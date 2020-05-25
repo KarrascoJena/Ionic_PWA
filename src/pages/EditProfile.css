@@ -1,0 +1,65 @@
+.input-label-custom {
+    display: flex;
+}
+
+.ion-select-custom {
+    --padding-start: 0px;
+}
+
+.select-text {
+    width: 300px;
+}
+
+.ion-datetime-custom {
+    --padding-start: 0px;
+}
+
+ion-content {
+    --padding-end: 10px;
+    --padding-start: 10px;
+    --padding-top: 20px;
+}
+
+ion-range {
+    width: 100%;
+}
+
+.text-align-left {
+    text-align: left;
+}
+
+.gender-padding-left {
+    padding-left: 25px;
+}
+
+.label-padding-left {
+    padding-left: 5px;
+}
+
+.label-padding-top {
+    margin-top: 10px;
+}
+
+.underline-text-decorate {
+    text-decoration: underline;
+}
+
+.align-self-center {
+    align-self: center;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.range-div-padding-top {
+    padding-top: 20px;
+}
+
+.grey-text {
+    color: grey;
+}
+
+.margin-bottom-characteristics {
+    margin-bottom: 340px;
+}

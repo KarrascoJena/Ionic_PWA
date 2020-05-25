@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import { defineCustomElements } from '@ionic/pwa-elements/loader';
 import * as serviceWorker from './serviceWorker';
+
+defineCustomElements(window);
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

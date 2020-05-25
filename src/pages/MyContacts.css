@@ -1,0 +1,53 @@
+.padding-header {
+  padding: 0 16px
+}
+
+.padding-content {
+  padding: 100 16px
+}
+
+ion-content {
+    --overflow: scroll;
+}
+
+.grid-img {
+  position: relative;
+  
+}
+
+.grid-img-button {
+  position: absolute;
+  bottom: -3px;
+  right: -3px;
+}
+
+.img-auto {
+  height: auto;
+  width: auto;
+}
+
+.card-effect {
+  border-radius: 8px;
+}
+
+.grid-container {
+  width: 95%;
+  margin: auto;
+}
+
+.justify-content-center {
+  display: flex;
+  justify-content: center;
+}
+
+.circle-icon {
+  border-radius: 35px;
+}
+
+.empty-img {
+  background-color: #e8ecf0;
+  padding: 10px;
+  height: 100%;
+  border-style: dotted;
+  border-color: darkgrey;
+}
