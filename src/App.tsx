@@ -9,6 +9,8 @@ import getStart from './pages/GetStart';
 import myAccount from './pages/MyContacts';
 import editProfile from './pages/EditProfile';
 import contactDetail from './pages/ContactDetail';
+import selectAvatar from './pages/SelectAvatar';
+import discoverVote from './pages/DiscoverVote';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -37,6 +39,8 @@ const App: React.FC = () => (
           <Route path="/mycontacts" component={myAccount} exact={true} />
           <Route path="/editprofile" component={editProfile} exact={true} />
           <Route path="/contactdetail" component={contactDetail} exact={true} />
+          <Route path="/selectavatar" component={selectAvatar} exact={true} />
+          <Route path="/discovervote" component={discoverVote} exact={true} />
           <Route path="/" render={() => <Redirect to="/getstart" />} exact={true} />
         </IonRouterOutlet>
     </IonReactRouter>

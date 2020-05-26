@@ -61,5 +61,18 @@ ion-range {
 }
 
 .margin-bottom-characteristics {
-    margin-bottom: 340px;
+    margin-bottom: 30px;
+}
+
+.margin-bottom-connections {
+    margin-bottom: 200px;
+}
+
+.delete-connect {
+    margin-bottom: 150px;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
 }

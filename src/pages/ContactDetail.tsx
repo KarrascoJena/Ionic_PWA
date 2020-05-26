@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { IonDatetime, IonSelect, IonSelectOption, IonToggle, IonLabel, IonRange, IonItemDivider, IonList, IonInput, IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonButton, IonButtons, IonItem } from '@ionic/react';
-import { peopleOutline, sunny, moon } from 'ionicons/icons';
+import { IonDatetime, IonActionSheet, IonSelect, IonSelectOption, IonToggle, IonIcon, IonLabel, IonRange, IonItemDivider, IonList, IonInput, IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonButton, IonButtons, IonItem, IonAlert } from '@ionic/react';
+import { share, close, camera, personAdd, logoFacebook, logoInstagram, call } from 'ionicons/icons';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import './EditProfile.css';
+// import '../theme/pages/EditProfile.css';
+import '../theme/pages/EditProfile.css';
 
 const gotoBack = (e, props) => {
   e.preventDefault();
@@ -53,14 +54,22 @@ const ContactDetail: React.FC = (props) => {
     checkAnniversary: true,
     anniversaryDate: null,
     rangeDinnerCulinary: 5,
-    rangeType2: 3,
-    rangeType3: 4,
+    rangeType2: 5,
+    rangeType3: 5,
     rangeType4: 5,
-    rangeType5: 1,
+    rangeType5: 5,
     rangeFitness: 3,
     rangePersonality: 9,
-    rangeSociality: 8
-  })
+    rangeSociality: 8,
+    contactEmail: "chris@huhu.com",
+    telNumber: '+43 664 049 4493',
+    facebookUsername: 'chris23424',
+    instagramEmail: 'chris@huhu.com'
+  });
+
+  const [showActionSheet, setShowActionSheet] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+  const [validEmailError, setValidEmailError] = useState('');
 
   const onChangeName = (e) => {
     setState({...state, name: e.target.value})
@@ -87,6 +96,16 @@ const ContactDetail: React.FC = (props) => {
     setState({...state, [field]: !state[field]})
   }
   
+  const onChangeConnections = (e, field) => {
+    setState({...state, [field]: e.target.value})
+    if(field == 'contactEmail'){
+      if(!/.+@.+\.[A-Za-z]+$/.test(e.target.value)){
+        setValidEmailError('please enter a valid email address')
+      } else {
+        setValidEmailError('')
+      }
+    }
+  }
   return (
     <IonPage>
       <IonHeader>
@@ -114,11 +133,47 @@ const ContactDetail: React.FC = (props) => {
           <IonRow>
             <IonCol size="2"></IonCol>
             <IonCol size="8" className="text-align-center">
-              <a>Change profile photo</a>
+              <a onClick={() => setShowActionSheet(true)}>Change profile photo</a>
             </IonCol>
             <IonCol size="2"></IonCol>
           </IonRow>
 
+          <IonRow>
+            <IonActionSheet
+              isOpen={showActionSheet}
+              onDidDismiss={() => setShowActionSheet(false)}
+              cssClass='my-custom-class'
+              header="Change contact photo"
+              buttons={[{
+                text: 'Take Photo',
+                icon: camera,
+                handler: () => {
+                  console.log('Delete clicked');
+                }
+              }, {
+                text: 'Choose From Library',
+                icon: share,
+                handler: () => {
+                  console.log('Share clicked');
+                }
+              }, {
+                text: 'Select Avatar',
+                icon: personAdd,
+                handler: () => {
+                  props.history.push('./selectavatar')
+                }
+              }, {
+                text: 'Cancel',
+                icon: close,
+                role: 'cancel',
+                handler: () => {
+                  console.log('Cancel clicked');
+                }
+              }]}
+            >
+            </IonActionSheet>
+          </IonRow>
+          
           <IonRow>
             <IonCol size="3" className="input-label-custom">
               <IonLabel className="align-self-center">Name*</IonLabel>
@@ -241,7 +296,7 @@ const ContactDetail: React.FC = (props) => {
           </IonRow>
           <br/>
 
-          <IonRow>
+          <IonRow hidden={state.relationship !== 'Partner'}>
             <IonCol size="10" className="input-label-custom">
               <img src="./assets/icon/moon.png"/>
               <label className="align-self-center label-padding-left">Valentine</label>
@@ -252,7 +307,7 @@ const ContactDetail: React.FC = (props) => {
           </IonRow>
           <br/>
 
-          <IonRow>
+          <IonRow hidden={state.relationship !== 'Partner'}>
             <IonCol size="10" className="input-label-custom">
               <img src="./assets/icon/moon.png"/>
               <label className="align-self-center label-padding-left">Anniversary</label>
@@ -261,8 +316,9 @@ const ContactDetail: React.FC = (props) => {
               <IonToggle checked={state.checkAnniversary} onIonChange={(e) => onChangeCheck(e, 'checkAnniversary')}/>
             </IonCol>
           </IonRow>
-
-          <IonRow hidden={!state.checkAnniversary}>
+          
+          <IonRow hidden={state.relationship !== 'Partner' || !state.checkAnniversary}>
+          {/* <IonRow hidden={!state.checkAnniversary} className=""> */}
             <IonCol size="12">
               <IonItem>
                 <IonDatetime value={state.birthday} placeholder="Select Date" className="ion-datetime-custom"></IonDatetime>
@@ -272,7 +328,7 @@ const ContactDetail: React.FC = (props) => {
         </div>
 
         <div id="Interests">
-          <h4 className="underline-text-decorate">Interests</h4>
+          <h4 className="">Interests</h4>
           <label className="grey-text">Defiine preferences of you favourite</label>
 
           <div className="range-div-padding-top">
@@ -317,7 +373,7 @@ const ContactDetail: React.FC = (props) => {
         </div>
 
         <div id="Characteristics" className="margin-bottom-characteristics">
-          <h4 className="underline-text-decorate">Characteristics</h4>
+          <h4 className="">Characteristics</h4>
           <label className="grey-text">Define preferences of you favourite</label>
 
           <div className="range-div-padding-top">
@@ -345,6 +401,69 @@ const ContactDetail: React.FC = (props) => {
           </div>
         </div>
         
+
+        <div id="Connections" className="margin-bottom-connections">
+          <h4 className="">Connections</h4>
+          <IonRow>
+            <IonCol size="2" className="input-label-custom">
+              <IonIcon src="./assets/icon/contact-email.svg" className="align-self-center" size="large"></IonIcon>
+            </IonCol>
+            <IonCol size="10">
+              <IonItem>
+                <IonInput value={state.contactEmail} type="email" clearInput={true} className="" onIonChange={(e) => onChangeConnections(e, 'contactEmail')}></IonInput>
+              </IonItem>
+              <div className="text-align-center">
+                <IonLabel color="danger">{validEmailError}</IonLabel>
+              </div>
+            </IonCol>
+          </IonRow>
+          
+          <IonRow>
+            <IonCol size="2" className="input-label-custom">
+              <IonIcon icon={call} className="align-self-center" size="large"></IonIcon>
+            </IonCol>
+            <IonCol size="10">
+              <IonItem>
+                <IonInput value={state.telNumber} type="tel" clearInput={true} className="" onIonChange={(e) => onChangeConnections(e, 'telNumber')}></IonInput>
+              </IonItem>
+            </IonCol>
+          </IonRow>
+
+          <IonRow>
+            <IonCol size="2" className="input-label-custom">
+              <IonIcon icon={logoFacebook} className="align-self-center" size="large"></IonIcon>
+            </IonCol>
+            <IonCol size="10">
+              <IonItem>
+                <IonInput value={state.facebookUsername} type="text" clearInput={true} className="" onIonChange={(e) => onChangeConnections(e, 'facebookUsername')}></IonInput>
+              </IonItem>
+            </IonCol>
+          </IonRow>
+
+          <IonRow>
+            <IonCol size="2" className="input-label-custom">
+              <IonIcon icon={logoInstagram} className="align-self-center" size="large"></IonIcon>
+            </IonCol>
+            <IonCol size="10">
+              <IonItem>
+                <IonInput value={state.instagramEmail} type="email" autofocus={true} clearInput={true} className="" onIonChange={(e) => onChangeConnections(e, 'instagramEmail')}></IonInput>
+              </IonItem>
+            </IonCol>
+          </IonRow>
+        </div>
+
+        <div id="delete-connect" className="delete-connect">
+          <IonButton fill="clear" onClick={() => setShowAlert(true)}>Delete contact</IonButton>
+        </div>
+
+        <IonAlert
+          isOpen={showAlert}
+          onDidDismiss={() => setShowAlert(false)}
+          cssClass='my-custom-class'
+          header={'Are you sure?'}
+          message={'Your contact will be deleted for ever'}
+          buttons={['No', 'Yes']}
+        />
       </IonContent>
     </IonPage>
   );

@@ -3,7 +3,8 @@ import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonBadge, IonRouterOutlet, I
 import { peopleOutline, searchOutline, heartOutline, trailSignOutline, settingsSharp, personOutline, createOutline } from 'ionicons/icons';
 
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import './MyContacts.css';
+// import './MyContacts.css';
+import '../theme/pages/MyContacts.css'
 
 const gotoGetStart = (e, props) => {
   e.preventDefault();
@@ -40,19 +41,22 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const contacts = [
   {
-    img: 'https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/38/f5/37/38f53753079845b89acc3f48f8c094d9/images/account_-_overview/u26.png?token=3f05902f2e22f70d65bd38a731ebd2a096afb029530983767a91428a56e162d9',
+    img: 'https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/38/f5/37/38f53753079845b89acc3f48f8c094d9/images/account_-_overview/u26.png?token=d4bb157f584a5de33b31f90b8ae931c4fb31f2e9d497bf6d460029cf7a060cd8',
   },
   {
-  img: 'https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/38/f5/37/38f53753079845b89acc3f48f8c094d9/images/account_-_overview/u26.png?token=3f05902f2e22f70d65bd38a731ebd2a096afb029530983767a91428a56e162d9',
+    img: 'https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/38/f5/37/38f53753079845b89acc3f48f8c094d9/images/account_-_overview/u26.png?token=d4bb157f584a5de33b31f90b8ae931c4fb31f2e9d497bf6d460029cf7a060cd8',
   },
   {
-  img: 'https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/38/f5/37/38f53753079845b89acc3f48f8c094d9/images/account_-_overview/u26.png?token=3f05902f2e22f70d65bd38a731ebd2a096afb029530983767a91428a56e162d9',
+    img: 'https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/38/f5/37/38f53753079845b89acc3f48f8c094d9/images/account_-_overview/u26.png?token=d4bb157f584a5de33b31f90b8ae931c4fb31f2e9d497bf6d460029cf7a060cd8',
   },
   {
-    img: 'https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/38/f5/37/38f53753079845b89acc3f48f8c094d9/images/account_-_overview/u26.png?token=3f05902f2e22f70d65bd38a731ebd2a096afb029530983767a91428a56e162d9',
+    img: 'https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/38/f5/37/38f53753079845b89acc3f48f8c094d9/images/account_-_overview/u26.png?token=d4bb157f584a5de33b31f90b8ae931c4fb31f2e9d497bf6d460029cf7a060cd8',
   },
   {
-    img: 'https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/38/f5/37/38f53753079845b89acc3f48f8c094d9/images/account_-_overview/u26.png?token=3f05902f2e22f70d65bd38a731ebd2a096afb029530983767a91428a56e162d9',
+    img: 'https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/38/f5/37/38f53753079845b89acc3f48f8c094d9/images/account_-_overview/u26.png?token=d4bb157f584a5de33b31f90b8ae931c4fb31f2e9d497bf6d460029cf7a060cd8',
+  },
+  {
+    img: 'https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/38/f5/37/38f53753079845b89acc3f48f8c094d9/images/account_-_overview/u26.png?token=d4bb157f584a5de33b31f90b8ae931c4fb31f2e9d497bf6d460029cf7a060cd8',
   },
 ];
 
@@ -96,7 +100,7 @@ const MyAccount: React.FC = (props) => {
       {/* <IonTabs> */}
         {/* <IonRouterOutlet></IonRouterOutlet> */}
         <IonTabBar slot="bottom">
-          <IonTabButton tab="speakers">
+          <IonTabButton tab="speakers" onClick={() => {props.history.push('./discovervote')}}>
             <IonIcon icon={trailSignOutline} />
           </IonTabButton>
 
@@ -107,7 +111,7 @@ const MyAccount: React.FC = (props) => {
 
         
           <IonTabButton tab="map">
-            <img alt="" src="./assets/imgs/daiamond.png"/>
+            <img alt="" src="./assets/imgs/daiamond.png" height="55"/>
           </IonTabButton>
 
           <IonTabButton tab="about">
