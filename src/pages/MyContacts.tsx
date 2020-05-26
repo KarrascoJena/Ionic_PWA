@@ -3,8 +3,7 @@ import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonBadge, IonRouterOutlet, I
 import { peopleOutline, searchOutline, heartOutline, trailSignOutline, settingsSharp, personOutline, createOutline } from 'ionicons/icons';
 
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-// import './MyContacts.css';
-import '../theme/pages/MyContacts.css'
+import '../theme/pages/MyContacts.scss'
 
 const gotoGetStart = (e, props) => {
   e.preventDefault();

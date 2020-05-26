@@ -3,8 +3,7 @@ import { IonIcon, IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonAvata
 import { settingsSharp, personOutline } from 'ionicons/icons';
 
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-// import './SelectAvatar.css';
-import '../theme/pages/SelectAvatar.css'
+import '../theme/pages/SelectAvatar.scss'
 
 const gotoGetStart = (e, props) => {
   e.preventDefault();

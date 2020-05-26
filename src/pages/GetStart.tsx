@@ -1,8 +1,6 @@
 import React from 'react';
 import { IonContent, IonPage, IonButton, IonRow, IonCol, IonSlides, IonSlide } from '@ionic/react';
-// import './GetStart.css';
-
-import '../theme/pages/GetStart.css'
+import '../theme/pages/GetStart.scss'
 
 const slideOpts = {
   initialSlide: 0,

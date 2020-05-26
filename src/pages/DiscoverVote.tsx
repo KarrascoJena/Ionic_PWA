@@ -7,8 +7,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-// import './DiscoverVote.css';
-import '../theme/pages/DiscoverVote.css'
+import '../theme/pages/DiscoverVote.scss'
 
 const gotoBack = (props) => {
   props.history.goBack()

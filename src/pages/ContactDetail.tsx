@@ -7,8 +7,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-// import '../theme/pages/EditProfile.css';
-import '../theme/pages/EditProfile.css';
+import '../theme/pages/EditProfile.scss';
 
 const gotoBack = (e, props) => {
   e.preventDefault();
