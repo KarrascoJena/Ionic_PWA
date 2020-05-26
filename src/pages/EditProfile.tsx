@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IonTabs, IonDatetime, IonSelect, IonSelectOption, IonLabel, IonTabBar, IonInput, IonTabButton, IonIcon, IonBadge, IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonButton, IonButtons, IonList, IonItem, IonItemDivider } from '@ionic/react';
+import { IonTabs, IonDatetime, IonSelect, IonSelectOption, IonLabel, IonTabBar, IonAvatar, IonInput, IonTabButton, IonIcon, IonBadge, IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonButton, IonButtons, IonList, IonItem, IonItemDivider } from '@ionic/react';
 import { peopleOutline, searchOutline, heartOutline, trailSignOutline } from 'ionicons/icons';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -77,34 +77,37 @@ const EditProfile: React.FC = (props) => {
       <IonHeader>
         <IonToolbar className="padding-header">
           <IonButtons slot="start">
-            <IonButton onClick={(e) => gotoBack(e, props)}>Cancel</IonButton>
+            <IonButton onClick={(e) => gotoBack(e, props)} className="cancel-button">Cancel</IonButton>
           </IonButtons>
           <IonButtons slot="end">
-            <IonButton onClick={(e) => gotoMyContacts(e, props)}>Done</IonButton>
+            <IonButton onClick={(e) => gotoMyContacts(e, props)} strong={true} className="done-button">Done</IonButton>
           </IonButtons>
           <IonTitle>Edit Profile</IonTitle>
         </IonToolbar>
       </IonHeader>
 
-      <IonContent className="padding-content justify-content-center">
+      <IonContent className="padding-content">
         <IonRow>
-          <IonCol size="4"></IonCol>
-          <IonCol size="4">
-            <img src="https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/38/f5/37/38f53753079845b89acc3f48f8c094d9/images/account_-_settings/u41.png?token=b8149e9dc60237bdb6472331d27ee7d3800d4cc93600b998644097cf96aa2a63" />
+          <IonCol size="2"></IonCol>
+          <IonCol size="8" className="justify-content-center">
+            <IonAvatar class="profile-img-cover">
+              <img src="https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/3b/1c/f0/3b1cf058856c4f7ea8aa4ba8b2c3e486/images/account_-_overview/u26.png?token=c14a7f334166f6699c206821b3181cbe534ae07f3d0d6cd875622be59d71b9da" />
+            </IonAvatar>
           </IonCol>
-          <IonCol size="4"></IonCol>
+          <IonCol size="2"></IonCol>
         </IonRow>
 
         <IonRow>
           <IonCol size="2"></IonCol>
-          <IonCol size="8">
+          <IonCol size="8" className="text-align-center">
             <a>Change profile photo</a>
           </IonCol>
           <IonCol size="2"></IonCol>
         </IonRow>
+        <hr className="line-divider"/>
 
         <IonRow>
-          <IonCol size="3" className="input-label-custom">
+          <IonCol size="3" className="align-item-center">
             <IonLabel>Name</IonLabel>
           </IonCol>
           <IonCol size="9">
@@ -115,21 +118,21 @@ const EditProfile: React.FC = (props) => {
         </IonRow>
 
         <IonRow>
-          <IonCol size="3" className="input-label-custom">
+          <IonCol size="3" className="align-item-center">
             <IonLabel>GENDER</IonLabel>
           </IonCol>
           <IonCol size="9" className="gender-padding-left">
             <FormControl component="fieldset">
               <RadioGroup row aria-label="position" name="position" defaultValue="top">
-                <FormControlLabel value="male" control={<Radio color="primary" />} label="weiblish" checked={state.gender === 'male'} onChange={(e) => {onChangeGender(e)}}/>
-                <FormControlLabel value="female" control={<Radio color="primary" />} label="mannlish" checked={state.gender === 'female'} onChange={(e) => {onChangeGender(e)}}/>
+                <FormControlLabel value="male" control={<Radio color="primary" />} label="female" checked={state.gender === 'male'} onChange={(e) => {onChangeGender(e)}}/>
+                <FormControlLabel value="female" control={<Radio color="primary" />} label="male" checked={state.gender === 'female'} onChange={(e) => {onChangeGender(e)}}/>
               </RadioGroup>
             </FormControl>
           </IonCol>
         </IonRow>
 
         <IonRow>
-          <IonCol size="3" className="input-label-custom">
+          <IonCol size="3" className="align-item-center">
             <IonLabel>Birthday</IonLabel>
           </IonCol>
           <IonCol size="9">
@@ -140,7 +143,7 @@ const EditProfile: React.FC = (props) => {
         </IonRow>
 
         <IonRow>
-          <IonCol size="3" className="input-label-custom">
+          <IonCol size="3" className="align-item-center">
             <IonLabel>City</IonLabel>
           </IonCol>
           <IonCol size="9">
@@ -151,7 +154,7 @@ const EditProfile: React.FC = (props) => {
         </IonRow>
 
         <IonRow>
-          <IonCol size="3" className="input-label-custom">
+          <IonCol size="3" className="align-item-center">
             <IonLabel>Status</IonLabel>
           </IonCol>
           <IonCol size="9">
@@ -167,7 +170,7 @@ const EditProfile: React.FC = (props) => {
         </IonRow>
 
         <IonRow>
-          <IonCol size="3" className="input-label-custom">
+          <IonCol size="3" className="align-item-center">
             <IonLabel>Children</IonLabel>
           </IonCol>
           <IonCol size="9">

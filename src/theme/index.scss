@@ -1,0 +1,40 @@
+@import 'custom_variable.scss';
+
+.circle-image {
+    border-radius: 50%;
+}
+
+.justify-content-center {
+    display: flex;
+    justify-content: center;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.align-item-center {
+    display: flex;
+    align-items: center
+}
+
+.line-divider {
+    background-color:#629aff;
+}
+
+.full-fill-red-icon {
+    background-color: $color_red;
+}
+
+.white-icon {
+    color: white;
+}
+
+.cancel-button {
+    --color: $color_gren_dark;
+}
+
+.done-button {
+    --color: #0095F6;
+    font-weight: bold;
+}

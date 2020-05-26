@@ -1,6 +1,4 @@
-.input-label-custom {
-    display: flex;
-}
+@import '../custom_variable.scss';
 
 .ion-select-custom {
     --padding-start: 0px;
@@ -75,4 +73,29 @@ ion-range {
 
 .hidden {
     display: none;
+}
+
+.profile-img {
+    width: 120px;
+    height: 120px;
+    background-size: cover;
+}
+
+.auto-height {
+    height: 100px;
+}
+
+.profile-img-cover {
+    width: 130px;
+    height: 130px;
+}
+
+.occasions-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 20%;
+}
+
+.dark-text {
+    --button-color: $color_dark;
 }

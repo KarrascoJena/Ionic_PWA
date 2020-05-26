@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { IonDatetime, IonActionSheet, IonSelect, IonSelectOption, IonToggle, IonIcon, IonLabel, IonRange, IonItemDivider, IonList, IonInput, IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonButton, IonButtons, IonItem, IonAlert } from '@ionic/react';
-import { share, close, camera, personAdd, logoFacebook, logoInstagram, call } from 'ionicons/icons';
+import { IonDatetime, IonActionSheet, IonSelect, IonSelectOption, IonToggle, IonAvatar, IonIcon, IonLabel, IonRange, IonItemDivider, IonList, IonInput, IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonButton, IonButtons, IonItem, IonAlert } from '@ionic/react';
+import { share, close, cameraOutline, personCircleOutline, arrowUpCircleSharp, archiveOutline } from 'ionicons/icons';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -39,6 +39,7 @@ const ContactDetail: React.FC = (props) => {
   const classes = useStyles();
 
   const [state, setState] = useState({
+    avatarUrl: 'https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/3b/1c/f0/3b1cf058856c4f7ea8aa4ba8b2c3e486/images/account_-_overview/u26.png?token=c14a7f334166f6699c206821b3181cbe534ae07f3d0d6cd875622be59d71b9da',
     name: 'Christian',
     gender: 'male',
     birthday: Date(),
@@ -63,7 +64,8 @@ const ContactDetail: React.FC = (props) => {
     contactEmail: "chris@huhu.com",
     telNumber: '+43 664 049 4493',
     facebookUsername: 'chris23424',
-    instagramEmail: 'chris@huhu.com'
+    instagramEmail: 'chris@huhu.com',
+    whatsAppNumber: '+43 664304938'
   });
 
   const [showActionSheet, setShowActionSheet] = useState(false);
@@ -110,10 +112,10 @@ const ContactDetail: React.FC = (props) => {
       <IonHeader>
         <IonToolbar className="padding-header">
           <IonButtons slot="start">
-            <IonButton onClick={(e) => gotoBack(e, props)}>Cancel</IonButton>
+            <IonButton onClick={(e) => gotoBack(e, props)} className="cancel-button">Cancel</IonButton>
           </IonButtons>
           <IonButtons slot="end">
-            <IonButton onClick={(e) => gotoMyContacts(e, props)}>Done</IonButton>
+            <IonButton onClick={(e) => gotoMyContacts(e, props)} strong={true} className="done-button">Done</IonButton>
           </IonButtons>
           <IonTitle>Edit Contact</IonTitle>
         </IonToolbar>
@@ -122,13 +124,16 @@ const ContactDetail: React.FC = (props) => {
       <IonContent className="padding-content justify-content-center">
         <div id="brife">
           <IonRow>
-            <IonCol size="4"></IonCol>
-            <IonCol size="4">
-              <img src="https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/38/f5/37/38f53753079845b89acc3f48f8c094d9/images/contact_-_details/u80.png?token=43b70dd64cf52192ec74ef55711403a6ea46f7e0f461337179802b6b9ad8fd44"/>
+            <IonCol size="2"></IonCol>
+            <IonCol size="8" className="justify-content-center">
+              <IonAvatar class="profile-img-cover">
+                <img src={state.avatarUrl} />
+              </IonAvatar>
             </IonCol>
-            <IonCol size="4"></IonCol>
+            <IonCol size="2"></IonCol>
           </IonRow>
-
+          <span>
+          </span>
           <IonRow>
             <IonCol size="2"></IonCol>
             <IonCol size="8" className="text-align-center">
@@ -136,28 +141,29 @@ const ContactDetail: React.FC = (props) => {
             </IonCol>
             <IonCol size="2"></IonCol>
           </IonRow>
+          <hr className="line-divider"/>
 
           <IonRow>
             <IonActionSheet
               isOpen={showActionSheet}
               onDidDismiss={() => setShowActionSheet(false)}
-              cssClass='my-custom-class'
+              cssClass='my-custom-class dark-text'
               header="Change contact photo"
               buttons={[{
                 text: 'Take Photo',
-                icon: camera,
+                icon: cameraOutline,
                 handler: () => {
                   console.log('Delete clicked');
                 }
               }, {
                 text: 'Choose From Library',
-                icon: share,
+                icon: archiveOutline,
                 handler: () => {
                   console.log('Share clicked');
                 }
               }, {
                 text: 'Select Avatar',
-                icon: personAdd,
+                icon: personCircleOutline,
                 handler: () => {
                   props.history.push('./selectavatar')
                 }
@@ -186,13 +192,13 @@ const ContactDetail: React.FC = (props) => {
 
           <IonRow>
             <IonCol size="3" className="input-label-custom">
-              <IonLabel className="align-self-center">GENDER*</IonLabel>
+              <IonLabel className="align-self-center">Gender*</IonLabel>
             </IonCol>
             <IonCol size="9" className="gender-padding-left">
               <FormControl component="fieldset">
                 <RadioGroup row aria-label="position" name="position" defaultValue="top">
-                  <FormControlLabel value="male" control={<Radio color="primary" />} label="weiblish" checked={state.gender === 'male'} onChange={(e) => {onChangeGender(e)}}/>
-                  <FormControlLabel value="female" control={<Radio color="primary" />} label="mannlish" checked={state.gender === 'female'} onChange={(e) => {onChangeGender(e)}}/>
+                  <FormControlLabel value="male" control={<Radio color="primary" />} label="female" checked={state.gender === 'male'} onChange={(e) => {onChangeGender(e)}}/>
+                  <FormControlLabel value="female" control={<Radio color="primary" />} label="male" checked={state.gender === 'female'} onChange={(e) => {onChangeGender(e)}}/>
                 </RadioGroup>
               </FormControl>
             </IonCol>
@@ -254,8 +260,7 @@ const ContactDetail: React.FC = (props) => {
 
           <IonRow>
             <IonCol size="10" className="input-label-custom">
-              <img src="./assets/icon/moon.png"/>
-              <label className="align-self-center label-padding-left">Birthday</label>
+              {renderOccasionIcon("fal fa-birthday-cake fa-1x", "Birthday")}
             </IonCol>
             <IonCol size="2">
               <IonToggle checked={state.checkBirthday} onIonChange={(e) => onChangeCheck(e, 'checkBirthday')}/>
@@ -264,8 +269,7 @@ const ContactDetail: React.FC = (props) => {
           <br/>
           <IonRow>
             <IonCol size="10" className="input-label-custom">
-              <img src="./assets/icon/moon.png"/>
-              <label className="align-self-center label-padding-left">Chrismas</label>
+              {renderOccasionIcon("fal fa-tree-christmas fa-1x", "Chrismas")}
             </IonCol>
             <IonCol size="2">
               <IonToggle checked={state.checkChrismas}/>
@@ -275,8 +279,7 @@ const ContactDetail: React.FC = (props) => {
 
           <IonRow>
             <IonCol size="10" className="input-label-custom">
-              <img src="./assets/icon/moon.png"/>
-              <label className="align-self-center label-padding-left">Vacation</label>
+              {renderOccasionIcon("fal fa-island-tropical fa-1x", "Vacation")}
             </IonCol>
             <IonCol size="2">
               <IonToggle checked={state.checkVacation} onIonChange={(e) => onChangeCheck(e, 'checkVacation')}/>
@@ -286,8 +289,7 @@ const ContactDetail: React.FC = (props) => {
 
           <IonRow>
             <IonCol size="10" className="input-label-custom">
-              <img src="./assets/icon/moon.png"/>
-              <label className="align-self-center label-padding-left">Weekend</label>
+              {renderOccasionIcon("fal fa-calendar-day fa-1x", "Weekend")}
             </IonCol>
             <IonCol size="2">
               <IonToggle checked={state.checkWeekend} onIonChange={(e) => onChangeCheck(e, 'checkWeekend')}/>
@@ -297,8 +299,7 @@ const ContactDetail: React.FC = (props) => {
 
           <IonRow hidden={state.relationship !== 'Partner'}>
             <IonCol size="10" className="input-label-custom">
-              <img src="./assets/icon/moon.png"/>
-              <label className="align-self-center label-padding-left">Valentine</label>
+              {renderOccasionIcon("fal fa-kiss-wink-heart fa-1x", "Valentine")}
             </IonCol>
             <IonCol size="2">
               <IonToggle checked={state.checkValentine} onIonChange={(e) => onChangeCheck(e, 'checkValentine')}/>
@@ -308,8 +309,7 @@ const ContactDetail: React.FC = (props) => {
 
           <IonRow hidden={state.relationship !== 'Partner'}>
             <IonCol size="10" className="input-label-custom">
-              <img src="./assets/icon/moon.png"/>
-              <label className="align-self-center label-padding-left">Anniversary</label>
+              {renderOccasionIcon("far fa-heart fa-1x", "Anniversary")}
             </IonCol>
             <IonCol size="2">
               <IonToggle checked={state.checkAnniversary} onIonChange={(e) => onChangeCheck(e, 'checkAnniversary')}/>
@@ -317,7 +317,6 @@ const ContactDetail: React.FC = (props) => {
           </IonRow>
           
           <IonRow hidden={state.relationship !== 'Partner' || !state.checkAnniversary}>
-          {/* <IonRow hidden={!state.checkAnniversary} className=""> */}
             <IonCol size="12">
               <IonItem>
                 <IonDatetime value={state.birthday} placeholder="Select Date" className="ion-datetime-custom"></IonDatetime>
@@ -404,10 +403,10 @@ const ContactDetail: React.FC = (props) => {
         <div id="Connections" className="margin-bottom-connections">
           <h4 className="">Connections</h4>
           <IonRow>
-            <IonCol size="2" className="input-label-custom">
-              <IonIcon src="./assets/icon/contact-email.svg" className="align-self-center" size="large"></IonIcon>
+            <IonCol size="1" className="input-label-custom align-item-center">
+              <i className="fas fa-envelope-square fa-2x"></i>
             </IonCol>
-            <IonCol size="10">
+            <IonCol size="11">
               <IonItem>
                 <IonInput value={state.contactEmail} type="email" clearInput={true} className="" onIonChange={(e) => onChangeConnections(e, 'contactEmail')}></IonInput>
               </IonItem>
@@ -418,10 +417,10 @@ const ContactDetail: React.FC = (props) => {
           </IonRow>
           
           <IonRow>
-            <IonCol size="2" className="input-label-custom">
-              <IonIcon icon={call} className="align-self-center" size="large"></IonIcon>
+            <IonCol size="1" className="input-label-custom align-item-center">
+              <i className="fa fa-phone-square-alt fa-2x"></i>
             </IonCol>
-            <IonCol size="10">
+            <IonCol size="11">
               <IonItem>
                 <IonInput value={state.telNumber} type="tel" clearInput={true} className="" onIonChange={(e) => onChangeConnections(e, 'telNumber')}></IonInput>
               </IonItem>
@@ -429,10 +428,10 @@ const ContactDetail: React.FC = (props) => {
           </IonRow>
 
           <IonRow>
-            <IonCol size="2" className="input-label-custom">
-              <IonIcon icon={logoFacebook} className="align-self-center" size="large"></IonIcon>
+            <IonCol size="1" className="input-label-custom align-item-center">
+              <i className="fab fa-facebook-square fa-2x"></i>
             </IonCol>
-            <IonCol size="10">
+            <IonCol size="11">
               <IonItem>
                 <IonInput value={state.facebookUsername} type="text" clearInput={true} className="" onIonChange={(e) => onChangeConnections(e, 'facebookUsername')}></IonInput>
               </IonItem>
@@ -440,12 +439,23 @@ const ContactDetail: React.FC = (props) => {
           </IonRow>
 
           <IonRow>
-            <IonCol size="2" className="input-label-custom">
-              <IonIcon icon={logoInstagram} className="align-self-center" size="large"></IonIcon>
+            <IonCol size="1" className="input-label-custom align-item-center">
+              <i className="fab fa-instagram-square fa-2x"></i>
             </IonCol>
-            <IonCol size="10">
+            <IonCol size="11">
               <IonItem>
-                <IonInput value={state.instagramEmail} type="email" autofocus={true} clearInput={true} className="" onIonChange={(e) => onChangeConnections(e, 'instagramEmail')}></IonInput>
+                <IonInput value={state.instagramEmail} type="email" clearInput={true} className="" onIonChange={(e) => onChangeConnections(e, 'instagramEmail')}></IonInput>
+              </IonItem>
+            </IonCol>
+          </IonRow>
+
+          <IonRow>
+            <IonCol size="1" className="input-label-custom align-item-center">
+              <i className="fab fa-whatsapp-square fa-2x"></i>
+            </IonCol>
+            <IonCol size="11">
+              <IonItem>
+                <IonInput value={state.whatsAppNumber} type="phone" clearInput={true} className="" onIonChange={(e) => onChangeConnections(e, 'whatsAppNumber')}></IonInput>
               </IonItem>
             </IonCol>
           </IonRow>
@@ -469,3 +479,17 @@ const ContactDetail: React.FC = (props) => {
 };
 
 export default ContactDetail;
+
+
+const renderOccasionIcon = (icons, title) => {
+  return (
+    <IonRow>
+      <div className="occasions-icon full-fill-red-icon justify-content-center align-item-center">
+        <span className="circle-icon white-icon">
+          <i className={icons}></i>
+        </span>
+      </div>
+      <label className="align-self-center label-padding-left">{title}</label>
+    </IonRow>
+  );
+}

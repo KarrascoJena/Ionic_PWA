@@ -1,3 +1,5 @@
+@import '../custom_variable.scss';
+
 .padding-header {
   padding: 0 16px
 }
@@ -12,7 +14,11 @@ ion-content {
 
 .grid-img {
   position: relative;
-  
+ 
+}
+
+.grid-img-heigh {
+  height: 160px;
 }
 
 .grid-img-button {
@@ -22,12 +28,13 @@ ion-content {
 }
 
 .img-auto {
-  height: auto;
-  width: auto;
+  height: 160px;
+  width: 100%;
+  background-size: cover;
 }
 
 .card-effect {
-  border-radius: 8px;
+  border-radius: 4px;
 }
 
 .grid-container {
@@ -47,7 +54,28 @@ ion-content {
 .empty-img {
   background-color: #e8ecf0;
   padding: 10px;
-  height: 160px;
+  height: 100%;
+  width: 100%;
+  border: 1px;
   border-style: dotted;
   border-color: darkgrey;
 }
+
+.pencil-icon {
+  color: $color_red;
+}
+
+.bottom-circle-icon {
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box-shadow-full-screen {
+  box-shadow: 3px 3px 2px grey
+}
+
