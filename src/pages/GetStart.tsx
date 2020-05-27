@@ -1,5 +1,8 @@
 import React from 'react';
-import { IonContent, IonPage, IonButton, IonRow, IonCol, IonSlides, IonSlide } from '@ionic/react';
+import { IonContent, IonPage, IonButton, IonRow, IonCol, getPlatforms } from '@ionic/react';
+
+import AwesomeSlider from 'react-awesome-slider';
+import AwesomeSliderStyles from 'react-awesome-slider/src/styles';
 import '../theme/pages/GetStart.scss'
 
 const slideOpts = {
@@ -7,35 +10,25 @@ const slideOpts = {
   speed: 400
 }
 
-const GetStart: React.FC = () => {
+const slider = (
+  <AwesomeSlider style={{height: window.innerHeight}} cssModule={AwesomeSliderStyles} bullets={false}>
+    <div data-src="./assets/imgs/slides/slide1.jpg" />
+    <div data-src="./assets/imgs/slides/slide2.jpg" />
+    <div data-src="./assets/imgs/slides/slide3.jpg" />
+    <div data-src="./assets/imgs/slides/slide4.jpg" />
+    <div data-src="./assets/imgs/slides/slide5.jpg" />
+  </AwesomeSlider>
+)
 
+const GetStart: React.FC = () => {
+  
+  console.log(window.innerHeight)
   return (
     <IonPage>
       <IonContent>
-      <IonSlides  pager={false} options={slideOpts}>
-
-        <IonSlide>
-          <div className="slide">
-            <img alt="" src="./assets/imgs/background.jpg"/>
-            <h2>Welcome</h2>
-            <p>title1.</p>
-          </div>
-        </IonSlide>
-
-        <IonSlide>
-          <img alt="" src="./assets/imgs/background.jpg"/>
-          <h2>What is landing?</h2>
-          <p>title2</p>
-        </IonSlide>
-
-        <IonSlide>
-          <img alt="" src="./assets/imgs/background.jpg"/>
-          <h2>How to use this?</h2>
-          <p>title3</p>
-        </IonSlide>
-      </IonSlides>
-        <IonRow className="justify-content-end height-4">
-          <IonCol size="1"></IonCol>
+      <div className="position-relative">
+        {slider}
+        <IonRow className="justify-content-end height-4 bottom-content">
           <IonCol>
             <IonButton expand="block" routerLink="/mycontacts">Getting started</IonButton>
             <div className="font-10 footer-notice text-align-center">
@@ -44,8 +37,9 @@ const GetStart: React.FC = () => {
               <a href="/#">Privacy Policy</a>
             </div>
           </IonCol>
-          <IonCol size="1"></IonCol>
         </IonRow>
+      </div>
+      
       </IonContent>
     </IonPage>
   );
