@@ -9,7 +9,7 @@
     justify-content: center;
 }
 
-.justify-content-center {
+.justify-content-space-between {
     display: flex;
     justify-content: space-between;
 }
@@ -45,4 +45,8 @@
 
 .tab-bar-icon {
     color: $color_dark;
+}
+
+.bacground-color-grey {
+    background-color: $color_gren;
 }

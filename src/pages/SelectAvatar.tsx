@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
 import { IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonButton, IonButtons } from '@ionic/react';
 import { } from 'ionicons/icons';
+import avatarIcons from './avatar-icons'
 
 import '../theme/pages/SelectAvatar.scss'
+import { CONNREFUSED } from 'dns';
 
 const gotoBack = (e, props) => {
   e.preventDefault();
@@ -18,45 +20,16 @@ const changeAvatar = (e, props) => {
   
 }
 
-const contacts = [
-  {img: './assets/avatar/female1.jpg' },
-  {img: './assets/avatar/male1.jpg' },
-  {img: './assets/avatar/female1.jpg' },
-  {img: './assets/avatar/male1.jpg' },
-  {img: './assets/avatar/female1.jpg' },
-  {img: './assets/avatar/male1.jpg' },
-  {img: './assets/avatar/female1.jpg' },
-  {img: './assets/avatar/male1.jpg' },
-  {img: './assets/avatar/female1.jpg' },
-  {img: './assets/avatar/male1.jpg' },
-  {img: './assets/avatar/female1.jpg' },
-  {img: './assets/avatar/male1.jpg' },
-  {img: './assets/avatar/female1.jpg' },
-  {img: './assets/avatar/male1.jpg' },
-  {img: './assets/avatar/female1.jpg' },
-  {img: './assets/avatar/male1.jpg' },
-  {img: './assets/avatar/female1.jpg' },
-  {img: './assets/avatar/male1.jpg' },
-  {img: './assets/avatar/female1.jpg' },
-  {img: './assets/avatar/male1.jpg' },
-  {img: './assets/avatar/female1.jpg' },
-  {img: './assets/avatar/male1.jpg' },
-  {img: './assets/avatar/female1.jpg' },
-  {img: './assets/avatar/male1.jpg' },
-  {img: './assets/avatar/female1.jpg' },
-  {img: './assets/avatar/male1.jpg' },
-  {img: './assets/avatar/female1.jpg' },
-  {img: './assets/avatar/male1.jpg' },
-];
-
 const SelectAvartar: React.FC = (props) => {
 
   const  [selectedNo, setSelectedNo] = useState(-1);
 
-  const contactList = contacts.map((item, index) => {
+  const contactList = avatarIcons.map((item, index) => {
     return(
-      <IonCol onClick={(e) => changeAvatar(e, props)} size="4" className="grid-img" key={index}>
-          <img className={selectedNo === index ? "" : "not-selected"} src={item.img} onClick={() => {setSelectedNo(index)}} alt=""/>
+      <IonCol onClick={(e) => changeAvatar(e, props)} size="3" className="padding-10" key={index}>
+        <div className={selectedNo === index ? "selected-icon-background circle-image" : "bacground-color-grey circle-image"}>
+          <img className={selectedNo === index ? "" : ""} src={item.img} onClick={() => {setSelectedNo(index)}} alt=""/>
+        </div>
       </IonCol>
     );
   });

@@ -28,7 +28,7 @@ const DiscoverVote: React.FC = (props) => {
     <IonPage>
       <IonHeader>
         <IonToolbar className="padding-header">
-          <IonButtons slot="start">
+          <IonButtons slot="start" onClick={() => {props.history.goBack()}}>
             <i className="fal fa-times fa-2x"></i>
           </IonButtons>
           <IonButtons slot="end">
