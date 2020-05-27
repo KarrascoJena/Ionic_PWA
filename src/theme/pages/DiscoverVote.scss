@@ -9,3 +9,71 @@
 .mouse-hover:hover {
     display: none;
 }
+
+.bottom-profile-circle-img {
+    display: flex;
+    position: absolute;
+    top: 87%;
+    height: 100px;
+    width: 100px;
+    justify-content: center;
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+    align-items: center;
+    transition: transform ease-in 0.1s;
+    z-index: 2;
+}
+
+.position-relative {
+    display: flex;
+    position: relative;
+    justify-content: center;
+}
+
+.awssld__bullets {
+    display: flex;
+    position: absolute;
+    top: 80%;
+    left: 3%;
+    // width: 30%;
+    height: auto;
+    // background: white;
+    align-items: center;
+    z-index: 2;
+    justify-content: start;
+}
+
+.awssld {
+    display: flex;
+    position: relative;
+}
+
+.awssld__bullets--active {
+    width: 6px !important;
+    height: 6px !important;
+    background-color: black !important;
+}
+
+.awssld__bullets button {
+    width: 6px;
+    height: 6px;
+    margin: 3px;
+    background-color: white;
+}
+
+.margin-10 {
+    margin: 2% 3%;
+}
+
+.icon-size-small {
+    font-size: 20px;
+}
+
+.custom-height {
+    height: 400px;
+}
+
+ion-content {
+    --padding-top: 10px;
+}

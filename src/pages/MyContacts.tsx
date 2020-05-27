@@ -2,7 +2,6 @@ import React from 'react';
 import { IonTabBar, IonTabButton, IonIcon, IonBadge, IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol } from '@ionic/react';
 import { peopleOutline, searchOutline, heartOutline, trailSignOutline } from 'ionicons/icons';
 
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import '../theme/pages/MyContacts.scss'
 
 const gotoGetStart = (e, props) => {
@@ -18,25 +17,6 @@ const gotoEditProfile = (e, props) => {
 const gotoContactDetail = (e, props) => {
   props.history.push('/contactdetail');
 }
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'space-around',
-      overflow: 'hidden',
-      backgroundColor: theme.palette.background.paper,
-    },
-    gridList: {
-      width: 250,
-      height: 350,
-    },
-    icon: {
-      color: 'rgba(255, 255, 255, 0.54)',
-    },
-  }),
-);
 
 const contacts = [
   {
@@ -57,12 +37,11 @@ const contacts = [
 ];
 
 const MyAccount: React.FC = (props) => {
-  const classes = useStyles();
 
   const contactList = contacts.map((item, index) => {
     return(
       <IonCol onClick={(e) => gotoContactDetail(e, props)} size="4" className="grid-img" key={index}>
-        <img className="img-auto card-effect" src={item.img} />
+        <img className="img-auto card-effect" src={item.img} alt=""/>
         <div className="grid-img-button bottom-circle-icon box-shadow-full-screen">
           <span className="pencil-icon circle-icon">
             <i className="fal fa-pencil-alt"></i>
@@ -105,25 +84,35 @@ const MyAccount: React.FC = (props) => {
         {/* <IonRouterOutlet></IonRouterOutlet> */}
         <IonTabBar slot="bottom">
           <IonTabButton tab="speakers" onClick={() => {props.history.push('./discovervote')}}>
-            <IonIcon icon={trailSignOutline} />
+            <span className="tab-bar-icon">
+              <i className="fal fa-telescope fa-3x"></i>
+            </span>
           </IonTabButton>
 
           <IonTabButton tab="schedule">
-            <IonIcon icon={heartOutline} />
+            <span className="tab-bar-icon">
+              <i className="fal fa-heart fa-3x"></i>
+            </span>
             <IonBadge>2</IonBadge>
           </IonTabButton>
 
         
           <IonTabButton tab="map">
-            <img alt="" src="./assets/imgs/daiamond.png" height="55"/>
+            <span className="tab-bar-icon">
+              <i className="fal fa-book-spells fa-3x"></i>
+            </span>
           </IonTabButton>
 
           <IonTabButton tab="about">
-            <IonIcon icon={searchOutline} />
+            <span className="tab-bar-icon">
+              <i className="fal fa-search fa-3x"></i>
+            </span>
           </IonTabButton>
           
           <IonTabButton tab="about">
-            <IonIcon icon={peopleOutline} />
+            <span className="tab-bar-icon">
+              <i className="fas fa-user-friends fa-3x"></i>
+            </span>
           </IonTabButton>
         </IonTabBar>
       {/* </IonTabs> */}

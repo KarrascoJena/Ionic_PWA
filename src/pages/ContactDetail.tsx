@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { IonDatetime, IonActionSheet, IonSelect, IonSelectOption, IonToggle, IonAvatar, IonIcon, IonLabel, IonRange, IonItemDivider, IonList, IonInput, IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonButton, IonButtons, IonItem, IonAlert } from '@ionic/react';
-import { share, close, cameraOutline, personCircleOutline, arrowUpCircleSharp, archiveOutline } from 'ionicons/icons';
+import { IonDatetime, IonActionSheet, IonSelect, IonSelectOption, IonToggle, IonAvatar, IonLabel, IonRange, IonInput, IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonButton, IonButtons, IonItem, IonAlert } from '@ionic/react';
+import { close, cameraOutline, personCircleOutline, archiveOutline } from 'ionicons/icons';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import '../theme/pages/EditProfile.scss';
 
 const gotoBack = (e, props) => {
@@ -19,24 +18,7 @@ const gotoMyContacts = (e, props) => {
   props.history.push('/mycontacts');
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'space-around',
-      overflow: 'hidden',
-      backgroundColor: theme.palette.background.paper,
-    },
-    inputTextForm: {
-      borderRadius: '5px',
-      borderColor: 'red'
-    }
-  }),
-);
-
 const ContactDetail: React.FC = (props) => {
-  const classes = useStyles();
 
   const [state, setState] = useState({
     avatarUrl: 'https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/3b/1c/f0/3b1cf058856c4f7ea8aa4ba8b2c3e486/images/account_-_overview/u26.png?token=c14a7f334166f6699c206821b3181cbe534ae07f3d0d6cd875622be59d71b9da',
@@ -99,7 +81,7 @@ const ContactDetail: React.FC = (props) => {
   
   const onChangeConnections = (e, field) => {
     setState({...state, [field]: e.target.value})
-    if(field == 'contactEmail'){
+    if(field === 'contactEmail'){
       if(!/.+@.+\.[A-Za-z]+$/.test(e.target.value)){
         setValidEmailError('please enter a valid email address')
       } else {
@@ -127,7 +109,7 @@ const ContactDetail: React.FC = (props) => {
             <IonCol size="2"></IonCol>
             <IonCol size="8" className="justify-content-center">
               <IonAvatar class="profile-img-cover">
-                <img src={state.avatarUrl} />
+                <img src={state.avatarUrl} alt=""/>
               </IonAvatar>
             </IonCol>
             <IonCol size="2"></IonCol>
@@ -137,7 +119,7 @@ const ContactDetail: React.FC = (props) => {
           <IonRow>
             <IonCol size="2"></IonCol>
             <IonCol size="8" className="text-align-center">
-              <a onClick={() => setShowActionSheet(true)}>Change profile photo</a>
+              <IonButton onClick={() => setShowActionSheet(true)} fill="clear">Change profile photo</IonButton>
             </IonCol>
             <IonCol size="2"></IonCol>
           </IonRow>
@@ -210,7 +192,7 @@ const ContactDetail: React.FC = (props) => {
             </IonCol>
             <IonCol size="9">
               <IonItem>
-                <IonDatetime value={state.birthday} placeholder="Select Date" className="ion-datetime-custom"></IonDatetime>
+                <IonDatetime value={state.birthday} onIonChange={(e) => {onChangeBirthday(e)}} placeholder="Select Date" className="ion-datetime-custom"></IonDatetime>
               </IonItem>
             </IonCol>
           </IonRow>

@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { IonTabs, IonDatetime, IonSelect, IonSelectOption, IonLabel, IonTabBar, IonAvatar, IonInput, IonTabButton, IonIcon, IonBadge, IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonButton, IonButtons, IonList, IonItem, IonItemDivider } from '@ionic/react';
+import { IonDatetime, IonSelect, IonSelectOption, IonLabel, IonTabBar, IonAvatar, IonInput, IonTabButton, IonIcon, IonBadge, IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonButton, IonButtons, IonItem } from '@ionic/react';
 import { peopleOutline, searchOutline, heartOutline, trailSignOutline } from 'ionicons/icons';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import '../theme/pages/EditProfile.scss'
 
 const gotoBack = (e, props) => {
@@ -19,24 +18,7 @@ const gotoMyContacts = (e, props) => {
   props.history.push('/mycontacts');
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'space-around',
-      overflow: 'hidden',
-      backgroundColor: theme.palette.background.paper,
-    },
-    inputTextForm: {
-      borderRadius: '5px',
-      borderColor: 'red'
-    }
-  }),
-);
-
 const EditProfile: React.FC = (props) => {
-  const classes = useStyles();
 
   const [state, setState] = useState({
     name: 'Edina',
@@ -91,7 +73,7 @@ const EditProfile: React.FC = (props) => {
           <IonCol size="2"></IonCol>
           <IonCol size="8" className="justify-content-center">
             <IonAvatar class="profile-img-cover">
-              <img src="https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/3b/1c/f0/3b1cf058856c4f7ea8aa4ba8b2c3e486/images/account_-_overview/u26.png?token=c14a7f334166f6699c206821b3181cbe534ae07f3d0d6cd875622be59d71b9da" />
+              <img alt="" src="https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/3b/1c/f0/3b1cf058856c4f7ea8aa4ba8b2c3e486/images/account_-_overview/u26.png?token=c14a7f334166f6699c206821b3181cbe534ae07f3d0d6cd875622be59d71b9da" />
             </IonAvatar>
           </IonCol>
           <IonCol size="2"></IonCol>
@@ -100,7 +82,7 @@ const EditProfile: React.FC = (props) => {
         <IonRow>
           <IonCol size="2"></IonCol>
           <IonCol size="8" className="text-align-center">
-            <a>Change profile photo</a>
+            <IonButton fill="clear">Change profile photo</IonButton>
           </IonCol>
           <IonCol size="2"></IonCol>
         </IonRow>
@@ -137,7 +119,7 @@ const EditProfile: React.FC = (props) => {
           </IonCol>
           <IonCol size="9">
             <IonItem>
-              <IonDatetime value={state.birthday} placeholder="Select Date" className="ion-datetime-custom"></IonDatetime>
+              <IonDatetime value={state.birthday} onIonChange={(e) => {onChangeBirthday(e)}} placeholder="Select Date" className="ion-datetime-custom"></IonDatetime>
           </IonItem>
           </IonCol>
         </IonRow>
@@ -202,7 +184,7 @@ const EditProfile: React.FC = (props) => {
 
         
           <IonTabButton tab="map">
-            <img alt="" src="./assets/imgs/daiamond.png"/>
+            <img src="./assets/imgs/daiamond.png" alt="" />
           </IonTabButton>
 
           <IonTabButton tab="about">

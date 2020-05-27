@@ -9,6 +9,10 @@
     justify-content: center;
 }
 
+.justify-content-center {
+    display: flex;
+    justify-content: space-between;
+}
 .text-align-center {
     text-align: center;
 }
@@ -37,4 +41,8 @@
 .done-button {
     --color: #0095F6;
     font-weight: bold;
+}
+
+.tab-bar-icon {
+    color: $color_dark;
 }
