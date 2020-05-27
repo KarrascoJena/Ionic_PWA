@@ -4,6 +4,7 @@ import { ellipsisHorizontalOutline } from 'ionicons/icons';
 
 import AwesomeSlider from 'react-awesome-slider';
 import AwesomeSliderStyles from 'react-awesome-slider/src/styles';
+import EmoticonRating from '../components/emoticon-rating'
 
 import '../theme/pages/DiscoverVote.scss'
 
@@ -22,7 +23,16 @@ const gotoBack = (props) => {
   props.history.goBack()
 }
 
-const DiscoverVote: React.FC = (props) => {
+const DiscoverVote: React.FC<{history}> = (props) => {
+
+  const [value, setValue] = React.useState(1);
+  const [valueText] = React.useState([
+    'Hate', 'Disappointed', 'Natural', 'Good', 'Excellent'
+  ]);
+
+  const onChangeValue = (changedValue) => {
+    setValue(changedValue)
+  }
 
   return (
     <IonPage>
@@ -40,7 +50,7 @@ const DiscoverVote: React.FC = (props) => {
 
       <IonContent className="padding-content justify-content-center">
         <IonRow>
-          <IonCol size="9" className="font-size-20 padding-left-20">
+          <IonCol size="9" className="font-size-20">
             Title
           </IonCol>
           <IonCol size="1">
@@ -72,34 +82,13 @@ const DiscoverVote: React.FC = (props) => {
               <i className="fas fa-info"></i>
             </span>
         </div>
-          <Rating/>
+        <div className="justify-content-center margin-top-10">
+          <h4>{valueText[value]}</h4>
+        </div>
+        <EmoticonRating value={value} changeValue={(changedValue) => {onChangeValue(changedValue)}}/>
       </IonContent>
     </IonPage>
   );
 };
 
 export default DiscoverVote;
-
-const Rating = (props) => {
-  return(
-    <IonRow>
-      <IonCol size="1"></IonCol>
-      <IonCol size="2"  onTouchStart = {() => {console.log("I am 1st emoji")}}>
-        <img src="./assets/avatar/female1.jpg" alt=""/>
-      </IonCol>
-      <IonCol size="2"  onTouchStart = {() => {console.log("I am 2nd emoji")}}>
-        <img src="./assets/avatar/male1.jpg" alt=""/>
-      </IonCol>
-      <IonCol size="2"  onTouchStart = {() => {console.log("I am 3rd emoji")}}>
-        <img src="./assets/avatar/female1.jpg" alt=""/>
-      </IonCol>
-      <IonCol size="2" onFocus = {() => {console.log("focused on 4th emoji")}} onTouchStart = {() => {console.log("I am 4th emoji")}}>
-        <img src="./assets/avatar/male1.jpg" alt=""/>
-      </IonCol>
-      <IonCol size="2" onTouchMove={(e) => {console.log(e.currentTarget)}} >
-        <img className="mouse-hover" src="./assets/avatar/female1.jpg" alt=""/>
-      </IonCol>
-      <IonCol size="1"></IonCol>
-    </IonRow>
-  );
-}

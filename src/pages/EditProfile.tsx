@@ -101,7 +101,7 @@ const EditProfile: React.FC = (props) => {
 
         <IonRow>
           <IonCol size="3" className="align-item-center">
-            <IonLabel>GENDER</IonLabel>
+            <IonLabel>Gender</IonLabel>
           </IonCol>
           <IonCol size="9" className="gender-padding-left">
             <FormControl component="fieldset">
