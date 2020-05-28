@@ -22,7 +22,6 @@ const slider = (
 
 const GetStart: React.FC = () => {
   
-  console.log(window.innerHeight)
   return (
     <IonPage>
       <IonContent>

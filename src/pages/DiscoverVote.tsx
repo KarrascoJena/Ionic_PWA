@@ -10,8 +10,8 @@ import '../theme/pages/DiscoverVote.scss'
 
 const slider = (
   <AwesomeSlider className="custom-height" cssModule={AwesomeSliderStyles} bullets={true}>
-    <div data-src="./assets/imgs/slides/slide1.jpg" />
     <div data-src="./assets/imgs/slides/slide2.jpg" />
+    <div data-src="./assets/imgs/slides/slide1.jpg" />
     <div data-src="./assets/imgs/slides/slide3.jpg" />
     <div data-src="./assets/imgs/slides/slide4.jpg" />
     <div data-src="./assets/imgs/slides/slide5.jpg" />
