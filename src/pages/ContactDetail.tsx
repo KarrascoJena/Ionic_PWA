@@ -18,7 +18,7 @@ const gotoMyContacts = (e, props) => {
   props.history.push('/mycontacts');
 }
 
-const ContactDetail: React.FC = (props) => {
+const ContactDetail: React.FC<{history}> = (props) => {
 
   const [state, setState] = useState({
     avatarUrl: 'https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/3b/1c/f0/3b1cf058856c4f7ea8aa4ba8b2c3e486/images/account_-_overview/u26.png?token=c14a7f334166f6699c206821b3181cbe534ae07f3d0d6cd875622be59d71b9da',
@@ -32,6 +32,7 @@ const ContactDetail: React.FC = (props) => {
     checkChrismas: true,
     checkVacation: true,
     checkWeekend: false,
+    fatherAndMotherday: false,
     checkValentine: true,
     checkAnniversary: true,
     anniversaryDate: null,
@@ -199,7 +200,7 @@ const ContactDetail: React.FC = (props) => {
 
           <IonRow>
             <IonCol size="3" className="input-label-custom">
-              <IonLabel className="align-self-center">Relationship*</IonLabel>
+              <IonLabel className="align-self-center" >Relationship*</IonLabel>
             </IonCol>
             <IonCol size="9">
               <IonItem>
@@ -236,7 +237,7 @@ const ContactDetail: React.FC = (props) => {
           </IonRange>
         </div>
 
-        <div id="Occasions">
+        <div id="Occasions" className="occasions">
           <h4 className="underline-text-decorate">Occasions</h4>
           <label className="grey-text">Select to receive experieces for</label>
 
@@ -286,6 +287,16 @@ const ContactDetail: React.FC = (props) => {
             <IonCol size="2">
               <IonToggle checked={state.checkValentine} onIonChange={(e) => onChangeCheck(e, 'checkValentine')}/>
             </IonCol>
+            <br/>
+          </IonRow>
+          
+          <IonRow hidden={state.relationship !== 'Parent'}>
+            <IonCol size="10" className="input-label-custom">
+              {renderOccasionIcon("fal fa-kiss-wink-heart fa-1x", "Father or Mother day")}
+            </IonCol>
+            <IonCol size="2">
+              <IonToggle checked={state.fatherAndMotherday} onIonChange={(e) => onChangeCheck(e, 'fatherAndMotherday')}/>
+            </IonCol>
           </IonRow>
           <br/>
 
@@ -307,7 +318,7 @@ const ContactDetail: React.FC = (props) => {
           </IonRow>
         </div>
 
-        <div id="Interests">
+        <div id="Interests" className="interests">
           <h4 className="">Interests</h4>
           <label className="grey-text">Defiine preferences of you favourite</label>
 
@@ -352,7 +363,7 @@ const ContactDetail: React.FC = (props) => {
           </div>
         </div>
 
-        <div id="Characteristics" className="margin-bottom-characteristics">
+        <div id="Characteristics" className="margin-bottom-characteristics characteristics">
           <h4 className="">Characteristics</h4>
           <label className="grey-text">Define preferences of you favourite</label>
 
@@ -382,7 +393,7 @@ const ContactDetail: React.FC = (props) => {
         </div>
         
 
-        <div id="Connections" className="margin-bottom-connections">
+        <div id="Connections" className="margin-bottom-connections connections">
           <h4 className="">Connections</h4>
           <IonRow>
             <IonCol size="1" className="input-label-custom align-item-center">
@@ -437,7 +448,7 @@ const ContactDetail: React.FC = (props) => {
             </IonCol>
             <IonCol size="11">
               <IonItem>
-                <IonInput value={state.whatsAppNumber} type="phone" clearInput={true} className="" onIonChange={(e) => onChangeConnections(e, 'whatsAppNumber')}></IonInput>
+                <IonInput value={state.whatsAppNumber} type="text" clearInput={true} className="" onIonChange={(e) => onChangeConnections(e, 'whatsAppNumber')}></IonInput>
               </IonItem>
             </IonCol>
           </IonRow>

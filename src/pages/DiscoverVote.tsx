@@ -1,6 +1,6 @@
 import React from 'react';
 import { IonIcon, IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonButtons, IonAvatar } from '@ionic/react';
-import { ellipsisHorizontalOutline } from 'ionicons/icons';
+import { ellipsisHorizontal } from 'ionicons/icons';
 
 import AwesomeSlider from 'react-awesome-slider';
 import AwesomeSliderStyles from 'react-awesome-slider/src/styles';
@@ -25,7 +25,7 @@ const gotoBack = (props) => {
 
 const DiscoverVote: React.FC<{history}> = (props) => {
 
-  const [value, setValue] = React.useState(1);
+  const [value, setValue] = React.useState(-1);
   const [valueText] = React.useState([
     'Hate', 'Disappointed', 'Natural', 'Good', 'Excellent'
   ]);
@@ -39,18 +39,19 @@ const DiscoverVote: React.FC<{history}> = (props) => {
       <IonHeader>
         <IonToolbar className="padding-header">
           <IonButtons slot="start" onClick={() => {props.history.goBack()}}>
-            <i className="fal fa-times fa-2x"></i>
+            <i className="fal fa-times custom-icon-size-small"></i>
           </IonButtons>
           <IonButtons slot="end">
-            <i className="fal fa-share-alt fa-2x"></i>
+            <i className="fal fa-share-alt custom-icon-size-small"></i>
           </IonButtons>
           <IonTitle>Brand</IonTitle>
         </IonToolbar>
       </IonHeader>
 
       <IonContent className="padding-content justify-content-center">
-        <IonRow>
-          <IonCol size="9" className="font-size-20">
+        
+        <IonRow class="custom-height-35 align-item-center">
+          <IonCol size="9" className="custom-title-font-size">
             Title
           </IonCol>
           <IonCol size="1">
@@ -65,7 +66,7 @@ const DiscoverVote: React.FC<{history}> = (props) => {
           </IonCol>
           <IonCol size="1">
             <span className="icon-size-small">
-              <IonIcon icon={ellipsisHorizontalOutline}/>
+              <IonIcon icon={ellipsisHorizontal}/>
             </span>
           </IonCol>
         </IonRow>
@@ -74,16 +75,17 @@ const DiscoverVote: React.FC<{history}> = (props) => {
           {slider}
           <img src="./assets/avatar/female1.jpg" className="bottom-profile-circle-img"/>
         </div>
-        <div className="justify-content-center margin-10">
-            <span className="icon-size-small">
+        <div className="justify-content-space-between margin-10">
+            <span className="custom-title-font-size">
               <i className="fas fa-undo"></i>
             </span>
-            <span  className="icon-size-small">
+            <span  className="custom-title-font-size">
               <i className="fas fa-info"></i>
             </span>
         </div>
         <div className="justify-content-center margin-top-10">
-          <h4>{valueText[value]}</h4>
+          <h4>Edina</h4>
+          {/* <h4>{valueText[value]}</h4> */}
         </div>
         <EmoticonRating value={value} changeValue={(changedValue) => {onChangeValue(changedValue)}}/>
       </IonContent>

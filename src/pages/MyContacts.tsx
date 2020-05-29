@@ -20,23 +20,23 @@ const gotoContactDetail = (e, props) => {
 
 const contacts = [
   {
-    img: 'https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/3b/1c/f0/3b1cf058856c4f7ea8aa4ba8b2c3e486/images/account_-_overview/u26.png?token=c14a7f334166f6699c206821b3181cbe534ae07f3d0d6cd875622be59d71b9da',
+    img: 'https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/79/40/55/79405597c78a427aad7454be74144d3d/images/account_-_overview/u26.png?token=4bf66e8f9a1fa75d65514bb559eeaff92a8f7229a164ad31976b0338c71ec196',
   },
   {
-    img: 'https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/3b/1c/f0/3b1cf058856c4f7ea8aa4ba8b2c3e486/images/account_-_overview/u26.png?token=c14a7f334166f6699c206821b3181cbe534ae07f3d0d6cd875622be59d71b9da',
+    img: 'https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/79/40/55/79405597c78a427aad7454be74144d3d/images/account_-_overview/u26.png?token=4bf66e8f9a1fa75d65514bb559eeaff92a8f7229a164ad31976b0338c71ec196',
   },
   {
-    img: 'https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/3b/1c/f0/3b1cf058856c4f7ea8aa4ba8b2c3e486/images/account_-_settings/u41.png?token=0efbfee354b2c14c71f6dc351a34c2e80f778d6e40721d4d841260703fba3a0c',
+    img: 'https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/79/40/55/79405597c78a427aad7454be74144d3d/images/account_-_overview/u26.png?token=4bf66e8f9a1fa75d65514bb559eeaff92a8f7229a164ad31976b0338c71ec196',
   },
   {
-    img: 'https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/3b/1c/f0/3b1cf058856c4f7ea8aa4ba8b2c3e486/images/account_-_settings/u41.png?token=0efbfee354b2c14c71f6dc351a34c2e80f778d6e40721d4d841260703fba3a0c',
+    img: 'https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/79/40/55/79405597c78a427aad7454be74144d3d/images/account_-_overview/u26.png?token=4bf66e8f9a1fa75d65514bb559eeaff92a8f7229a164ad31976b0338c71ec196',
   },
   {
-    img: 'https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/3b/1c/f0/3b1cf058856c4f7ea8aa4ba8b2c3e486/images/account_-_overview/u26.png?token=c14a7f334166f6699c206821b3181cbe534ae07f3d0d6cd875622be59d71b9da',
+    img: 'https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/79/40/55/79405597c78a427aad7454be74144d3d/images/account_-_overview/u26.png?token=4bf66e8f9a1fa75d65514bb559eeaff92a8f7229a164ad31976b0338c71ec196',
   },
 ];
 
-const MyAccount: React.FC = (props) => {
+const MyAccount: React.FC<{history}> = (props) => {
 
   const contactList = contacts.map((item, index) => {
     return(
@@ -56,10 +56,10 @@ const MyAccount: React.FC = (props) => {
       <IonHeader>
         <IonToolbar className="padding-header">
           <div onClick={(e) => gotoGetStart(e, props)} slot="start">
-            <i className="fal fa-cog fa-2x" slot="start"></i>
+            <i className="fal fa-cog custom-icon-size-small" slot="start"></i>
           </div>
           <div onClick={(e) => gotoEditProfile(e, props)} slot="end">
-            <i className="far fa-user fa-2x" slot="end" ></i>
+            <i className="far fa-user custom-icon-size-small" slot="end" ></i>
           </div>
           <IonTitle>My Contacts</IonTitle>
         </IonToolbar>
@@ -82,36 +82,36 @@ const MyAccount: React.FC = (props) => {
 
       {/* <IonTabs> */}
         {/* <IonRouterOutlet></IonRouterOutlet> */}
-        <IonTabBar slot="bottom">
+        <IonTabBar slot="bottom" className="bottom-tab-bar-background-color bottom-icon-height">
           <IonTabButton tab="speakers" onClick={() => {props.history.push('./discovervote')}}>
-            <span className="tab-bar-icon">
-              <i className="fal fa-telescope fa-3x"></i>
+            <span className="tab-bar-icon custom-icon-size-small">
+              <i className="fal fa-telescope"></i>
             </span>
           </IonTabButton>
 
           <IonTabButton tab="schedule">
-            <span className="tab-bar-icon">
-              <i className="fal fa-heart fa-3x"></i>
+            <span className="tab-bar-icon custom-icon-size-small ">
+              <i className="fal fa-heart"></i>
             </span>
             <IonBadge>2</IonBadge>
           </IonTabButton>
 
         
           <IonTabButton tab="map">
-            <span className="tab-bar-icon">
-              <i className="fal fa-book-spells fa-3x"></i>
+            <span className="tab-bar-icon custom-icon-size-small">
+              <i className="fal fa-book-spells"></i>
             </span>
           </IonTabButton>
 
           <IonTabButton tab="about">
-            <span className="tab-bar-icon">
-              <i className="fal fa-search fa-3x"></i>
+            <span className="tab-bar-icon custom-icon-size-small">
+              <i className="fal fa-search"></i>
             </span>
           </IonTabButton>
           
           <IonTabButton tab="about">
-            <span className="tab-bar-icon">
-              <i className="fas fa-user-friends fa-3x"></i>
+            <span className="tab-bar-icon custom-icon-size-small">
+              <i className="fas fa-user-friends"></i>
             </span>
           </IonTabButton>
         </IonTabBar>

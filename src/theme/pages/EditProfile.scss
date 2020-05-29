@@ -41,8 +41,11 @@ ion-range {
 .underline-text-decorate {
     text-decoration: underline;
 }
-
+.occasions {
+    padding: 3px;
+}
 .align-self-center {
+    display: flex;
     align-self: center;
 }
 
@@ -63,7 +66,7 @@ ion-range {
 }
 
 .margin-bottom-connections {
-    margin-bottom: 200px;
+    margin-bottom: 50px;
 }
 
 .delete-connect {
@@ -73,6 +76,18 @@ ion-range {
 
 .hidden {
     display: none;
+}
+
+.connections {
+    padding: 3px;
+}
+
+.characteristics {
+    padding: 3px;
+}
+
+.interests {
+    padding: 3px;
 }
 
 .profile-img {
@@ -98,4 +113,8 @@ ion-range {
 
 .dark-text {
     --button-color: $color_dark;
+}
+
+.input-label-custom {
+    display: flex;
 }

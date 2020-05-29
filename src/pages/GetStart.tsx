@@ -24,7 +24,6 @@ const GetStart: React.FC = () => {
   
   return (
     <IonPage>
-      <IonContent>
       <div className="position-relative">
         {slider}
         <IonRow className="justify-content-end height-4 bottom-content">
@@ -38,8 +37,6 @@ const GetStart: React.FC = () => {
           </IonCol>
         </IonRow>
       </div>
-      
-      </IonContent>
     </IonPage>
   );
 };

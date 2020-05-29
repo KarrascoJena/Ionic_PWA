@@ -1,3 +1,5 @@
+@import '../custom_variable';
+
 .font-size-20 {
     font-size: 20px;
 }
@@ -55,11 +57,15 @@
     width: 6px;
     height: 6px;
     margin: 3px;
-    background-color: white;
+    background-color: rgb(192, 192, 192);;
+}
+
+.awssld__bullets--active {
+    background-color: white !important;
 }
 
 .margin-10 {
-    margin: 2% 3%;
+    margin: 2% 5%;
 }
 
 .icon-size-small {
@@ -76,4 +82,23 @@ ion-content {
 
 .margin-top-10 {
     margin-top: 20px;
+}
+
+.awssld__content:before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    height: 30%;
+    background: linear-gradient(to bottom, transparent 0%, $color_dark 100%);
+    z-index: 1;
+}
+
+.custom-title-font-size {
+    font-size: 18px;
+}
+
+.custom-height-35 {
+    height: 40px;
 }

@@ -23,7 +23,7 @@
 }
 
 .line-divider {
-    background-color:#629aff;
+    background-color:#d5d5d5;
 }
 
 .full-fill-red-icon {
@@ -49,4 +49,16 @@
 
 .bacground-color-grey {
     background-color: $color_gren;
+}
+
+.custom-icon-size-small {
+    font-size: 24px;
+}
+
+.bottom-tab-bar-background-color {
+    color: #FBFAFA
+}
+
+.bottom-icon-height {
+    height: 45px !important;
 }

@@ -172,30 +172,40 @@ const EditProfile: React.FC = (props) => {
 
       {/* <IonTabs> */}
         {/* <IonRouterOutlet></IonRouterOutlet> */}
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="speakers">
-            <IonIcon icon={trailSignOutline} />
+        <IonTabBar slot="bottom" className="bottom-tab-bar-background-color bottom-icon-height">
+          <IonTabButton tab="speakers" onClick={() => {props.history.push('./discovervote')}}>
+            <span className="tab-bar-icon custom-icon-size-small">
+              <i className="fal fa-telescope"></i>
+            </span>
           </IonTabButton>
 
           <IonTabButton tab="schedule">
-            <IonIcon icon={heartOutline} />
+            <span className="tab-bar-icon custom-icon-size-small ">
+              <i className="fal fa-heart"></i>
+            </span>
             <IonBadge>2</IonBadge>
           </IonTabButton>
 
         
           <IonTabButton tab="map">
-            <img src="./assets/imgs/daiamond.png" alt="" />
+            <span className="tab-bar-icon custom-icon-size-small">
+              <i className="fal fa-book-spells"></i>
+            </span>
           </IonTabButton>
 
           <IonTabButton tab="about">
-            <IonIcon icon={searchOutline} />
+            <span className="tab-bar-icon custom-icon-size-small">
+              <i className="fal fa-search"></i>
+            </span>
           </IonTabButton>
           
           <IonTabButton tab="about">
-            <IonIcon icon={peopleOutline} />
+            <span className="tab-bar-icon custom-icon-size-small">
+              <i className="fas fa-user-friends"></i>
+            </span>
           </IonTabButton>
         </IonTabBar>
-      {/* </IonTabs> */}
+{/* </IonTabs> */}
     </IonPage>
   );
 };
