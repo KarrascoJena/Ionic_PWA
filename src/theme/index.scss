@@ -23,7 +23,7 @@
 }
 
 .line-divider {
-    background-color:#d5d5d5;
+    background-color: $color_grey_light;
 }
 
 .full-fill-red-icon {
@@ -35,20 +35,20 @@
 }
 
 .cancel-button {
-    --color: $color_gren_dark;
+    --color: $color_grey_dark;
 }
 
 .done-button {
-    --color: #0095F6;
+    color: $color_blue;
     font-weight: bold;
 }
 
 .tab-bar-icon {
-    color: $color_dark;
+    color: $color_gray_very_dark;
 }
 
 .bacground-color-grey {
-    background-color: $color_gren;
+    background-color: $color_grey_medium;
 }
 
 .custom-icon-size-small {
@@ -56,7 +56,7 @@
 }
 
 .bottom-tab-bar-background-color {
-    color: #FBFAFA
+    color: $color_grey_light;
 }
 
 .bottom-icon-height {

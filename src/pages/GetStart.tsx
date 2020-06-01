@@ -1,14 +1,9 @@
 import React from 'react';
-import { IonContent, IonPage, IonButton, IonRow, IonCol, getPlatforms } from '@ionic/react';
+import { IonPage, IonButton, IonRow, IonCol } from '@ionic/react';
 
 import AwesomeSlider from 'react-awesome-slider';
 import AwesomeSliderStyles from 'react-awesome-slider/src/styles';
 import '../theme/pages/GetStart.scss'
-
-const slideOpts = {
-  initialSlide: 0,
-  speed: 400
-}
 
 const slider = (
   <AwesomeSlider style={{height: window.innerHeight}} cssModule={AwesomeSliderStyles} bullets={false}>

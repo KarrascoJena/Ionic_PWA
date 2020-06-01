@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { IonDatetime, IonSelect, IonSelectOption, IonLabel, IonTabBar, IonAvatar, IonInput, IonTabButton, IonIcon, IonBadge, IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonButton, IonButtons, IonItem } from '@ionic/react';
-import { peopleOutline, searchOutline, heartOutline, trailSignOutline } from 'ionicons/icons';
+import { IonDatetime, IonSelect, IonSelectOption, IonLabel, IonTabBar, IonAvatar, IonInput, IonTabButton, IonBadge, IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonButton, IonButtons, IonItem } from '@ionic/react';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
+
+import BottomTabBar from '../components/bottom-tab-bar';
 
 import '../theme/pages/EditProfile.scss'
 
@@ -18,7 +19,7 @@ const gotoMyContacts = (e, props) => {
   props.history.push('/mycontacts');
 }
 
-const EditProfile: React.FC = (props) => {
+const EditProfile: React.FC<{history}> = (props) => {
 
   const [state, setState] = useState({
     name: 'Edina',
@@ -167,45 +168,8 @@ const EditProfile: React.FC = (props) => {
             </IonItem>
           </IonCol>
         </IonRow>
-
       </IonContent>
-
-      {/* <IonTabs> */}
-        {/* <IonRouterOutlet></IonRouterOutlet> */}
-        <IonTabBar slot="bottom" className="bottom-tab-bar-background-color bottom-icon-height">
-          <IonTabButton tab="speakers" onClick={() => {props.history.push('./discovervote')}}>
-            <span className="tab-bar-icon custom-icon-size-small">
-              <i className="fal fa-telescope"></i>
-            </span>
-          </IonTabButton>
-
-          <IonTabButton tab="schedule">
-            <span className="tab-bar-icon custom-icon-size-small ">
-              <i className="fal fa-heart"></i>
-            </span>
-            <IonBadge>2</IonBadge>
-          </IonTabButton>
-
-        
-          <IonTabButton tab="map">
-            <span className="tab-bar-icon custom-icon-size-small">
-              <i className="fal fa-book-spells"></i>
-            </span>
-          </IonTabButton>
-
-          <IonTabButton tab="about">
-            <span className="tab-bar-icon custom-icon-size-small">
-              <i className="fal fa-search"></i>
-            </span>
-          </IonTabButton>
-          
-          <IonTabButton tab="about">
-            <span className="tab-bar-icon custom-icon-size-small">
-              <i className="fas fa-user-friends"></i>
-            </span>
-          </IonTabButton>
-        </IonTabBar>
-{/* </IonTabs> */}
+      <BottomTabBar history={props.history} />
     </IonPage>
   );
 };

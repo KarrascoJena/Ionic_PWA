@@ -9,7 +9,7 @@ import EmoticonRating from '../components/emoticon-rating'
 import '../theme/pages/DiscoverVote.scss'
 
 const slider = (
-  <AwesomeSlider className="custom-height" cssModule={AwesomeSliderStyles} bullets={true}>
+  <AwesomeSlider style={{height: window.innerHeight - 300}} cssModule={AwesomeSliderStyles} bullets={true}>
     <div data-src="./assets/imgs/slides/slide2.jpg" />
     <div data-src="./assets/imgs/slides/slide1.jpg" />
     <div data-src="./assets/imgs/slides/slide3.jpg" />
