@@ -3,10 +3,20 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { defineCustomElements } from '@ionic/pwa-elements/loader';
 import * as serviceWorker from './serviceWorker';
+import configureStore from "./store";
+import { Provider } from "react-redux";
+
+const store = configureStore();
+
+const Root = () => (
+  <Provider store={store}>
+    <App />
+  </Provider>
+)
 
 defineCustomElements(window);
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<Root />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Redirect, Route, useHistory } from 'react-router-dom';
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
@@ -21,6 +21,10 @@ import config from './config';
 
 /* okta auth part */
 import { Security, LoginCallback } from '@okta/okta-react';
+
+import { connect, ConnectedProps } from 'react-redux'
+import { useOktaAuth } from '@okta/okta-react';
+
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -62,10 +66,36 @@ const client = new ApolloClient({
   cache: cache
 });
 
+interface AuthState {
+  loggedIn: boolean;
+  session: string;
+  userName: string;
+  authInfo: object;
+}
 
+const mapState = (state: AuthState) => ({
+  loggedIn: state.loggedIn
+})
 
-const App: React.FC<{}> = (props) => {
+const mapDispatch = {
+  init: () => ({ type: 'INIT_STATE' })
+}
 
+const connector = connect(mapState, mapDispatch)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+type Props = PropsFromRedux & {
+  backgroundColor: string
+}
+
+const App: React.FC<{props: Props}> = (props) => {
+  const { authState } = useOktaAuth();
+
+  useEffect(() => {
+    // Update the document title using the browser API
+    props.init(authState)
+  });
   const customAuthHandler = (props) => {props.history.push('/login')}
   return (
     <ApolloProvider client={client}>
@@ -90,4 +120,4 @@ const App: React.FC<{}> = (props) => {
     </ApolloProvider>
   );
 }
-export default App;
+export default connector(App);
