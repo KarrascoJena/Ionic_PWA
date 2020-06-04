@@ -23,7 +23,7 @@ const GetStart: React.FC = () => {
         {slider}
         <IonRow className="justify-content-end height-4 bottom-content">
           <IonCol>
-            <IonButton expand="block" routerLink="/mycontacts">Getting started</IonButton>
+            <IonButton expand="block" routerLink="/login">Getting started</IonButton>
             <div className="font-10 footer-notice text-align-center">
               <p>We don't past anything to Facebook.</p>
               <p>By signingin, you agree to our Terms of Services and</p>

@@ -1,5 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol } from '@ionic/react';
+import { useOktaAuth } from '@okta/okta-react';
+import { gql } from "apollo-boost";
+import { useQuery, useMutation, useLazyQuery } from '@apollo/react-hooks';
 
 import BottomTabBar from '../components/bottom-tab-bar';
 import '../theme/pages/MyContacts.scss'
@@ -17,6 +20,14 @@ const gotoEditProfile = (e, props) => {
 const gotoContactDetail = (e, props) => {
   props.history.push('/contactdetail');
 }
+
+const getUserQuery = gql`
+query getUser($oktaId: String!)  {
+  user: User(where: {otkaId: {_eq: $oktaId}}) {
+    id
+  }
+}
+`;
 
 const contacts = [
   {
@@ -38,6 +49,23 @@ const contacts = [
 
 const MyAccount: React.FC< { history } > = (props) => {
 
+  const [userInfo, setUserInfo] = useState([]);
+  const [userId, setUserId] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const { authState, authService } = useOktaAuth();
+
+  const [loadUser, { loading, error, data }] = useLazyQuery(getUserQuery, {
+    variables: {
+      oktaId: userInfo.idp
+    }
+  });
+  authService.getUser().then((info) => {
+    setUserInfo(info);
+    console.log(info)
+  })
+
+  // loadUser();
   const contactList = contacts.map((item, index) => {
     return(
       <IonCol onClick={(e) => gotoContactDetail(e, props)} size="4" className="grid-img" key={index}>
