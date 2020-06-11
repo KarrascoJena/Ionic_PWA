@@ -21,7 +21,7 @@ const gotoMyContacts = (e, props) => {
 const ContactDetail: React.FC<{history}> = (props) => {
 
   const [state, setState] = useState({
-    avatarUrl: 'https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/3b/1c/f0/3b1cf058856c4f7ea8aa4ba8b2c3e486/images/account_-_overview/u26.png?token=c14a7f334166f6699c206821b3181cbe534ae07f3d0d6cd875622be59d71b9da',
+    avatarUrl: 'https://experiencecontent.blob.core.windows.net/user/5717f23a-d765-48d6-ac16-f11169860c19/profile.jpg',
     name: 'Christian',
     gender: 'male',
     birthday: Date(),
@@ -41,6 +41,9 @@ const ContactDetail: React.FC<{history}> = (props) => {
     rangeType3: 5,
     rangeType4: 5,
     rangeType5: 5,
+    rangeType6: 6,
+    rangeType7: 7,
+    rangeType8: 8,
     rangeFitness: 3,
     rangePersonality: 9,
     rangeSociality: 8,
@@ -331,34 +334,58 @@ const ContactDetail: React.FC<{history}> = (props) => {
           </div>
 
           <div className="range-div-padding-top">
-            <label className="label-padding-left">Type 2</label>
+            <label className="label-padding-left">Short holiday & Overnight stay</label>
             <IonRange min={0} max={10} color="secondary" value={state.rangeType2}>
-              <IonLabel slot="start">0</IonLabel>
-              <IonLabel slot="end">10</IonLabel>
+            <IonLabel slot="start">low</IonLabel>
+              <IonLabel slot="end">high</IonLabel>
             </IonRange>
           </div>
 
           <div className="range-div-padding-top">
-            <label className="label-padding-left">Type 3</label>
+            <label className="label-padding-left">Flying & Falling</label>
             <IonRange min={0} max={10} color="secondary" value={state.rangeType3}>
-              <IonLabel slot="start">0</IonLabel>
-              <IonLabel slot="end">10</IonLabel>
+            <IonLabel slot="start">low</IonLabel>
+              <IonLabel slot="end">high</IonLabel>
             </IonRange>
           </div>
 
           <div className="range-div-padding-top">
-            <label className="label-padding-left">Type 4</label>
+            <label className="label-padding-left">Driving fun & Motorsport</label>
             <IonRange min={0} max={10} color="secondary" value={state.rangeType4}>
-              <IonLabel slot="start">0</IonLabel>
-              <IonLabel slot="end">10</IonLabel>
+            <IonLabel slot="start">low</IonLabel>
+              <IonLabel slot="end">high</IonLabel>
             </IonRange>
           </div>
 
           <div className="range-div-padding-top">
-            <label className="label-padding-left">Type 5</label>
+            <label className="label-padding-left">Sport, Action & Natur</label>
             <IonRange min={0} max={10} color="secondary" value={state.rangeType5}>
-              <IonLabel slot="start">0</IonLabel>
-              <IonLabel slot="end">10</IonLabel>
+            <IonLabel slot="start">low</IonLabel>
+              <IonLabel slot="end">high</IonLabel>
+            </IonRange>
+          </div>
+
+          <div className="range-div-padding-top">
+            <label className="label-padding-left">Wellness & Beauty</label>
+            <IonRange min={0} max={10} color="secondary" value={state.rangeType6}>
+            <IonLabel slot="start">low</IonLabel>
+              <IonLabel slot="end">high</IonLabel>
+            </IonRange>
+          </div>
+
+          <div className="range-div-padding-top">
+            <label className="label-padding-left">Culture & Creative</label>
+            <IonRange min={0} max={10} color="secondary" value={state.rangeType7}>
+            <IonLabel slot="start">low</IonLabel>
+              <IonLabel slot="end">high</IonLabel>
+            </IonRange>
+          </div>
+
+          <div className="range-div-padding-top">
+            <label className="label-padding-left">Wind & Water</label>
+            <IonRange min={0} max={10} color="secondary" value={state.rangeType8}>
+            <IonLabel slot="start">low</IonLabel>
+              <IonLabel slot="end">high</IonLabel>
             </IonRange>
           </div>
         </div>
@@ -370,8 +397,8 @@ const ContactDetail: React.FC<{history}> = (props) => {
           <div className="range-div-padding-top">
             <label className="label-padding-left">Fitness Level</label>
             <IonRange min={0} max={10} color="secondary" value={state.rangeFitness}>
-              <IonLabel slot="start">0</IonLabel>
-              <IonLabel slot="end">10</IonLabel>
+              <IonLabel slot="start">low</IonLabel>
+              <IonLabel slot="end">high</IonLabel>
             </IonRange>
           </div>
 
@@ -454,7 +481,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
           </IonRow>
         </div>
 
-        <div id="delete-connect" className="delete-connect">
+        <div id="delete-connect" className="delete-contact">
           <IonButton fill="clear" onClick={() => setShowAlert(true)}>Delete contact</IonButton>
         </div>
 

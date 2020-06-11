@@ -23,6 +23,7 @@ const EditProfile: React.FC<{history}> = (props) => {
 
   const [state, setState] = useState({
     name: 'Edina',
+    username: 'edina23',
     gender: 'female',
     birthday: Date(),
     city: 'Graz',
@@ -34,6 +35,11 @@ const EditProfile: React.FC<{history}> = (props) => {
     setState({...state, name: e.target.value})
     console.log(state.birthday)
   }
+  
+  const onChangeUserName = (e) => {
+    setState({...state, username: e.target.value})
+  }
+
   const onChangeBirthday = (e) => {
     console.log(e)
     setState({...state, birthday: e})
@@ -74,7 +80,7 @@ const EditProfile: React.FC<{history}> = (props) => {
           <IonCol size="2"></IonCol>
           <IonCol size="8" className="justify-content-center">
             <IonAvatar class="profile-img-cover">
-              <img alt="" src="https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/3b/1c/f0/3b1cf058856c4f7ea8aa4ba8b2c3e486/images/account_-_overview/u26.png?token=c14a7f334166f6699c206821b3181cbe534ae07f3d0d6cd875622be59d71b9da" />
+              <img alt="" src="https://experiencecontent.blob.core.windows.net/user/901890a5-64c1-468d-a603-930c724e082a/profile.jpg" />
             </IonAvatar>
           </IonCol>
           <IonCol size="2"></IonCol>
@@ -91,7 +97,7 @@ const EditProfile: React.FC<{history}> = (props) => {
 
         <IonRow>
           <IonCol size="3" className="align-item-center">
-            <IonLabel>Name</IonLabel>
+            <IonLabel>Name*</IonLabel>
           </IonCol>
           <IonCol size="9">
             <IonItem>
@@ -99,6 +105,18 @@ const EditProfile: React.FC<{history}> = (props) => {
             </IonItem>
           </IonCol>
         </IonRow>
+
+        <IonRow>
+          <IonCol size="3" className="align-item-center">
+            <IonLabel>Username*</IonLabel>
+          </IonCol>
+          <IonCol size="9">
+            <IonItem>
+              <IonInput value={state.username} autofocus={true} clearInput={true} className="" onIonChange={(e) => onChangeUserName(e)}></IonInput>
+            </IonItem>
+          </IonCol>
+        </IonRow>
+
 
         <IonRow>
           <IonCol size="3" className="align-item-center">

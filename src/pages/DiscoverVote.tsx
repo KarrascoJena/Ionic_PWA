@@ -5,17 +5,16 @@ import { ellipsisHorizontal } from 'ionicons/icons';
 import AwesomeSlider from 'react-awesome-slider';
 import AwesomeSliderStyles from 'react-awesome-slider/src/styles';
 import EmoticonRating from '../components/emoticon-rating'
+import useWebShare from "react-use-web-share";
 
 import '../theme/pages/DiscoverVote.scss'
 
 const slider = (
   <AwesomeSlider style={{height: window.innerHeight - 300}} cssModule={AwesomeSliderStyles} bullets={true}>
-    <div data-src="./assets/imgs/slides/slide2.jpg" />
-    <div data-src="./assets/imgs/slides/slide1.jpg" />
-    <div data-src="./assets/imgs/slides/slide3.jpg" />
-    <div data-src="./assets/imgs/slides/slide4.jpg" />
-    <div data-src="./assets/imgs/slides/slide5.jpg" />
-    <div data-src="./assets/imgs/background.jpg" />
+    <div data-src="https://experiencecontent.blob.core.windows.net/experience/801f4489-98f8-4f7e-8c62-f050293f2a1b/image1.jpg" />
+    <div data-src="https://experiencecontent.blob.core.windows.net/experience/801f4489-98f8-4f7e-8c62-f050293f2a1b/image2.jpg" />
+    <div data-src="https://experiencecontent.blob.core.windows.net/experience/801f4489-98f8-4f7e-8c62-f050293f2a1b/image3.jpg" />
+    <div data-src="https://experiencecontent.blob.core.windows.net/experience/801f4489-98f8-4f7e-8c62-f050293f2a1b/image4.jpg" />
   </AwesomeSlider>
 )
 
@@ -27,8 +26,21 @@ const DiscoverVote: React.FC<{history}> = (props) => {
 
   const [value, setValue] = React.useState(-1);
   const [valueText] = React.useState([
-    'Hate', 'Disappointed', 'Natural', 'Good', 'Excellent'
+    'hates', 'does not like', 'might like', 'likes', 'loves'
   ]);
+
+  
+  const { loading, isSupported, share } = useWebShare();
+
+  // ToDo: Static test text which needs to be changed
+  // ToDo: Add image for social web sharing
+  function shareClick() {
+    share({
+      title: 'Parrot Tour',
+      text:'Some text for Parrot Tour',
+      url: 'Link to URL'
+    });
+  }
 
   const onChangeValue = (changedValue) => {
     setValue(changedValue)
@@ -41,7 +53,7 @@ const DiscoverVote: React.FC<{history}> = (props) => {
           <IonButtons slot="start" onClick={() => {props.history.goBack()}}>
             <i className="fal fa-times custom-icon-size-small"></i>
           </IonButtons>
-          <IonButtons slot="end">
+          <IonButtons slot="end" onClick={() => { shareClick()}}>
             <i className="fal fa-share-alt custom-icon-size-small"></i>
           </IonButtons>
           <IonTitle>Brand</IonTitle>
@@ -73,7 +85,7 @@ const DiscoverVote: React.FC<{history}> = (props) => {
 
         <div className="position-relative">
           {slider}
-          <img src="./assets/avatar/female1.jpg" className="bottom-profile-circle-img"/>
+          <img src="https://experiencecontent.blob.core.windows.net/user/5717f23a-d765-48d6-ac16-f11169860c19/profile.jpg" className="bottom-profile-circle-img"/>
         </div>
         <div className="justify-content-space-between margin-10">
             <span className="custom-title-font-size">
@@ -84,7 +96,7 @@ const DiscoverVote: React.FC<{history}> = (props) => {
             </span>
         </div>
         <div className="justify-content-center margin-top-10">
-          <h4>Edina</h4>
+          <h4>Christian</h4>
           {/* <h4>{valueText[value]}</h4> */}
         </div>
         <EmoticonRating value={value} changeValue={(changedValue) => {onChangeValue(changedValue)}}/>

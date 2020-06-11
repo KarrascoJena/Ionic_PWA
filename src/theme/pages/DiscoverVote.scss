@@ -17,6 +17,7 @@
     justify-content: center;
     background: white;
     border-radius: 50%;
+    border: 2px solid white;
     cursor: pointer;
     align-items: center;
     transition: transform ease-in 0.1s;
@@ -32,7 +33,7 @@
 .awssld__bullets {
     display: flex;
     position: absolute;
-    top: 80%;
+    top: 85%;
     left: 3%;
     // width: 30%;
     height: auto;
@@ -48,15 +49,15 @@
 }
 
 .awssld__bullets--active {
-    width: 6px !important;
-    height: 6px !important;
+    width: 4px !important;
+    height: 4px !important;
     background-color: black !important;
 }
 
 .awssld__bullets button {
-    width: 6px;
-    height: 6px;
-    margin: 3px;
+    width: 4px;
+    height: 4px;
+    margin: 2px;
     background-color: rgb(192, 192, 192);;
 }
 
@@ -91,7 +92,7 @@ ion-content {
     width: 100%;
     bottom: 0;
     height: 30%;
-    background: linear-gradient(to bottom, transparent 0%, $color_gray_very_dark 100%);
+    background: linear-gradient(to bottom, transparent 0%, $color_grey_very_dark 100%);
     z-index: 1;
 }
 

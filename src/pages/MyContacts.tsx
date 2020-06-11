@@ -1,10 +1,7 @@
-import React, {useState} from 'react';
-import { IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol } from '@ionic/react';
-import { useOktaAuth } from '@okta/okta-react';
-import { gql } from "apollo-boost";
-import { useQuery, useMutation, useLazyQuery } from '@apollo/react-hooks';
+import React from 'react';
+import { IonTabBar, IonTabButton, IonIcon, IonBadge, IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol } from '@ionic/react';
+import { peopleOutline, searchOutline, heartOutline, trailSignOutline } from 'ionicons/icons';
 
-import BottomTabBar from '../components/bottom-tab-bar';
 import '../theme/pages/MyContacts.scss'
 
 const gotoGetStart = (e, props) => {
@@ -21,51 +18,17 @@ const gotoContactDetail = (e, props) => {
   props.history.push('/contactdetail');
 }
 
-const getUserQuery = gql`
-query getUser($oktaId: String!)  {
-  user: User(where: {otkaId: {_eq: $oktaId}}) {
-    id
-  }
-}
-`;
-
 const contacts = [
   {
-    img: 'https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/79/40/55/79405597c78a427aad7454be74144d3d/images/account_-_overview/u26.png?token=4bf66e8f9a1fa75d65514bb559eeaff92a8f7229a164ad31976b0338c71ec196',
+    img: 'https://experiencecontent.blob.core.windows.net/user/5717f23a-d765-48d6-ac16-f11169860c19/profile.jpg',
   },
   {
-    img: 'https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/79/40/55/79405597c78a427aad7454be74144d3d/images/account_-_overview/u26.png?token=4bf66e8f9a1fa75d65514bb559eeaff92a8f7229a164ad31976b0338c71ec196',
-  },
-  {
-    img: 'https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/79/40/55/79405597c78a427aad7454be74144d3d/images/account_-_overview/u26.png?token=4bf66e8f9a1fa75d65514bb559eeaff92a8f7229a164ad31976b0338c71ec196',
-  },
-  {
-    img: 'https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/79/40/55/79405597c78a427aad7454be74144d3d/images/account_-_overview/u26.png?token=4bf66e8f9a1fa75d65514bb559eeaff92a8f7229a164ad31976b0338c71ec196',
-  },
-  {
-    img: 'https://d1icd6shlvmxi6.cloudfront.net/gsc/2V3PDC/79/40/55/79405597c78a427aad7454be74144d3d/images/account_-_overview/u26.png?token=4bf66e8f9a1fa75d65514bb559eeaff92a8f7229a164ad31976b0338c71ec196',
+    img: 'https://experiencecontent.blob.core.windows.net/user/2fb1c8e4-42a4-43a6-a337-b8cc52c83d3f/profile.jpg',
   },
 ];
 
-const MyAccount: React.FC< { history } > = (props) => {
+const MyAccount: React.FC<{history}> = (props) => {
 
-  const [userInfo, setUserInfo] = useState([]);
-  const [userId, setUserId] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  const { authState, authService } = useOktaAuth();
-
-  const [loadUser, { loading, error, data }] = useLazyQuery(getUserQuery, {
-    variables: {
-      oktaId: userInfo.idp
-    }
-  });
-  authService.getUser().then((info) => {
-    setUserInfo(info);
-    console.log(info)
-  })
-
-  // loadUser();
   const contactList = contacts.map((item, index) => {
     return(
       <IonCol onClick={(e) => gotoContactDetail(e, props)} size="4" className="grid-img" key={index}>
@@ -108,7 +71,42 @@ const MyAccount: React.FC< { history } > = (props) => {
         </IonRow>
       </IonContent>
 
-      <BottomTabBar history={props.history} />
+      {/* <IonTabs> */}
+        {/* <IonRouterOutlet></IonRouterOutlet> */}
+        <IonTabBar slot="bottom" className="bottom-tab-bar-background-color bottom-icon-height">
+          <IonTabButton tab="speakers" onClick={() => {props.history.push('./discovervote')}}>
+            <span className="tab-bar-icon custom-icon-size-small">
+              <i className="fal fa-telescope"></i>
+            </span>
+          </IonTabButton>
+
+          <IonTabButton tab="schedule">
+            <span className="tab-bar-icon custom-icon-size-small ">
+              <i className="fal fa-heart"></i>
+            </span>
+            <IonBadge>2</IonBadge>
+          </IonTabButton>
+
+        
+          <IonTabButton tab="map">
+            <span className="tab-bar-icon custom-icon-size-small">
+              <i className="fal fa-book-spells"></i>
+            </span>
+          </IonTabButton>
+
+          <IonTabButton tab="about">
+            <span className="tab-bar-icon custom-icon-size-small">
+              <i className="fal fa-search"></i>
+            </span>
+          </IonTabButton>
+          
+          <IonTabButton tab="about">
+            <span className="tab-bar-icon custom-icon-size-small">
+              <i className="fas fa-user-friends"></i>
+            </span>
+          </IonTabButton>
+        </IonTabBar>
+      {/* </IonTabs> */}
     </IonPage>
   );
 };
