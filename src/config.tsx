@@ -9,5 +9,8 @@ export default {
     scopes: ['openid', 'profile', 'email'],
     pkce: false,
     disableHttpsCheck: false,
+  },
+  brand: {
+    name: 'brand name'
   }
 };

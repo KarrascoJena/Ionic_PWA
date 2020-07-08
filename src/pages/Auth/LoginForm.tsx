@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import OktaAuth from '@okta/okta-auth-js';
 import { useOktaAuth } from '@okta/okta-react';
-import { IonPage, IonContent, IonInput, IonButton, IonTitle, IonHeader } from '@ionic/react';
+import { IonPage, IonContent, IonInput, IonButton, IonTitle, IonHeader, IonAlert } from '@ionic/react';
 
 
 const LoginForm: React.FC<{ history:any; }> = (props) => { 
@@ -9,9 +9,13 @@ const LoginForm: React.FC<{ history:any; }> = (props) => {
   const [sessionToken, setSessionToken] = useState();
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
+  const [alert, setAlert] = useState({
+    state: false,
+    header: '',
+    content:''
+  });
   
   const handleSubmit = (e) => {
-
     console.log(username)
     console.log(password)
     e.preventDefault();
@@ -25,7 +29,17 @@ const LoginForm: React.FC<{ history:any; }> = (props) => {
       authService.redirect({ sessionToken });
       props.history.push('/mycontacts')
     })
-    .catch(err => console.log('Found an error', err));
+    .catch((err) => {
+      console.log(err.name)
+      console.log(err)
+      if(!err.errorCode){
+        setAlert({state: true, header: 'server is not working', content: 'try again later'})
+      } else if (err.errorCode == "E0000004"){
+        setAlert({state: true, header: 'Authentication failed', content: 'Username and Password was wrong'})
+      } else if (err.errorCode == "E0000001"){
+        setAlert({state: true, header: 'Authentication failed', content: 'type the validate username and password'})
+      }
+    });
   };     
 
   const handleUsernameChange = (e) => {
@@ -50,6 +64,14 @@ const LoginForm: React.FC<{ history:any; }> = (props) => {
         <IonInput value={username} onIonChange={handleUsernameChange} placeholder = "Username?" />
         <IonInput value={password} onIonChange={handlePasswordChange} placeholder = "Password?" />
         <IonButton onClick={handleSubmit}>Login</IonButton>
+        <IonAlert
+          isOpen={alert.state}
+          onDidDismiss={() => setAlert({state: false, header: '', content: ''})}
+          cssClass='my-custom-class'
+          header={alert.header}
+          message={alert.content}
+          buttons={['OK']}
+        />
       </IonContent>
     </IonPage>
   );

@@ -1,4 +1,4 @@
-@import '../custom_variable.scss';
+@import '../../../../theme/custom_variable';
 
 .ion-select-custom {
     --padding-start: 0px;
@@ -117,4 +117,8 @@ ion-range {
 
 .input-label-custom {
     display: flex;
+}
+
+.relation-ship-width {
+    max-width: 100% !important;
 }

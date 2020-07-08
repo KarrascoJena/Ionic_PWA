@@ -4,10 +4,10 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
+import ChoosePhoto from '../../components/change-photo';
+import BottomTabBar from '../../components/bottom-tab-bar';
 
-import BottomTabBar from '../components/bottom-tab-bar';
-
-import '../theme/pages/EditProfile.scss'
+import './assets/css/EditProfile.scss'
 
 const gotoBack = (e, props) => {
   e.preventDefault();
@@ -86,14 +86,7 @@ const EditProfile: React.FC<{history}> = (props) => {
           <IonCol size="2"></IonCol>
         </IonRow>
 
-        <IonRow>
-          <IonCol size="2"></IonCol>
-          <IonCol size="8" className="text-align-center">
-            <IonButton fill="clear">Change profile photo</IonButton>
-          </IonCol>
-          <IonCol size="2"></IonCol>
-        </IonRow>
-        <hr className="line-divider"/>
+        <ChoosePhoto title="Change profile photo" history={props.history}/>
 
         <IonRow>
           <IonCol size="3" className="align-item-center">
@@ -160,7 +153,7 @@ const EditProfile: React.FC<{history}> = (props) => {
           </IonCol>
           <IonCol size="9">
             <IonItem>
-              <IonSelect value={state.status} onIonChange={(e) => {onChangeStatus(e)}} interface="popover" className="ion-select-custom">
+              <IonSelect value={state.status} onIonChange={(e) => {onChangeStatus(e)}} interface="popover" className="ion-select-custom relation-ship-width">
                 <IonSelectOption value="Single">Single</IonSelectOption>
                 <IonSelectOption value="Married">Married</IonSelectOption>
                 <IonSelectOption value="Divorced">Divorced</IonSelectOption>
@@ -181,7 +174,7 @@ const EditProfile: React.FC<{history}> = (props) => {
                 <IonSelectOption value={2}>2</IonSelectOption>
                 <IonSelectOption value={3}>3</IonSelectOption>
                 <IonSelectOption value={4}>4</IonSelectOption>
-                <IonSelectOption value={5}>> 5</IonSelectOption>
+                <IonSelectOption value={5}>5</IonSelectOption>
               </IonSelect>
             </IonItem>
           </IonCol>

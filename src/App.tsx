@@ -1,13 +1,15 @@
 import React from 'react';
-import { Redirect, Route, useHistory } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import getStart from './pages/GetStart';
-import myAccount from './pages/MyContacts';
-import editProfile from './pages/EditProfile';
-import contactDetail from './pages/ContactDetail';
-import selectAvatar from './pages/SelectAvatar';
-import discoverVote from './pages/DiscoverVote';
+
+import getStart from './pages/GetStart/GetStart';
+import setting from './pages/GetStart/Setting';
+import myAccount from './pages/Contact/MyContacts';
+import editProfile from './pages/User/EditProfile';
+import contactDetail from './pages/Contact/ContactDetail';
+import selectAvatar from './pages/User/SelectAvatar';
+import discoverVote from './pages/User/DiscoverVote';
 import login from './pages/Auth/Login';
 import logout from './pages/Auth/Logout'
 
@@ -76,6 +78,7 @@ const App: React.FC<{}> = (props) => {
                 <Route path="/login" component={login} exact={true} />
                 <Route path="/logout"  component={logout} exact={true} />
                 <Route path="/getstart" component={getStart} exact={true} />
+                <Route path="/setting" component={setting} exact={true} />
                 <Route path="/mycontacts" component={myAccount} exact={true} />
                 <Route path="/editprofile" component={editProfile} exact={true} />
                 <Route path="/contactdetail" component={contactDetail} exact={true} />
@@ -83,6 +86,7 @@ const App: React.FC<{}> = (props) => {
                 <Route path="/discovervote" component={discoverVote} exact={true} />
                 <Route path="/implicit/callback" component={LoginCallback} exact />
                 <Route path="/" render={() => <Redirect to="/getstart" />} exact={true} />
+                <Route component={getStart} />
               </IonRouterOutlet>
           </IonReactRouter>
         </Security>

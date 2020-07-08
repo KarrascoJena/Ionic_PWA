@@ -1,7 +1,7 @@
 import React from 'react';
 import { IonTabBar, IonTabButton, IonBadge } from '@ionic/react';
 
-import '../../theme/pages/MyContacts.scss';
+import './assets/css/bottomTabBar.scss';
 
 const gotoGetStart = (e, props) => {
   e.preventDefault();

@@ -1,22 +1,17 @@
 import React from 'react';
 import { IonIcon, IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonButtons, IonAvatar } from '@ionic/react';
 import { ellipsisHorizontal } from 'ionicons/icons';
+import classNames from 'classnames';
 
 import AwesomeSlider from 'react-awesome-slider';
 import AwesomeSliderStyles from 'react-awesome-slider/src/styles';
-import EmoticonRating from '../components/emoticon-rating'
+import EmoticonRating from '../../components/emoticon-rating'
 import useWebShare from "react-use-web-share";
+import config from '../../config';
 
-import '../theme/pages/DiscoverVote.scss'
+import './assets/css/DiscoverVote.scss'
 
-const slider = (
-  <AwesomeSlider style={{height: window.innerHeight - 300}} cssModule={AwesomeSliderStyles} bullets={true}>
-    <div data-src="https://experiencecontent.blob.core.windows.net/experience/801f4489-98f8-4f7e-8c62-f050293f2a1b/image1.jpg" />
-    <div data-src="https://experiencecontent.blob.core.windows.net/experience/801f4489-98f8-4f7e-8c62-f050293f2a1b/image2.jpg" />
-    <div data-src="https://experiencecontent.blob.core.windows.net/experience/801f4489-98f8-4f7e-8c62-f050293f2a1b/image3.jpg" />
-    <div data-src="https://experiencecontent.blob.core.windows.net/experience/801f4489-98f8-4f7e-8c62-f050293f2a1b/image4.jpg" />
-  </AwesomeSlider>
-)
+
 
 const gotoBack = (props) => {
   props.history.goBack()
@@ -25,12 +20,24 @@ const gotoBack = (props) => {
 const DiscoverVote: React.FC<{history}> = (props) => {
 
   const [value, setValue] = React.useState(-1);
+  const [sliderImage, setSliderImage] = React.useState(
+    [
+      'https://experiencecontent.blob.core.windows.net/experience/801f4489-98f8-4f7e-8c62-f050293f2a1b/image1.jpg',
+      'https://experiencecontent.blob.core.windows.net/experience/801f4489-98f8-4f7e-8c62-f050293f2a1b/image2.jpg',
+      'https://experiencecontent.blob.core.windows.net/experience/801f4489-98f8-4f7e-8c62-f050293f2a1b/image3.jpg',
+      'https://experiencecontent.blob.core.windows.net/experience/801f4489-98f8-4f7e-8c62-f050293f2a1b/image4.jpg'
+    ]
+  );
+  const [userImage, setUserImage] = React.useState('https://experiencecontent.blob.core.windows.net/user/5717f23a-d765-48d6-ac16-f11169860c19/profile.jpg')
   const [valueText] = React.useState([
     'hates', 'does not like', 'might like', 'likes', 'loves'
   ]);
-
+  const [userName, setUserName] = React.useState('Christian')
   
   const { loading, isSupported, share } = useWebShare();
+
+  const [animationFinished, setAnimationFinished] = React.useState(false);
+  const [imageAnimationFinished, setImageAnimationFinished] = React.useState(false);
 
   // ToDo: Static test text which needs to be changed
   // ToDo: Add image for social web sharing
@@ -44,8 +51,39 @@ const DiscoverVote: React.FC<{history}> = (props) => {
 
   const onChangeValue = (changedValue) => {
     setValue(changedValue)
+    setAnimationFinished(false);
+    setTimeout(() => {setAnimationFinished(true)}, 1000)
+    setTimeout(() => {newUser()}, 2000)
   }
 
+  const newUser = () => {
+    setSliderImage([
+      'https://experiencecontent.blob.core.windows.net/experience/801f4489-98f8-4f7e-8c62-f050293f2a1b/image4.jpg',
+      'https://experiencecontent.blob.core.windows.net/experience/801f4489-98f8-4f7e-8c62-f050293f2a1b/image3.jpg',
+      'https://experiencecontent.blob.core.windows.net/experience/801f4489-98f8-4f7e-8c62-f050293f2a1b/image2.jpg',
+      'https://experiencecontent.blob.core.windows.net/experience/801f4489-98f8-4f7e-8c62-f050293f2a1b/image1.jpg'
+    ])
+    setUserImage('https://experiencecontent.blob.core.windows.net/user/2fb1c8e4-42a4-43a6-a337-b8cc52c83d3f/profile.jpg')
+    setValue(-1)
+    setUserName("Sarah")
+    setAnimationFinished(false);
+    setTimeout(() => {setAnimationFinished(true)}, 1000)
+    setImageAnimationFinished(true)
+    setImageAnimationFinished(false)
+  }
+
+  const slider = (
+    <AwesomeSlider style={{height: window.innerHeight - 300}} cssModule={AwesomeSliderStyles} bullets={true}>
+      {sliderImage.map((item, index)=> {
+        return (<div key={index} data-src={item} />)
+      })}
+    </AwesomeSlider>
+  )
+
+  const onAnimationEnd = () => {
+    setAnimationFinished(true);
+    console.log('Animation End');
+  }
   return (
     <IonPage>
       <IonHeader>
@@ -56,7 +94,7 @@ const DiscoverVote: React.FC<{history}> = (props) => {
           <IonButtons slot="end" onClick={() => { shareClick()}}>
             <i className="fal fa-share-alt custom-icon-size-small"></i>
           </IonButtons>
-          <IonTitle>Brand</IonTitle>
+          <IonTitle>{config.brand.name}</IonTitle>
         </IonToolbar>
       </IonHeader>
 
@@ -85,7 +123,7 @@ const DiscoverVote: React.FC<{history}> = (props) => {
 
         <div className="position-relative">
           {slider}
-          <img src="https://experiencecontent.blob.core.windows.net/user/5717f23a-d765-48d6-ac16-f11169860c19/profile.jpg" className="bottom-profile-circle-img"/>
+          <img src={userImage}  className={imageAnimationFinished ? '' : "bottom-profile-circle-img flip-in-hor-top"} />
         </div>
         <div className="justify-content-space-between margin-10">
             <span className="custom-title-font-size">
@@ -96,8 +134,7 @@ const DiscoverVote: React.FC<{history}> = (props) => {
             </span>
         </div>
         <div className="justify-content-center margin-top-10">
-          <h4>Christian</h4>
-          {/* <h4>{valueText[value]}</h4> */}
+          {value == -1 ? <h4 className={animationFinished ? '' : "slide-in-right"} onAnimationEnd={onAnimationEnd}>{userName}</h4> : <h4 className={animationFinished ? '' : "slide-in-right"} onAnimationEnd={onAnimationEnd}>{valueText[value]}</h4> }
         </div>
         <EmoticonRating value={value} changeValue={(changedValue) => {onChangeValue(changedValue)}}/>
       </IonContent>

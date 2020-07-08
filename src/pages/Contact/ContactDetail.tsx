@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { IonDatetime, IonActionSheet, IonSelect, IonSelectOption, IonToggle, IonAvatar, IonLabel, IonRange, IonInput, IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonButton, IonButtons, IonItem, IonAlert } from '@ionic/react';
-import { close, cameraOutline, personCircleOutline, archiveOutline } from 'ionicons/icons';
+import { IonDatetime, IonSelect, IonSelectOption, IonToggle, IonAvatar, IonLabel, IonRange, IonInput, IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonButton, IonButtons, IonItem, IonAlert } from '@ionic/react';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
+import ChoosePhoto from '../../components/change-photo';
 
-import '../theme/pages/EditProfile.scss';
+import './assets/css/ContactDetail.scss';
 
 const gotoBack = (e, props) => {
   e.preventDefault();
@@ -96,7 +96,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar className="padding-header">
+        <IonToolbar className="padding-header header-bacground-color">
           <IonButtons slot="start">
             <IonButton onClick={(e) => gotoBack(e, props)} className="cancel-button">Cancel</IonButton>
           </IonButtons>
@@ -118,52 +118,8 @@ const ContactDetail: React.FC<{history}> = (props) => {
             </IonCol>
             <IonCol size="2"></IonCol>
           </IonRow>
-          <span>
-          </span>
-          <IonRow>
-            <IonCol size="2"></IonCol>
-            <IonCol size="8" className="text-align-center">
-              <IonButton onClick={() => setShowActionSheet(true)} fill="clear">Change profile photo</IonButton>
-            </IonCol>
-            <IonCol size="2"></IonCol>
-          </IonRow>
-          <hr className="line-divider"/>
-
-          <IonRow>
-            <IonActionSheet
-              isOpen={showActionSheet}
-              onDidDismiss={() => setShowActionSheet(false)}
-              cssClass='my-custom-class dark-text'
-              header="Change contact photo"
-              buttons={[{
-                text: 'Take Photo',
-                icon: cameraOutline,
-                handler: () => {
-                  console.log('Delete clicked');
-                }
-              }, {
-                text: 'Choose From Library',
-                icon: archiveOutline,
-                handler: () => {
-                  console.log('Share clicked');
-                }
-              }, {
-                text: 'Select Avatar',
-                icon: personCircleOutline,
-                handler: () => {
-                  props.history.push('./selectavatar')
-                }
-              }, {
-                text: 'Cancel',
-                icon: close,
-                role: 'cancel',
-                handler: () => {
-                  console.log('Cancel clicked');
-                }
-              }]}
-            >
-            </IonActionSheet>
-          </IonRow>
+          
+          <ChoosePhoto title="Change profile photo" history={props.history}/>
           
           <IonRow>
             <IonCol size="3" className="input-label-custom">
@@ -207,7 +163,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
             </IonCol>
             <IonCol size="9">
               <IonItem>
-                <IonSelect value={state.relationship} onIonChange={(e) => {onChangeRelationship(e)}} interface="popover" className="ion-select-custom">
+                <IonSelect value={state.relationship} onIonChange={(e) => {onChangeRelationship(e)}} interface="popover" className="ion-select-custom relation-ship-width">
                   <IonSelectOption value="Partner">Partner</IonSelectOption>
                   <IonSelectOption value="Parent">Parent</IonSelectOption>
                   <IonSelectOption value="Sibling">Sibling</IonSelectOption>

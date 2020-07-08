@@ -1,8 +1,9 @@
 import React from 'react';
-import { IonTabBar, IonTabButton, IonIcon, IonBadge, IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol } from '@ionic/react';
-import { peopleOutline, searchOutline, heartOutline, trailSignOutline } from 'ionicons/icons';
+import { IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol } from '@ionic/react';
 
-import '../theme/pages/MyContacts.scss'
+import BottomTabBar from '../../components/bottom-tab-bar';
+
+import './assets/css/MyContacts.scss';
 
 const gotoGetStart = (e, props) => {
   e.preventDefault();
@@ -70,43 +71,7 @@ const MyAccount: React.FC<{history}> = (props) => {
           </IonCol>
         </IonRow>
       </IonContent>
-
-      {/* <IonTabs> */}
-        {/* <IonRouterOutlet></IonRouterOutlet> */}
-        <IonTabBar slot="bottom" className="bottom-tab-bar-background-color bottom-icon-height">
-          <IonTabButton tab="speakers" onClick={() => {props.history.push('./discovervote')}}>
-            <span className="tab-bar-icon custom-icon-size-small">
-              <i className="fal fa-telescope"></i>
-            </span>
-          </IonTabButton>
-
-          <IonTabButton tab="schedule">
-            <span className="tab-bar-icon custom-icon-size-small ">
-              <i className="fal fa-heart"></i>
-            </span>
-            <IonBadge>2</IonBadge>
-          </IonTabButton>
-
-        
-          <IonTabButton tab="map">
-            <span className="tab-bar-icon custom-icon-size-small">
-              <i className="fal fa-book-spells"></i>
-            </span>
-          </IonTabButton>
-
-          <IonTabButton tab="about">
-            <span className="tab-bar-icon custom-icon-size-small">
-              <i className="fal fa-search"></i>
-            </span>
-          </IonTabButton>
-          
-          <IonTabButton tab="about">
-            <span className="tab-bar-icon custom-icon-size-small">
-              <i className="fas fa-user-friends"></i>
-            </span>
-          </IonTabButton>
-        </IonTabBar>
-      {/* </IonTabs> */}
+      <BottomTabBar history={props.history} />
     </IonPage>
   );
 };
