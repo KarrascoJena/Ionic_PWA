@@ -1,13 +1,13 @@
 import React from 'react';
-import { IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol } from '@ionic/react';
+import { IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonToast } from '@ionic/react';
 
 import BottomTabBar from '../../components/bottom-tab-bar';
 
 import './assets/css/MyContacts.scss';
 
-const gotoGetStart = (e, props) => {
+const gotoSetting = (e, props) => {
   e.preventDefault();
-  props.history.push('/getstart');
+  props.history.push('/account_setting');
 }
 
 const gotoEditProfile = (e, props) => {
@@ -32,22 +32,48 @@ const MyAccount: React.FC<{history}> = (props) => {
 
   const contactList = contacts.map((item, index) => {
     return(
-      <IonCol onClick={(e) => gotoContactDetail(e, props)} size="4" className="grid-img" key={index}>
-        <img className="img-auto card-effect" src={item.img} alt=""/>
+      <IonCol onClick={(e) => gotoContactDetail(e, props)} size="4" className="grid-img height-140" key={index}>
+        <img className="img-auto card-effect" src={item.img} width="100%" height="100%" alt=""/>
         <div className="grid-img-button bottom-circle-icon box-shadow-full-screen">
-          <span className="pencil-icon circle-icon">
+          <span className="pencil-icon ">
             <i className="fal fa-pencil-alt"></i>
           </span>
         </div>
       </IonCol>
     );
   });
+  const initCard = (key) => {
+    return(
+      <IonCol size="4" className="grid-img height-140" key={key}>
+        <div className="empty-img card-effect">
+        </div>
+        <div className="grid-img-button bottom-circle-icon box-shadow-full-screen full-fill-red-icon">
+          <span className="white-icon">
+            <i className="fal fa-plus"></i>
+          </span>
+        </div>
+      </IonCol>
+    )
+  }
+
+  const empty = () => {
+    console.log(contacts.length)
+    var tem = []
+    for(var i = contacts.length; i < 9; i++){
+      tem.push(initCard(i));
+    }
+    return tem
+  }
+
+  const accountActivated = (e) => {
+
+  }
 
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar className="padding-header">
-          <div onClick={(e) => gotoGetStart(e, props)} slot="start">
+          <div onClick={(e) => gotoSetting(e, props)} slot="start">
             <i className="fal fa-cog custom-icon-size-small" slot="start"></i>
           </div>
           <div onClick={(e) => gotoEditProfile(e, props)} slot="end">
@@ -60,16 +86,15 @@ const MyAccount: React.FC<{history}> = (props) => {
       <IonContent className="padding-content justify-content-center">
         <IonRow className="grid-container">
           {contactList}
-          <IonCol size="4" className="grid-img" >
-            <div className="empty-img card-effect">
-            </div>
-            <div className="grid-img-button bottom-circle-icon box-shadow-full-screen full-fill-red-icon">
-              <span className="circle-icon white-icon">
-                <i className="fal fa-plus"></i>
-              </span>
-            </div>
-          </IonCol>
+          {empty()}
         </IonRow>
+        <IonToast
+          isOpen={true}
+          onDidDismiss={(e) => accountActivated(e)}
+          message="Activated successfully."
+          duration={2000}
+          cssClass="bottom-toast-default"
+        />
       </IonContent>
       <BottomTabBar history={props.history} />
     </IonPage>

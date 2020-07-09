@@ -1,9 +1,5 @@
 @import '../../../../theme/custom_variable';
 
-.padding-header {
-  padding: 0 16px
-}
-
 .padding-content {
   padding: 100 16px
 }
@@ -34,12 +30,6 @@ ion-toolbar {
   position: absolute;
   bottom: 2px;
   right: 2px;
-}
-
-.img-auto {
-  height: 140px;
-  width: 100%;
-  background-size: cover;
 }
 
 .card-effect {

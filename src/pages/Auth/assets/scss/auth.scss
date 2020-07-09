@@ -1,0 +1,44 @@
+@import '../../../../theme/custom_variable';
+
+.signin-button {
+  margin-top: 20px;
+}
+
+.signin-container {
+  padding-left: 10%;
+  padding-right: 10%;
+  text-align: center;
+}
+
+.or-seperator {
+  text-align: center;
+}
+
+.btn-separator {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+  line-height: .1em;
+  font-weight: 300;
+  margin-bottom: 30px!important;
+  margin-top: 30px !important;
+}
+
+.btn-separator span {
+  padding: 0 10px;
+  background: #fff;
+  color: #606060;
+}
+
+.singup-header-text {
+  font-size: 20px;
+}
+
+.signup-facebook {
+  --background: red;
+}
+
+.singup-button {
+  --background: red;
+  margin-top: 20px;
+}

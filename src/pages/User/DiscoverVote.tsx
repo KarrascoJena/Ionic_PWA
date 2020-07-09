@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonIcon, IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonButtons, IonAvatar } from '@ionic/react';
+import { IonIcon, IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonButtons, IonAvatar, IonButton } from '@ionic/react';
 import { ellipsisHorizontal } from 'ionicons/icons';
 import classNames from 'classnames';
 
@@ -84,6 +84,10 @@ const DiscoverVote: React.FC<{history}> = (props) => {
     setAnimationFinished(true);
     console.log('Animation End');
   }
+
+  const gotoNoContacts = () => {
+    props.history.push('/no_contacts')
+  }
   return (
     <IonPage>
       <IonHeader>
@@ -125,13 +129,13 @@ const DiscoverVote: React.FC<{history}> = (props) => {
           {slider}
           <img src={userImage}  className={imageAnimationFinished ? '' : "bottom-profile-circle-img flip-in-hor-top"} />
         </div>
-        <div className="justify-content-space-between margin-10">
-            <span className="custom-title-font-size">
+        <div className="justify-content-space-between margin-10 ">
+            <IonButton fill="clear" className="custom-title-font-size black-button-text z-index-3" onClick={gotoNoContacts}>
               <i className="fas fa-undo"></i>
-            </span>
-            <span  className="custom-title-font-size">
+            </IonButton>
+            <IonButton fill="clear" className="custom-title-font-size black-button-text z-index-3" onClick={gotoNoContacts}>
               <i className="fas fa-info"></i>
-            </span>
+            </IonButton>
         </div>
         <div className="justify-content-center margin-top-10">
           {value == -1 ? <h4 className={animationFinished ? '' : "slide-in-right"} onAnimationEnd={onAnimationEnd}>{userName}</h4> : <h4 className={animationFinished ? '' : "slide-in-right"} onAnimationEnd={onAnimationEnd}>{valueText[value]}</h4> }

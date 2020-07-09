@@ -10,7 +10,7 @@ import './assets/css/ContactDetail.scss';
 
 const gotoBack = (e, props) => {
   e.preventDefault();
-  props.history.goBack()
+  props.history.push('/mycontacts')
 }
 
 const gotoMyContacts = (e, props) => {
@@ -214,7 +214,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
               {renderOccasionIcon("fal fa-tree-christmas fa-1x", "Chrismas")}
             </IonCol>
             <IonCol size="2">
-              <IonToggle checked={state.checkChrismas}/>
+              <IonToggle checked={state.checkChrismas} onIonChange={(e) => onChangeCheck(e, 'checkChrismas')}/>
             </IonCol>
           </IonRow>
           <br/>
@@ -461,7 +461,7 @@ const renderOccasionIcon = (icons, title) => {
   return (
     <IonRow>
       <div className="occasions-icon full-fill-red-icon justify-content-center align-item-center">
-        <span className="circle-icon white-icon">
+        <span className="white-icon">
           <i className={icons}></i>
         </span>
       </div>

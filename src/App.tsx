@@ -4,14 +4,20 @@ import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 
 import getStart from './pages/GetStart/GetStart';
-import setting from './pages/GetStart/Setting';
+import setting from './pages/Setting/Setting';
 import myAccount from './pages/Contact/MyContacts';
+import noContacts from './pages/Contact/NoContact';
+import AccountSetting from './pages/Setting/AccountSetting';
+import searchOverview from './pages/Search/Search';
 import editProfile from './pages/User/EditProfile';
 import contactDetail from './pages/Contact/ContactDetail';
 import selectAvatar from './pages/User/SelectAvatar';
 import discoverVote from './pages/User/DiscoverVote';
+import discover from './pages/User/Discover';
 import login from './pages/Auth/Login';
-import logout from './pages/Auth/Logout'
+import logout from './pages/Auth/Logout';
+import signUp from './pages/Auth/Signup';
+import passwordForgotten from './pages/Auth/PasswordForgotten';
 
 /* apollo client part */
 import { ApolloClient } from 'apollo-boost';
@@ -76,14 +82,20 @@ const App: React.FC<{}> = (props) => {
           <IonReactRouter>
               <IonRouterOutlet>
                 <Route path="/login" component={login} exact={true} />
+                <Route path="/register" component={signUp} exact={true} />
+                <Route path="/password_forgotten" component={passwordForgotten} exact={true} />
                 <Route path="/logout"  component={logout} exact={true} />
                 <Route path="/getstart" component={getStart} exact={true} />
                 <Route path="/setting" component={setting} exact={true} />
+                <Route path="/account_setting" component={AccountSetting} exact={true} />
                 <Route path="/mycontacts" component={myAccount} exact={true} />
+                <Route path="/no_contacts" component={noContacts} exact={true} />
+                <Route path="/search_overview" component={searchOverview} exact={true} />
                 <Route path="/editprofile" component={editProfile} exact={true} />
                 <Route path="/contactdetail" component={contactDetail} exact={true} />
                 <Route path="/selectavatar" component={selectAvatar} exact={true} />
                 <Route path="/discovervote" component={discoverVote} exact={true} />
+                <Route path="/discover" component={discover} exact={true} />
                 <Route path="/implicit/callback" component={LoginCallback} exact />
                 <Route path="/" render={() => <Redirect to="/getstart" />} exact={true} />
                 <Route component={getStart} />

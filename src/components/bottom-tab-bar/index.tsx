@@ -19,7 +19,8 @@ const gotoContactDetail = (e, props) => {
 
 
 const BottomTabBar: React.FC<{history}> = (props) => {
-
+  const current_url = window.location.href;
+  console.log(current_url)
   return (
 
       <IonTabBar slot="bottom" className="bottom-tab-bar-background-color bottom-icon-height">
@@ -43,15 +44,15 @@ const BottomTabBar: React.FC<{history}> = (props) => {
           </span>
         </IonTabButton>
 
-        <IonTabButton tab="about">
+        <IonTabButton tab="search_overview"  onClick={() => {props.history.push('./search_overview')}}>
           <span className="tab-bar-icon custom-icon-size-small">
             <i className="fal fa-search"></i>
           </span>
         </IonTabButton>
         
-        <IonTabButton tab="about">
+        <IonTabButton tab="about"   onClick={() => {props.history.push('./myContacts')}}>
           <span className="tab-bar-icon custom-icon-size-small">
-            <i className="fas fa-user-friends"></i>
+            <i className="fal fa-user-friends"></i>
           </span>
         </IonTabButton>
       </IonTabBar>
