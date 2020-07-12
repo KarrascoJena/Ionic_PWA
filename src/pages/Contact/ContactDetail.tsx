@@ -6,7 +6,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import ChoosePhoto from '../../components/change-photo';
 
-import './assets/css/ContactDetail.scss';
+import './assets/scss/ContactDetail.scss';
 
 const gotoBack = (e, props) => {
   e.preventDefault();

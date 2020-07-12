@@ -57,16 +57,18 @@ const Search: React.FC<{history}> = (props) => {
       <IonHeader>
         <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)}></IonSearchbar>
       </IonHeader>
-
+      
       <IonContent className="padding-content justify-content-center">
         <IonRow className="grid-container">
           {contactList}
         </IonRow>
       </IonContent>
-      <div className="text-align-center">
+      <div className="text-align-center disabled-button">
         <IonLabel>Experience not found?</IonLabel>
       </div>
-      <IonButton onClick={ (e) => {gotoSuggest(e)}} expand="block" className="red-button">Suggest New Experience</IonButton>
+      <div className="search-button-padding">
+        <IonButton expand="block" className="red-button">Suggest New Experience</IonButton>
+      </div>
       <BottomTabBar history={props.history} />
     </IonPage>
   );

@@ -34,8 +34,8 @@ export default function IndicatorDots (props) {
   } else {
     return (
       <div>
-        <div style={{position: 'absolute', width: '100%', zIndex: 100, top: '0px', textAlign: 'center'}} className="justify-content-space-between brand-title">
-          <img src="./assets/imgs/brand.png" className="brand-image"/>
+        <div style={{position: 'absolute', width: '100%', zIndex: 100, top: '15px', textAlign: 'center'}} className="justify-content-space-between brand-title">
+          <img src="./assets/imgs/brand_white.png" className="brand-image"/>
           <div onClick={(e) => gotoSetting(e, props)} slot="end" className="align-item-center">
             <i className="far fa-bars custom-icon-size-small white-icon"></i>
           </div>
@@ -51,8 +51,7 @@ export default function IndicatorDots (props) {
               }
               <div className="font-15 footer-notice text-align-center">
                 <p>We don't past anything to Facebook.</p>
-                <p>By signingin, you agree to our Terms of Services and</p>
-                <a href="/#">Privacy Policy</a>
+                <p>By signingin, you agree to our Terms of Services and Privacy Policy</p>  
               </div>
             </IonCol>
           </IonRow>

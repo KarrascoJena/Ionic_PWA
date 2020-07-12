@@ -71,17 +71,19 @@ const LoginForm: React.FC<{ history:any; }> = (props) => {
   return (
     <IonPage>
       <IonHeader>
-        <img src="./assets/imgs/brand.png"></img>
+        <div className="header_brand_image justify-content-center">
+          <img src="./assets/imgs/brand_black.png"></img>
+        </div>
       </IonHeader>
       <IonContent>
-        <div className="signin-container">
-          <IonItem className="input-block">
-            <IonInput value={username} onIonChange={handleUsernameChange} placeholder = "Username?" />
-          </IonItem>
-          <IonItem className="input-block">
-            <IonInput value={password} onIonChange={handlePasswordChange} placeholder = "Password?" />
-          </IonItem>
-          <IonButton onClick={handleSubmit} expand="block" className="signin-button red-button">Sign In</IonButton>
+        <div className="signin-container margin-top-20">
+          <div className="bordered-text-input margin-top-20 text-align-left">
+            <IonInput value={username} onIonChange={handleUsernameChange} placeholder = "Username or email" />
+          </div>
+          <div className="bordered-text-input margin-top-20 text-align-left">
+            <IonInput value={password} onIonChange={handlePasswordChange} placeholder = "Password" />
+          </div>
+          <IonButton onClick={handleSubmit} expand="block" className="margin-top-20 signin-button red-button">Sign In</IonButton>
           <IonAlert
             isOpen={alert.state}
             onDidDismiss={() => setAlert({state: false, header: '', content: ''})}
@@ -91,11 +93,16 @@ const LoginForm: React.FC<{ history:any; }> = (props) => {
             buttons={['OK']}
           />
           <p className="btn-separator"><span>OR</span></p>
-          <IonButton onClick={handleSubmit} expand="block" fill="clear" className="signin-button">Sign in with Facebook</IonButton>
-          <IonButton fill="clear" color="dark" size="small" onClick={gotoForgottenPassword}>Forget password?</IonButton>
-          <div className="align-item-center justify-content-center">
-            <IonLabel>Don't have an account? </IonLabel>
-            <IonButton fill="clear" color="primary" size="small" onClick={gotoSignUp}>Sign Up</IonButton>
+          <IonButton onClick={handleSubmit} expand="block" fill="clear" className="margin-top-20 signin-with-facebook">
+            <span className="account-setting-icon-font-size" style={{marginRight: '10px'}}>
+              <i className="fab fa-facebook-square"></i>
+            </span>
+            Sign in with Facebook
+          </IonButton>
+          <IonButton fill="clear" size="small" onClick={gotoForgottenPassword} className="disabled-button">Forget password?</IonButton>
+          <div className="align-item-center justify-content-center padding-top-50">
+            <IonLabel className="disabled-button">Don't have an account? </IonLabel>
+            <IonButton fill="clear" color="primary" size="small" onClick={gotoSignUp} className="signup-link">Sign Up</IonButton>
           </div>
         </div>
       </IonContent>

@@ -33,20 +33,20 @@ const Discover: React.FC<{history}> = (props) => {
       </IonHeader>
       <IonContent>
         <div className="signin-container">
-          <div className="circle-icon huge-icon discover-huge-icon">
+          <div className="circle-icon huge-icon margin-top-30">
             <i className="fal fa-book-spells"></i>
           </div>
-          <div className="discover-title">
-            <IonLabel className="truble-login-title">
+          <div className="margin-top-30">
+            <IonLabel className="large-title">
               Sorry!
             </IonLabel>
           </div>
-          <div>
-            <IonLabel className="truble-login-text">
+          <div className="margin-top-30">
+            <IonLabel className="truble-login-text disabled-button">
               We are out of experiences for the moment but we'll come back soon with new ideas
             </IonLabel>
           </div>
-          <IonButton expand="block" className="singup-button">Suggest New Experience</IonButton>
+          <IonButton expand="block" className="margin-top-20 red-button">Suggest New Experience</IonButton>
         </div>
       </IonContent>
      </IonPage>

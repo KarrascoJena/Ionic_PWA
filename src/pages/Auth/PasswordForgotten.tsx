@@ -63,37 +63,37 @@ const PasswordForgotten: React.FC<{ history:any; }> = (props) => {
 
   return (
     <IonPage>
-      <IonHeader>
-        <img src="./assets/imgs/brand.png"></img>
+      <IonHeader className="header_brand_image justify-content-center">
+        <img src="./assets/imgs/brand_black.png"></img>
       </IonHeader>
       <IonContent>
         <div className="signin-container">
           <div className="circle-icon huge-icon password-forgotten-huge-icon">
             <i className="fal fa-lock-alt"></i>
           </div>
-          <div className="truble-login-margin">
-            <IonLabel className="truble-login-title">
-              Truble Login in?
+          <div>
+            <IonLabel className="large-title">
+              Trouble Login in?
             </IonLabel>
           </div>
           <div className="truble-login-margin">
-            <IonLabel className="truble-login-text">
+            <IonLabel className="truble-login-text disabled-button">
               Enter your email and we'll send you a link to get back into your account.
             </IonLabel>
           </div>
           <div className="truble-login-margin">
-            <IonItem className="input-block">
+            <div className="bordered-text-input margin-top-10 text-align-left">
               <IonInput value={email} onIonChange={handleEmailChange} placeholder = "Email" />
-            </IonItem>
+            </div>
           </div>
           <div className="truble-login-margin">
-            <IonButton onClick={handleSubmit} expand="block" className="singup-button truble-login-margin">Send Sign In Link</IonButton>
+            <IonButton onClick={handleSubmit} expand="block" className="margin-top-20 red-button">Send Sign In Link</IonButton>
           </div>
           <div className="truble-login-margin">
             <p className="btn-separator truble-login-margin"><span>OR</span></p>
           </div>
           <div className="truble-login-margin">
-            <IonButton fill="clear" color="dark" size="small" onClick={gotoSignUp}><span className="font-size-16">Create New Account?</span></IonButton>
+            <IonButton fill="clear" color="dark" size="small" onClick={gotoSignUp}><span className="font-size-16">Create New Account</span></IonButton>
           </div>
           <div className="truble-login-margin">
             <IonButton fill="clear" color="dark" size="small" onClick={gotoSignIn}><span  className="font-size-16">Back to Sign In</span></IonButton>

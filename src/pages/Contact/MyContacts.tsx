@@ -3,7 +3,7 @@ import { IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, I
 
 import BottomTabBar from '../../components/bottom-tab-bar';
 
-import './assets/css/MyContacts.scss';
+import './assets/scss/MyContacts.scss';
 
 const gotoSetting = (e, props) => {
   e.preventDefault();
@@ -58,7 +58,7 @@ const MyAccount: React.FC<{history}> = (props) => {
 
   const empty = () => {
     console.log(contacts.length)
-    var tem = []
+    var tem = [] as any;
     for(var i = contacts.length; i < 9; i++){
       tem.push(initCard(i));
     }

@@ -70,29 +70,34 @@ const Signup: React.FC<{ history:any; }> = (props) => {
 
   return (
     <IonPage>
-      <IonHeader>
-        <img src="./assets/imgs/brand.png"></img>
+      <IonHeader className="header_brand_image justify-content-center">
+        <img src="./assets/imgs/brand_black.png"></img>
       </IonHeader>
       <IonContent>
         <div className="signin-container">
-          <IonLabel className="singup-header-text">
+          <div className="singup-header-text disabled-button padding-top-20">
             Sign up to find experiences for your friends and you.
-          </IonLabel>
-          <IonButton onClick={handleSubmit} expand="block" className="signin-button signup-facebook">Sign in with Facebook</IonButton>
+          </div>
+          <IonButton onClick={handleSubmit} expand="block" className="margin-top-20 signin-with-facebook red-button color-white justify-content-space-between">
+          <span className="account-setting-icon-font-size" style={{marginRight: '10px'}}>
+            <i className="fab fa-facebook-square"></i>
+          </span>
+            Sign in with Facebook
+          </IonButton>
           <p className="btn-separator"><span>OR</span></p>
-          <IonItem className="input-block">
+          <div className="bordered-text-input margin-top-10 text-align-left">
             <IonInput value={email} onIonChange={handleEmailChange} placeholder = "Email" />
-          </IonItem>
-          <IonItem className="input-block">
+          </div>
+          <div className="bordered-text-input margin-top-10 text-align-left">
             <IonInput value={fullname} onIonChange={handleFullNameChange} placeholder = "Full Name" />
-          </IonItem>
-          <IonItem className="input-block">
-            <IonInput value={username} onIonChange={handleUsernameChange} placeholder = "Username?" />
-          </IonItem>
-          <IonItem className="input-block">
-            <IonInput value={password} onIonChange={handlePasswordChange} placeholder = "Password?" />
-          </IonItem>
-          <IonButton onClick={handleSubmit} expand="block" className="singup-button">Sign Up</IonButton>
+          </div>
+          <div className="bordered-text-input margin-top-10 text-align-left">
+            <IonInput value={username} onIonChange={handleUsernameChange} placeholder = "Username" />
+          </div>
+          <div className="bordered-text-input margin-top-10 text-align-left">
+            <IonInput value={password} onIonChange={handlePasswordChange} placeholder = "Password" />
+          </div>
+          <IonButton onClick={handleSubmit} expand="block" className="margin-top-20 red-button">Sign Up</IonButton>
           <IonAlert
             isOpen={alert.state}
             onDidDismiss={() => setAlert({state: false, header: '', content: ''})}
@@ -101,12 +106,12 @@ const Signup: React.FC<{ history:any; }> = (props) => {
             message={alert.content}
             buttons={['OK']}
           />
-          <IonLabel className="singup-header-text">
+          <IonLabel className="signup-bottom-text disabled-button">
             By signing up, you agreeto our Terms Learn how we collect, use and share your data in our Data Policy and how we use cookies and similar tecnologies in out Cookies Policy
           </IonLabel>
-          <div className="align-item-center justify-content-center">
+          <div className="align-item-center justify-content-center disabled-button">
             <IonLabel>Have an account? </IonLabel>
-            <IonButton fill="clear" color="primary" size="small" onClick={gotoSignIn}>Sign In</IonButton>
+            <IonButton fill="clear" color="primary" size="small" onClick={gotoSignIn} className="signup-link">Sign In</IonButton>
           </div>
         </div>
       </IonContent>

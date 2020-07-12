@@ -1,7 +1,9 @@
 @import '../../../../theme/custom_variable';
 
 .signin-button {
-  margin-top: 20px;
+  // --border-radius: 10px;
+  font-size: 20px;
+  height: 50px;
 }
 
 .signin-container {
@@ -32,13 +34,25 @@
 
 .singup-header-text {
   font-size: 20px;
+  --padding-top: 20px;
 }
 
 .signup-facebook {
   --background: red;
 }
 
-.singup-button {
-  --background: red;
+.margin-top-20 {
   margin-top: 20px;
+}
+
+.signin-with-facebook {
+  color: $color_grey_very_dark;
+}
+
+.signup-link {
+  font-size: 16px;
+}
+
+.signup-bottom-text {
+  font-size: 13px;
 }

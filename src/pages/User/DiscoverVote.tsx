@@ -137,7 +137,7 @@ const DiscoverVote: React.FC<{history}> = (props) => {
               <i className="fas fa-info"></i>
             </IonButton>
         </div>
-        <div className="justify-content-center margin-top-10">
+        <div className="justify-content-center margin-top-20">
           {value == -1 ? <h4 className={animationFinished ? '' : "slide-in-right"} onAnimationEnd={onAnimationEnd}>{userName}</h4> : <h4 className={animationFinished ? '' : "slide-in-right"} onAnimationEnd={onAnimationEnd}>{valueText[value]}</h4> }
         </div>
         <EmoticonRating value={value} changeValue={(changedValue) => {onChangeValue(changedValue)}}/>
