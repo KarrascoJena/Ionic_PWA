@@ -1,6 +1,7 @@
 import React from 'react';
 import { IonPage, IonRow, IonCol, IonLabel, IonHeader, IonToolbar, IonTitle, IonSelect, IonSelectOption, IonButton } from '@ionic/react';
 import { useTranslation } from 'react-i18next';
+import config from '../../config';
 
 import './assets/scss/Setting.scss'
 
@@ -24,7 +25,7 @@ const GetStart: React.FC<{history}> = (props) => {
           <div onClick={(e) => gotoBack(e, props)} slot="end">
             <i className="fal fa-times custom-icon-size-small"></i> 
           </div>
-          <IonTitle>Brand</IonTitle>
+          <IonTitle>{config.brand.name}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <div className="container">

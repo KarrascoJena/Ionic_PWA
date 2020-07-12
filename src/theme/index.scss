@@ -137,11 +137,12 @@ ion-toolbar {
     }
   }
 
-.white-icon {
-  color: white;
-}
 
 .red-button {
+  height: 30px;
+  border-radius: 4px;
+  font-size: 14px;
+  --border-radius: 4px;
   --background: red;
   --background-activated: rgb(229, 147, 147);
 }
@@ -195,7 +196,9 @@ ion-toolbar {
 }
 
 .bordered-text-input {
-  border: 2px solid $color_grey_dark;
+  border: 1px solid $color_grey_dark;
+  border-radius: 3px;
+  padding-left: 10px;
 }
 
 .disabled-button {
@@ -231,4 +234,47 @@ ion-toolbar {
 
 .margin-top-30 {
   margin-top: 30px;
+}
+
+.title {
+	font-size: 16px;
+	color: $color_grey_very_dark;
+	font-weight: bold;
+}
+
+.title-sub {
+	font-size: 14px;
+	color: $color_grey_very_dark;
+}
+
+.title-header {
+	font-size: 17px;
+	color: $color_grey_dark;
+}
+
+.title-group {
+	font-size: 16px;
+	color: $color_grey_very_dark;
+  text-decoration: underline;
+}
+
+.text {
+	font-size: 14px;
+	color: $color_grey_dark;
+}
+
+.text-fields {
+	font-size: 14px;
+	color: $color_grey_very_dark;
+}
+
+.text_details {
+	font-size: 16px;
+	color: $color_grey_dark;
+}
+
+.text-box {
+	font-size: 12px;
+  color: $color_grey_dark;
+	background-color: $color_grey_light
 }

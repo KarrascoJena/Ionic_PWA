@@ -1,7 +1,6 @@
 import React from 'react';
 import { IonIcon, IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonButtons, IonAvatar, IonButton } from '@ionic/react';
 import { ellipsisHorizontal } from 'ionicons/icons';
-import classNames from 'classnames';
 
 import AwesomeSlider from 'react-awesome-slider';
 import AwesomeSliderStyles from 'react-awesome-slider/src/styles';

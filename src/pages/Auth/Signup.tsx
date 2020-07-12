@@ -48,7 +48,7 @@ const Signup: React.FC<{ history:any; }> = (props) => {
   };
 
   const handleFullNameChange = (e) => {
-    setPassword(e.target.value);
+    setFullname(e.target.value);
   };
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -70,32 +70,32 @@ const Signup: React.FC<{ history:any; }> = (props) => {
 
   return (
     <IonPage>
-      <IonHeader className="header_brand_image justify-content-center">
+      <div className="header_brand_image justify-content-center">
         <img src="./assets/imgs/brand_black.png"></img>
-      </IonHeader>
+      </div>
       <IonContent>
         <div className="signin-container">
           <div className="singup-header-text disabled-button padding-top-20">
             Sign up to find experiences for your friends and you.
           </div>
           <IonButton onClick={handleSubmit} expand="block" className="margin-top-20 signin-with-facebook red-button color-white justify-content-space-between">
-          <span className="account-setting-icon-font-size" style={{marginRight: '10px'}}>
+          <span className="facebook-icon-size">
             <i className="fab fa-facebook-square"></i>
           </span>
             Sign in with Facebook
           </IonButton>
           <p className="btn-separator"><span>OR</span></p>
-          <div className="bordered-text-input margin-top-10 text-align-left">
+          <div className="bordered-text-input margin-top-10 text-align-left text-box">
             <IonInput value={email} onIonChange={handleEmailChange} placeholder = "Email" />
           </div>
-          <div className="bordered-text-input margin-top-10 text-align-left">
+          <div className="bordered-text-input margin-top-10 text-align-left text-box">
             <IonInput value={fullname} onIonChange={handleFullNameChange} placeholder = "Full Name" />
           </div>
-          <div className="bordered-text-input margin-top-10 text-align-left">
+          <div className="bordered-text-input margin-top-10 text-align-left text-box">
             <IonInput value={username} onIonChange={handleUsernameChange} placeholder = "Username" />
           </div>
-          <div className="bordered-text-input margin-top-10 text-align-left">
-            <IonInput value={password} onIonChange={handlePasswordChange} placeholder = "Password" />
+          <div className="bordered-text-input margin-top-10 text-align-left text-box">
+            <IonInput value={password} type="password" onIonChange={handlePasswordChange} placeholder = "Password" />
           </div>
           <IonButton onClick={handleSubmit} expand="block" className="margin-top-20 red-button">Sign Up</IonButton>
           <IonAlert

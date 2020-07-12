@@ -40,7 +40,7 @@ export default function IndicatorDots (props) {
             <i className="far fa-bars custom-icon-size-small white-icon"></i>
           </div>
         </div>
-        <div style={{position: 'absolute', width: '100%', zIndex: 100, bottom: '30px', textAlign: 'center'}}>
+        <div style={{position: 'absolute', width: '100%', zIndex: 100, bottom: '15px', textAlign: 'center'}}>
           <IonRow className="justify-content-center">
             <IonCol>
               <IonButton expand="block" routerLink="/login" className="get-start-button">GETTING STARTING</IonButton>

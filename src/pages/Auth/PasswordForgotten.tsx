@@ -63,9 +63,9 @@ const PasswordForgotten: React.FC<{ history:any; }> = (props) => {
 
   return (
     <IonPage>
-      <IonHeader className="header_brand_image justify-content-center">
+      <div className="header_brand_image justify-content-center">
         <img src="./assets/imgs/brand_black.png"></img>
-      </IonHeader>
+      </div>
       <IonContent>
         <div className="signin-container">
           <div className="circle-icon huge-icon password-forgotten-huge-icon">
@@ -82,7 +82,7 @@ const PasswordForgotten: React.FC<{ history:any; }> = (props) => {
             </IonLabel>
           </div>
           <div className="truble-login-margin">
-            <div className="bordered-text-input margin-top-10 text-align-left">
+            <div className="bordered-text-input margin-top-10 text-align-left text-box">
               <IonInput value={email} onIonChange={handleEmailChange} placeholder = "Email" />
             </div>
           </div>

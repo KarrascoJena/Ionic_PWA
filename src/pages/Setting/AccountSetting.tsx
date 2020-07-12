@@ -83,6 +83,11 @@ const AccountSetting: React.FC<{history}> = (props) => {
             {settingList}
           </IonList>
         </IonRow>
+        <hr className="seperator-hr"/>
+        <IonButton fill="clear" onClick={(e) => {props.history.push('/logout')}}>Sign Out</IonButton>
+        <div className="account-setting-version">
+          <IonLabel>Version 1.0</IonLabel>
+        </div>
       </IonContent>
       <BottomTabBar history={props.history} />
     </IonPage>

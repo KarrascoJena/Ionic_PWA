@@ -117,10 +117,11 @@ ion-content {
     width: 70%;
     margin: auto;
     --background: #ff1f31;
+    --background-activated: rgb(229, 147, 147);
     font-weight: normal !important;
     --border-radius: 20px;
 }
-.title {
+.get-start-title {
     font-size: 30px;
     font-weight: normal;
     color: #ffffff;

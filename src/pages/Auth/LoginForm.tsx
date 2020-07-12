@@ -70,18 +70,18 @@ const LoginForm: React.FC<{ history:any; }> = (props) => {
 
   return (
     <IonPage>
-      <IonHeader>
+      <div>
         <div className="header_brand_image justify-content-center">
           <img src="./assets/imgs/brand_black.png"></img>
         </div>
-      </IonHeader>
+      </div>
       <IonContent>
         <div className="signin-container margin-top-20">
-          <div className="bordered-text-input margin-top-20 text-align-left">
+          <div className="bordered-text-input margin-top-20 text-align-left text-box">
             <IonInput value={username} onIonChange={handleUsernameChange} placeholder = "Username or email" />
           </div>
-          <div className="bordered-text-input margin-top-20 text-align-left">
-            <IonInput value={password} onIonChange={handlePasswordChange} placeholder = "Password" />
+          <div className="bordered-text-input margin-top-20 text-align-left text-box">
+            <IonInput value={password} type="password" onIonChange={handlePasswordChange} placeholder = "Password" />
           </div>
           <IonButton onClick={handleSubmit} expand="block" className="margin-top-20 signin-button red-button">Sign In</IonButton>
           <IonAlert
