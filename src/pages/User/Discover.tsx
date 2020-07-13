@@ -32,7 +32,7 @@ const Discover: React.FC<{history}> = (props) => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <div className="landing-container">
+        <div className="landing-container text-align-center">
           <div className="circle-icon huge-icon margin-top-30">
             <i className="fal fa-book-spells"></i>
           </div>

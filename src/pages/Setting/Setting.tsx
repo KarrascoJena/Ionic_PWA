@@ -20,7 +20,7 @@ const GetStart: React.FC<{history}> = (props) => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar className="padding-header">
+        <IonToolbar className="padding-header text-align-center">
           <div onClick={(e) => gotoBack(e, props)} slot="end">
             <i className="fal fa-times custom-icon-size-small"></i> 
           </div>
@@ -29,7 +29,7 @@ const GetStart: React.FC<{history}> = (props) => {
       </IonHeader>
       <div className="container">
         <div className="margin-left-5">
-          <IonLabel className="label">Language</IonLabel>
+          <IonLabel className="title">Language</IonLabel>
           <IonRow>
             <IonCol size="5" className="select">
               <IonSelect value={i18n.language} onIonChange={(e) => {onChangeLanguage(e)}} interface="popover" className="ion-select-custom relation-ship-width">
@@ -42,12 +42,12 @@ const GetStart: React.FC<{history}> = (props) => {
         <div className="margin-left-5">
           <IonRow>
             <IonCol size="6">
-              <IonLabel className="label margin-left-7">Company</IonLabel>
+              <IonLabel className="title margin-left-7">Company</IonLabel>
               <br />
               <IonButton fill="clear" color="dark" size="small">Privacy</IonButton>
             </IonCol>
             <IonCol size="6">
-              <IonLabel className="label margin-left-7">Legal</IonLabel>
+              <IonLabel className="title margin-left-7">Legal</IonLabel>
               <br />
               <IonButton fill="clear" color="dark" size="small">Privacy</IonButton>
               <br />

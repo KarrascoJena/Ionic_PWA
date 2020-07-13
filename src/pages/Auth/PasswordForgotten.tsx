@@ -64,7 +64,7 @@ const PasswordForgotten: React.FC<{ history:any; }> = (props) => {
         <img src="./assets/imgs/brand_black.png"></img>
       </div>
       <IonContent>
-        <div className="landing-container">
+        <div className="landing-container text-align-center">
           <div className="circle-icon huge-icon password-forgotten-huge-icon">
             <i className="fal fa-lock-alt"></i>
           </div>

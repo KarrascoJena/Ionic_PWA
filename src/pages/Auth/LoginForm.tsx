@@ -94,7 +94,9 @@ const LoginForm: React.FC<{ history:any; }> = (props) => {
             </span>
             Sign in with Facebook
           </IonButton>
-          <IonButton fill="clear" size="small" onClick={gotoForgottenPassword} className="text text-transform-none">Forget password?</IonButton>
+          <div className="text-align-center">
+            <IonButton fill="clear" size="small" onClick={gotoForgottenPassword} className="text text-transform-none">Forget password?</IonButton>
+          </div>
           <div className="align-item-center justify-content-center padding-top-50">
             <IonLabel className="text">Don't have an account? </IonLabel>
             <IonButton fill="clear" color="primary" size="small" onClick={gotoSignUp} className="link-main text-transform-none">Sign Up</IonButton>

@@ -18,7 +18,7 @@ const NoContacts: React.FC<{history}> = (props) => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <div className="landing-container">
+        <div className="landing-container text-align-center">
           <div className="circle-icon huge-icon margin-top-30 user-friends-icon-custom">
             <i className="fal fa-user-friends"></i>
           </div>
