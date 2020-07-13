@@ -33,7 +33,6 @@ const EditProfile: React.FC<{history}> = (props) => {
 
   const onChangeName = (e) => {
     setState({...state, name: e.target.value})
-    console.log(state.birthday)
   }
   
   const onChangeUserName = (e) => {
@@ -41,7 +40,6 @@ const EditProfile: React.FC<{history}> = (props) => {
   }
 
   const onChangeBirthday = (e) => {
-    console.log(e)
     setState({...state, birthday: e})
   }
 

@@ -20,7 +20,6 @@ const gotoContactDetail = (e, props) => {
 
 const BottomTabBar: React.FC<{history}> = (props) => {
   const current_url = window.location.href;
-  console.log(current_url)
   return (
 
       <IonTabBar slot="bottom" className="bottom-tab-bar-background-color bottom-icon-height">

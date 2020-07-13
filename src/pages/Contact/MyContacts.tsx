@@ -57,7 +57,6 @@ const MyAccount: React.FC<{history}> = (props) => {
   }
 
   const empty = () => {
-    console.log(contacts.length)
     var tem = [] as any;
     for(var i = contacts.length; i < 9; i++){
       tem.push(initCard(i));

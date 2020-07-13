@@ -18,17 +18,17 @@ const NoContacts: React.FC<{history}> = (props) => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <div className="signin-container">
+        <div className="landing-container">
           <div className="circle-icon huge-icon margin-top-30 user-friends-icon-custom">
             <i className="fal fa-user-friends"></i>
           </div>
           <div className="margin-top-30">
-            <IonLabel className="large-title">
+            <IonLabel className="title">
               No Contact Found!
             </IonLabel>
           </div>
           <div className="margin-top-30">
-            <IonLabel className="truble-login-text disabled-button">
+            <IonLabel className="text-details">
               You need to define minimum one contact before you can use the discovery featur.
             </IonLabel>
           </div>

@@ -81,7 +81,6 @@ const DiscoverVote: React.FC<{history}> = (props) => {
 
   const onAnimationEnd = () => {
     setAnimationFinished(true);
-    console.log('Animation End');
   }
 
   const gotoNoContacts = () => {

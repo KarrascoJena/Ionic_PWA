@@ -1,98 +1,106 @@
-import React, {useState} from 'react';
-import { IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonButtons, IonButton, IonLabel, IonList, IonItem, IonIcon, IonBackButton } from '@ionic/react';
-
+import React from 'react';
+import { Route } from 'react-router-dom';
+import { IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonButton, IonLabel, IonList, IonItem, IonBackButton } from '@ionic/react';
 import BottomTabBar from '../../components/bottom-tab-bar';
+import Notifications from './Notifications/Notifications'
+import Security from './Security/Security'
+import {useHistory} from 'react-router-dom'
 
-import './assets/scss/AccountSetting.scss'
+import './assets/scss/AccountSetting.scss';
 
-const gotoBack = (e, props) => {
-  e.preventDefault();
-  props.history.goBack();
-}
-const onChangeCheck = (e, url, props) => {
-  e.preventDefault();
-  props.history.push('/' + url);
-}
 
 const settings = [
   {
     'title': 'Notifications',
     'icon': 'fal fa-bell',
-    'description': 'A powerful Javascript framework for building single page apps. Angular is open source, and maintained by Google.',
-    'color': '#E63135'
+    'url': '/notifications'
   },
   {
     'title': 'Security',
     'icon': 'fal fa-shield-check',
-    'description': 'The latest version of cascading stylesheets - the styling language of the web!',
-    'color': '#0CA9EA'
+    'url': '/security'
+
   },
   {
     'title': 'Account',
     'icon': 'fal fa-user-circle',
-    'description': 'The latest version of the web\'s markup language.',
-    'color': '#F46529'
+    'url': '/account'
   },
   {
     'title': 'Help',
     'icon': 'fal fa-question-circle',
-    'description': 'One of the most popular programming languages on the Web!',
-    'color': '#FFD439'
+    'url': '/help'
   },
   {
     'title': 'About',
     'icon': 'fal fa-info-circle',
-    'description': 'Syntactically Awesome Stylesheets - a mature, stable, and powerful professional grade CSS extension.',
-    'color': '#CE6296'
+    'url': '/about'
   },
 ];
 
-const showDetail = (title) => {
-}
 
-const AccountSetting: React.FC<{history}> = (props) => {
-  
-  const settingList = settings.map((item, index) => {
+
+const Index: React.FC<{history}> = (props) => {
+  let history = useHistory()
+
+  const gotoSubLink = (e, url) => {
+    e.preventDefault();
+    history.push('/notifications')
+  }
+
+  const settingList = settings.map((item, i) => {
     return (
-      <div key={index}>
-        <IonItem button onClick={() => showDetail(item.title)} lines="none">
-          <div className="justify-content-center align-item-center">
-            <span className="account-setting-icon-font-size">
-              <i className={item.icon}></i>
-            </span>
-          </div>
-          <label className="align-self-center label-padding-left">{item.title}</label>
-        </IonItem>
-      </div>
+      <IonItem button onClick={(e) => {history.push(item.url)}} lines="none"  className="ion-react-nav-detail-btn" key={i}>
+        <div className="justify-content-center align-item-center">
+          <span className="account-setting-icon-font-size">
+            <i className={item.icon}></i>
+          </span>
+        </div>
+        <label className="align-self-center label-padding-left">{item.title}</label>
+      </IonItem>
     );
   })
   return (
-    <IonPage>
+   <IonPage>
       <IonHeader>
         <IonToolbar className="padding-header">
           <IonButtons slot="start">
-            <IonBackButton defaultHref="login" text="" className="disabled-button"/>
+            <IonBackButton defaultHref="/login" text="" className="disabled-button"/>
           </IonButtons>
           <IonTitle>Settings</IonTitle>
         </IonToolbar>
       </IonHeader>
-
-      <IonContent className="justify-content-center">
-        <IonRow>
-          <IonList style={{width: '100%'}}>
-            {settingList}
-          </IonList>
-        </IonRow>
+      <IonContent>
+        <IonList >
+          {settingList}
+        </IonList>
         <hr className="seperator-hr"/>
-        <IonButton fill="clear" onClick={(e) => {props.history.push('/logout')}}>Sign Out</IonButton>
-        <div className="account-setting-version">
+        <IonButton fill="clear" onClick={(e) => {props.history.goBack()}} className="link-main text-transform-none">Sign Out</IonButton>
+        <div className="account-setting-version text">
           <IonLabel>Version 1.0</IonLabel>
         </div>
+        <BottomTabBar history={props.history} />
       </IonContent>
-      <BottomTabBar history={props.history} />
     </IonPage>
   );
 };
 
 
-export default AccountSetting;
+const Test: React.FC = () => {
+  return (
+    <h1>I am here</h1>
+  );
+};
+
+const Settings: React.FC<{history}> = (props) => {
+  return (
+    <React.Fragment>
+      <Route path="/notifications" component={Notifications} exact={true} />
+      <Route path="/security" component={Security} exact={true} />
+      <Route component={Index} />
+    </React.Fragment>
+  );
+};
+
+
+export default Settings;

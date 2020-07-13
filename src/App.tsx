@@ -5,19 +5,23 @@ import { IonReactRouter } from '@ionic/react-router';
 
 import getStart from './pages/GetStart/GetStart';
 import setting from './pages/Setting/Setting';
-import myAccount from './pages/Contact/MyContacts';
 import noContacts from './pages/Contact/NoContact';
 import AccountSetting from './pages/Setting/AccountSetting';
 import searchOverview from './pages/Search/Search';
-import editProfile from './pages/User/EditProfile';
 import contactDetail from './pages/Contact/ContactDetail';
 import selectAvatar from './pages/User/SelectAvatar';
 import discoverVote from './pages/User/DiscoverVote';
 import discover from './pages/User/Discover';
+import editProfile from './pages/User/EditProfile';
+import myAccount from './pages/Contact/MyContacts';
+import matchs from './pages/Matchs/matchs';
+import experiences from './pages/Experiences/experiences';
 import login from './pages/Auth/Login';
 import logout from './pages/Auth/Logout';
 import signUp from './pages/Auth/Signup';
 import passwordForgotten from './pages/Auth/PasswordForgotten';
+import Notifications from './pages/Setting/Notifications/Notifications'
+import SecuritySetting from './pages/Setting/Security/Security'
 
 /* apollo client part */
 import { ApolloClient } from 'apollo-boost';
@@ -87,7 +91,13 @@ const App: React.FC<{}> = (props) => {
                 <Route path="/logout"  component={logout} exact={true} />
                 <Route path="/getstart" component={getStart} exact={true} />
                 <Route path="/setting" component={setting} exact={true} />
-                <Route path="/account_setting" component={AccountSetting} exact={true} />
+                <Route path="/notifications" component={Notifications}/>
+                <Route path="/security" component={SecuritySetting}/>
+                <Route path="/account_setting" component={AccountSetting}>
+                  {/* <Route path="/notifications" component={Notifications}/> */}
+                  {/* <Route path="/security" component={SecuritySetting}/> */}
+                  {/* <AccountSetting history={props} /> */}
+                </Route>
                 <Route path="/mycontacts" component={myAccount} exact={true} />
                 <Route path="/no_contacts" component={noContacts} exact={true} />
                 <Route path="/search_overview" component={searchOverview} exact={true} />
@@ -96,6 +106,8 @@ const App: React.FC<{}> = (props) => {
                 <Route path="/selectavatar" component={selectAvatar} exact={true} />
                 <Route path="/discovervote" component={discoverVote} exact={true} />
                 <Route path="/discover" component={discover} exact={true} />
+                <Route path="/matchs" component={matchs} exact={true} />
+                <Route path="/experiences" component={experiences} exact={true} />
                 <Route path="/implicit/callback" component={LoginCallback} exact />
                 <Route path="/" render={() => <Redirect to="/getstart" />} exact={true} />
                 <Route component={getStart} />
@@ -107,3 +119,9 @@ const App: React.FC<{}> = (props) => {
   );
 }
 export default App;
+
+const Test: React.FC = () => {
+  return (
+    <h1>I am here</h1>
+  );
+};

@@ -60,10 +60,8 @@ const ContactDetail: React.FC<{history}> = (props) => {
 
   const onChangeName = (e) => {
     setState({...state, name: e.target.value})
-    console.log(state.birthday)
   }
   const onChangeBirthday = (e) => {
-    console.log(e)
     setState({...state, birthday: e})
   }
 

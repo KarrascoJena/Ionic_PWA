@@ -10,7 +10,6 @@ const GetStart: React.FC<{history}> = (props) => {
   const { t, i18n } = useTranslation();
   
   const onChangeLanguage = (e) => {
-    console.log(e.target.value)
     i18n.changeLanguage(e.target.value)
   }
 

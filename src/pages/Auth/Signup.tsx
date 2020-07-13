@@ -23,7 +23,6 @@ const Signup: React.FC<{ history:any; }> = (props) => {
     const oktaAuth = new OktaAuth({ issuer: process.env.REACT_APP_ISSUER });
     oktaAuth.signIn({options: {warnBeforePasswordExpired: true, multiOptionalFactorEnroll: false}, username, password })
     .then(res => {
-      console.log(res)
       const sessionToken = res.sessionToken;
       setSessionToken(sessionToken);
       // sessionToken is a one-use token, so make sure this is only called once
@@ -31,8 +30,6 @@ const Signup: React.FC<{ history:any; }> = (props) => {
       props.history.push('/mycontacts')
     })
     .catch((err) => {
-      console.log(err.name)
-      console.log(err)
       if(!err.errorCode){
         setAlert({state: true, header: 'server is not working', content: 'try again later'})
       } else if (err.errorCode == "E0000004"){
@@ -74,11 +71,11 @@ const Signup: React.FC<{ history:any; }> = (props) => {
         <img src="./assets/imgs/brand_black.png"></img>
       </div>
       <IonContent>
-        <div className="signin-container">
-          <div className="singup-header-text disabled-button padding-top-20">
+        <div className="landing-container">
+          <div className="singup-header-text padding-top-20 title">
             Sign up to find experiences for your friends and you.
           </div>
-          <IonButton onClick={handleSubmit} expand="block" className="margin-top-20 signin-with-facebook red-button color-white justify-content-space-between">
+          <IonButton onClick={handleSubmit} expand="block" className="margin-top-20 signin-with-facebook red-button color-white justify-content-space-between text-transform-none">
           <span className="facebook-icon-size">
             <i className="fab fa-facebook-square"></i>
           </span>
@@ -97,7 +94,7 @@ const Signup: React.FC<{ history:any; }> = (props) => {
           <div className="bordered-text-input margin-top-10 text-align-left text-box">
             <IonInput value={password} type="password" onIonChange={handlePasswordChange} placeholder = "Password" />
           </div>
-          <IonButton onClick={handleSubmit} expand="block" className="margin-top-20 red-button">Sign Up</IonButton>
+          <IonButton onClick={handleSubmit} expand="block" className="margin-top-20 red-button text-transform-none">Sign Up</IonButton>
           <IonAlert
             isOpen={alert.state}
             onDidDismiss={() => setAlert({state: false, header: '', content: ''})}
@@ -106,12 +103,13 @@ const Signup: React.FC<{ history:any; }> = (props) => {
             message={alert.content}
             buttons={['OK']}
           />
-          <IonLabel className="signup-bottom-text disabled-button">
+          <IonLabel className="text">
+            <br />
             By signing up, you agreeto our Terms Learn how we collect, use and share your data in our Data Policy and how we use cookies and similar tecnologies in out Cookies Policy
           </IonLabel>
           <div className="align-item-center justify-content-center disabled-button">
-            <IonLabel>Have an account? </IonLabel>
-            <IonButton fill="clear" color="primary" size="small" onClick={gotoSignIn} className="signup-link">Sign In</IonButton>
+            <IonLabel className="text">Have an account? </IonLabel>
+            <IonButton fill="clear" color="primary" size="small" onClick={gotoSignIn} className="link-main text-transform-none">Sign In</IonButton>
           </div>
         </div>
       </IonContent>

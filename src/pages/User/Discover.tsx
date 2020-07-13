@@ -32,7 +32,7 @@ const Discover: React.FC<{history}> = (props) => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <div className="signin-container">
+        <div className="landing-container">
           <div className="circle-icon huge-icon margin-top-30">
             <i className="fal fa-book-spells"></i>
           </div>
@@ -42,7 +42,7 @@ const Discover: React.FC<{history}> = (props) => {
             </IonLabel>
           </div>
           <div className="margin-top-30">
-            <IonLabel className="truble-login-text disabled-button">
+            <IonLabel className="disabled-button">
               We are out of experiences for the moment but we'll come back soon with new ideas
             </IonLabel>
           </div>

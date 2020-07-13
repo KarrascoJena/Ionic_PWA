@@ -21,13 +21,10 @@ const LoginForm: React.FC<{ history:any; }> = (props) => {
 
 
   const handleSubmit = (e) => {
-    console.log(username)
-    console.log(password)
     e.preventDefault();
     const oktaAuth = new OktaAuth({ issuer: process.env.REACT_APP_ISSUER });
     oktaAuth.signIn({options: {warnBeforePasswordExpired: true, multiOptionalFactorEnroll: false}, username, password })
     .then(res => {
-      console.log(res)
       const sessionToken = res.sessionToken;
       setSessionToken(sessionToken);
       // sessionToken is a one-use token, so make sure this is only called once
@@ -35,8 +32,6 @@ const LoginForm: React.FC<{ history:any; }> = (props) => {
       props.history.push('/mycontacts')
     })
     .catch((err) => {
-      console.log(err.name)
-      console.log(err)
       if(!err.errorCode){
         setAlert({state: true, header: 'server is not working', content: 'try again later'})
       } else if (err.errorCode == "E0000004"){
@@ -76,14 +71,14 @@ const LoginForm: React.FC<{ history:any; }> = (props) => {
         </div>
       </div>
       <IonContent>
-        <div className="signin-container margin-top-20">
+        <div className="landing-container margin-top-20">
           <div className="bordered-text-input margin-top-20 text-align-left text-box">
             <IonInput value={username} onIonChange={handleUsernameChange} placeholder = "Username or email" />
           </div>
           <div className="bordered-text-input margin-top-20 text-align-left text-box">
             <IonInput value={password} type="password" onIonChange={handlePasswordChange} placeholder = "Password" />
           </div>
-          <IonButton onClick={handleSubmit} expand="block" className="margin-top-20 signin-button red-button">Sign In</IonButton>
+          <IonButton onClick={handleSubmit} expand="block" className="margin-top-20 signin-button red-button text-transform-none">Sign In</IonButton>
           <IonAlert
             isOpen={alert.state}
             onDidDismiss={() => setAlert({state: false, header: '', content: ''})}
@@ -93,16 +88,16 @@ const LoginForm: React.FC<{ history:any; }> = (props) => {
             buttons={['OK']}
           />
           <p className="btn-separator"><span>OR</span></p>
-          <IonButton onClick={handleSubmit} expand="block" fill="clear" className="margin-top-20 signin-with-facebook">
+          <IonButton onClick={handleSubmit} expand="block" fill="clear" className="margin-top-20 signin-with-facebook text-transform-none">
             <span className="account-setting-icon-font-size" style={{marginRight: '10px'}}>
               <i className="fab fa-facebook-square"></i>
             </span>
             Sign in with Facebook
           </IonButton>
-          <IonButton fill="clear" size="small" onClick={gotoForgottenPassword} className="disabled-button">Forget password?</IonButton>
+          <IonButton fill="clear" size="small" onClick={gotoForgottenPassword} className="text text-transform-none">Forget password?</IonButton>
           <div className="align-item-center justify-content-center padding-top-50">
-            <IonLabel className="disabled-button">Don't have an account? </IonLabel>
-            <IonButton fill="clear" color="primary" size="small" onClick={gotoSignUp} className="signup-link">Sign Up</IonButton>
+            <IonLabel className="text">Don't have an account? </IonLabel>
+            <IonButton fill="clear" color="primary" size="small" onClick={gotoSignUp} className="link-main text-transform-none">Sign Up</IonButton>
           </div>
         </div>
       </IonContent>

@@ -7,7 +7,6 @@ import './assets/scss/search.scss';
 
 
 const gotoSuggest = (e, props) => {
-  console.log("123123")
 }
 
 const contacts = [
@@ -54,21 +53,19 @@ const Search: React.FC<{history}> = (props) => {
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)}></IonSearchbar>
-      </IonHeader>
-      
+      <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)}></IonSearchbar>
       <IonContent className="padding-content justify-content-center">
         <IonRow className="grid-container">
           {contactList}
         </IonRow>
+        <div className="text-align-center text-details margin-top-50">
+          <IonLabel>Experience not found?</IonLabel>
+        </div>
+        <div className="search-button-padding">
+          <IonButton expand="block" className="red-button text-transform-none">Suggest New Experience</IonButton>
+        </div>
       </IonContent>
-      <div className="text-align-center disabled-button">
-        <IonLabel>Experience not found?</IonLabel>
-      </div>
-      <div className="search-button-padding">
-        <IonButton expand="block" className="red-button">Suggest New Experience</IonButton>
-      </div>
+      
       <BottomTabBar history={props.history} />
     </IonPage>
   );
