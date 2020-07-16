@@ -31,21 +31,19 @@ const Experiences: React.FC<{history}> = (props) => {
 
   const PersonalList = Personal_Matches.map((item, index) => {
     return (
-      <IonItem key={index} lines="none" className="background-grey-light">
-        <IonRow className="background-grey-light margin-top-10 width-100">
-          <IonCol size="3">
-            <div>
-              <span className="circle-icon large-icon">
-                <i className={item.icon} ></i>
-              </span>
-            </div>
-          </IonCol>
-          <IonCol size="9" className="align-items-center">
-            <div className="title">{item.title}</div>
-            <div className="text">{item.text}</div>
-          </IonCol>
-        </IonRow>
-      </IonItem>
+      <IonRow key={index} className="background-grey-light margin-top-10 width-100 ">
+        <IonCol size="3">
+          <div>
+            <span className="circle-icon large-icon">
+              <i className={item.icon} ></i>
+            </span>
+          </div>
+        </IonCol>
+        <IonCol size="9" className="align-items-center">
+          <div className="title">{item.title}</div>
+          <div className="text">{item.text}</div>
+        </IonCol>
+      </IonRow>
     );
   })
 

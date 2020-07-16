@@ -351,7 +351,6 @@ ion-toolbar {
 }
 
 .align-items-center {
-  // display: flex;
   align-self: center;
 }
 
@@ -370,4 +369,8 @@ ion-toolbar {
   height: 100%;
   width: 100%;
   object-fit: cover;
+}
+
+ion-toggle {
+  --background-checked: red;
 }
