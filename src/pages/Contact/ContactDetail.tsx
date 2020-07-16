@@ -54,7 +54,6 @@ const ContactDetail: React.FC<{history}> = (props) => {
     whatsAppNumber: '+43 664304938'
   });
 
-  const [showActionSheet, setShowActionSheet] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [validEmailError, setValidEmailError] = useState('');
 

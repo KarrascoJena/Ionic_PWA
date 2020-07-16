@@ -1,12 +1,9 @@
-import React, {useState} from 'react';
-import { IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonList, IonItem, IonBackButton } from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
-import {useHistory} from 'react-router-dom'
+import React from 'react';
+import { IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem } from '@ionic/react';
+import { IonButtons, IonBackButton } from '@ionic/react';
+import {useRouteMatch} from 'react-router-dom'
 
-import EmailAndSMS from './EmailAndSMS'
-import IonReactNav from '../../../components/IonReactNav';
-import TechDetail  from '../../../components/ion-nav/TechDetail';
-import BottomTabBar from '../../../components/bottom-tab-bar';
+// import BottomTabBar from '../../../components/bottom-tab-bar';
 
 import '../assets/scss/AccountSetting.scss';
 
@@ -20,53 +17,45 @@ const Test: React.FC = () => {
 const settings = [
   {
     'title': 'Email and SMS',
-    'content': <EmailAndSMS />
+    'url': 'emailandsms'
   },
   {
     'title': 'Push Notifications',
-    'content': <Test />
+    'content': 'test'
   },
   {
     'title': 'Social Media',
-    'content': <Test />
+    'content': 'test'
   }
 ];
 
 
-const Notifications: React.FC = () => {
-  let history = useHistory()
+const Notifications: React.FC<{history}> = (props) => {
 
-  const [setting, setSetting] = useState(settings[0])
+  let { path, url } = useRouteMatch();
 
   const settingList = settings.map((item, i) => {
     return (
-      <IonItem button onClick={() => setSetting(settings[i])} lines="none"  className="ion-react-nav-detail-btn" key={i}>
+      <IonItem button onClick={(e) => {e.preventDefault(); props.history.push(`${path}/${item.url}`)}} lines="none"  className="ion-react-nav-detail-btn" key={i}>
         <label className="align-self-center label-padding-left">{item.title}</label>
       </IonItem>
     );
   })
   return (
     <IonPage>
-      <IonContent>
-        <IonReactRouter>
-          <IonReactNav detail={() => <TechDetail {...setting} />}>
-            <IonHeader>
-              <IonToolbar className="padding-header">
-                <IonButtons slot="start">
-                  <IonBackButton defaultHref="/login" text="" className="disabled-button"/>
-                </IonButtons>
-                <IonTitle>Notifications</IonTitle>
-              </IonToolbar>
-            </IonHeader>
-            <IonContent fullscreen>
-              <IonList >
-                {settingList}
-              </IonList>
-            </IonContent>
-          </IonReactNav>
-        </IonReactRouter>
+      <IonHeader>
+        <IonToolbar className="padding-header">
+          <IonButtons slot="start" onClick={(e) => {props.history.goBack()}}>
+            <IonBackButton text="" className="disabled-button"/>
+          </IonButtons>
+          <IonTitle>Notifications</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent fullscreen>
+        <IonList >
+          {settingList}
+        </IonList>
       </IonContent>
-      <BottomTabBar history={history} />
     </IonPage>
   );
 };

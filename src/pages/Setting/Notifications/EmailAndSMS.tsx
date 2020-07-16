@@ -22,7 +22,9 @@ const EmailAndSMS: React.FC = () => {
           <IonButtons slot="start">
             <IonBackButton defaultHref="/login" text="" className="disabled-button"/>
           </IonButtons>
-          <IonButton fill="clear" onClick={(e) => {}} strong={true} slot="end" className="done-button">Save</IonButton>
+          <IonButtons slot="end">
+            <IonButton onClick={(e) => {}} strong={true}className="done-button">Save</IonButton>
+          </IonButtons>
           <IonTitle>Email and SMS</IonTitle>
         </IonToolbar>
       </IonHeader>

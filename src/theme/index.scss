@@ -155,10 +155,12 @@ ion-toolbar {
 }
 
 .circle-icon {
-  display: inline-block;
-  border-radius: 50%;
+  border-radius: 100%;
   box-shadow: 0px 0px 5px #000;
-  padding: 0.5em 0.6em;
+  display: flex;
+  margin: auto;
+  align-items: center; /* vertical alignment */
+  justify-content: center;
 }
 
 .huge-icon {
@@ -169,6 +171,8 @@ ion-toolbar {
 
 .large-icon {
   font-size: 25px;
+  height: 50px;
+  width: 50px;
 }
 
 .font-size-16 {
@@ -353,4 +357,11 @@ ion-toolbar {
 
 .background-grey-light{
   background: $color_grey_light;
+}
+
+.back-button-slot-start {
+  padding-left: -0.3em;
+  ion-icon {
+    font-size: 64px;
+  }
 }

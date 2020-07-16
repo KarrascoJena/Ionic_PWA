@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import OktaAuth from '@okta/okta-auth-js';
 import { useOktaAuth } from '@okta/okta-react';
-import { IonPage, IonContent, IonInput, IonButton, IonTabBar, IonHeader, IonAlert, IonItem, IonTabButton, IonLabel } from '@ionic/react';
+import { IonPage, IonContent, IonInput, IonButton, IonAlert, IonLabel } from '@ionic/react';
 
 import './assets/scss/auth.scss';
 
@@ -32,9 +32,9 @@ const Signup: React.FC<{ history:any; }> = (props) => {
     .catch((err) => {
       if(!err.errorCode){
         setAlert({state: true, header: 'server is not working', content: 'try again later'})
-      } else if (err.errorCode == "E0000004"){
+      } else if (err.errorCode === "E0000004"){
         setAlert({state: true, header: 'Authentication failed', content: 'Username and Password was wrong'})
-      } else if (err.errorCode == "E0000001"){
+      } else if (err.errorCode === "E0000001"){
         setAlert({state: true, header: 'Authentication failed', content: 'type the validate username and password'})
       }
     });
@@ -68,7 +68,7 @@ const Signup: React.FC<{ history:any; }> = (props) => {
   return (
     <IonPage>
       <div className="header_brand_image justify-content-center">
-        <img src="./assets/imgs/brand_black.png"></img>
+        <img alt="" src="./assets/imgs/brand_black.png"></img>
       </div>
       <IonContent>
         <div className="landing-container">

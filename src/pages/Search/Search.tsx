@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
-import { IonPage, IonContent, IonHeader, IonSearchbar, IonButton, IonRow, IonCol, IonLabel } from '@ionic/react';
+import { IonPage, IonContent, IonSearchbar, IonButton, IonRow, IonCol, IonLabel } from '@ionic/react';
 
 import BottomTabBar from '../../components/bottom-tab-bar';
 
 import './assets/scss/search.scss';
 
-
-const gotoSuggest = (e, props) => {
-}
 
 const contacts = [
   {

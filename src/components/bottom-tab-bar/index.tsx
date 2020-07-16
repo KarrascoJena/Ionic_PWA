@@ -3,23 +3,22 @@ import { IonTabBar, IonTabButton, IonBadge } from '@ionic/react';
 
 import './assets/css/bottomTabBar.scss';
 
-const gotoGetStart = (e, props) => {
-  e.preventDefault();
-  props.history.push('/getstart');
-}
+// const gotoGetStart = (e, props) => {
+//   e.preventDefault();
+//   props.history.push('/getstart');
+// }
 
-const gotoEditProfile = (e, props) => {
-  e.preventDefault();
-  props.history.push('/editprofile');
-}
+// const gotoEditProfile = (e, props) => {
+//   e.preventDefault();
+//   props.history.push('/editprofile');
+// }
 
-const gotoContactDetail = (e, props) => {
-  props.history.push('/contactdetail');
-}
+// const gotoContactDetail = (e, props) => {
+//   props.history.push('/contactdetail');
+// }
 
 
 const BottomTabBar: React.FC<{history}> = (props) => {
-  const current_url = window.location.href;
   return (
 
       <IonTabBar slot="bottom" className="bottom-tab-bar-background-color bottom-icon-height">

@@ -7,7 +7,7 @@ import './assets/scss/Setting.scss'
 
 
 const GetStart: React.FC<{history}> = (props) => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   
   const onChangeLanguage = (e) => {
     i18n.changeLanguage(e.target.value)

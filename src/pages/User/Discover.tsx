@@ -8,7 +8,7 @@ import './assets/css/DiscoverVote.scss'
 
 
 const Discover: React.FC<{history}> = (props) => {
-  const { loading, isSupported, share } = useWebShare();
+  const { share } = useWebShare();
 
   function shareClick() {
     share({
@@ -33,8 +33,10 @@ const Discover: React.FC<{history}> = (props) => {
       </IonHeader>
       <IonContent>
         <div className="landing-container text-align-center">
-          <div className="circle-icon huge-icon margin-top-30">
-            <i className="fal fa-book-spells"></i>
+          <div className="margin-top-30">
+            <span className="circle-icon huge-icon">
+              <i className="fal fa-book-spells"></i>
+            </span>
           </div>
           <div className="margin-top-30">
             <IonLabel className="large-title">

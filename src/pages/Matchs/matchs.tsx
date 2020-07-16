@@ -62,14 +62,14 @@ const Matchs: React.FC<{history}> = (props) => {
     return (
       <IonItem key={index}>
         <IonRow>
-          <IonCol size="3"  className="avatar-border padding-right-20">
+          <IonCol size="3" className="avatar-border padding-right-20">
             <IonAvatar className="avatar-img">
-              <img src={item.img} alt=""  className="circle-border"/>
+              <img src={item.img} alt="" className="circle-border"/>
             </IonAvatar>
           </IonCol>
           <IonCol size="9" className="align-items-center">
-            <IonLabel className="title">{item.name}</IonLabel>
-            <IonLabel className="text">Matches: {item.matches}</IonLabel>
+            <div className="title">{item.name}</div>
+            <div className="text">Matches: {item.matches}</div>
           </IonCol>
         </IonRow>
       </IonItem>
@@ -91,7 +91,7 @@ const Matchs: React.FC<{history}> = (props) => {
             {PersonalList}
           </IonList>
           <br />
-          <IonLabel className="padding-top-10">Contact Matches</IonLabel>
+          <IonLabel className="text-align-left">Contact Matches</IonLabel>
           <IonList>
             {ContactList}
           </IonList>

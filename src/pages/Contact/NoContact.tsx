@@ -19,8 +19,10 @@ const NoContacts: React.FC<{history}> = (props) => {
       </IonHeader>
       <IonContent>
         <div className="landing-container text-align-center">
-          <div className="circle-icon huge-icon margin-top-30 user-friends-icon-custom">
-            <i className="fal fa-user-friends"></i>
+          <div className="margin-top-30 user-friends-icon-custom">
+            <span className="circle-icon huge-icon">
+              <i className="fal fa-user-friends"></i>
+            </span>
           </div>
           <div className="margin-top-30">
             <IonLabel className="title">

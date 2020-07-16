@@ -1,18 +1,11 @@
 import React, { useState } from 'react';
-import OktaAuth from '@okta/okta-auth-js';
-import { useOktaAuth } from '@okta/okta-react';
-import { IonPage, IonContent, IonInput, IonButton, IonTabBar, IonHeader, IonAlert, IonItem, IonTabButton, IonLabel } from '@ionic/react';
+import { IonPage, IonContent, IonInput, IonButton, IonAlert, IonLabel } from '@ionic/react';
 
 import './assets/scss/auth.scss';
 import './assets/scss/passwordForgotten.scss';
 
 const PasswordForgotten: React.FC<{ history:any; }> = (props) => { 
-  const { authService } = useOktaAuth();
-  const [sessionToken, setSessionToken] = useState();
   const [email, setEmail] = useState();
-  const [fullname, setFullname] = useState();
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
   const [alert, setAlert] = useState({
     state: false,
     header: '',
@@ -21,24 +14,6 @@ const PasswordForgotten: React.FC<{ history:any; }> = (props) => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    const oktaAuth = new OktaAuth({ issuer: process.env.REACT_APP_ISSUER });
-    oktaAuth.signIn({options: {warnBeforePasswordExpired: true, multiOptionalFactorEnroll: false}, username, password })
-    .then(res => {
-      const sessionToken = res.sessionToken;
-      setSessionToken(sessionToken);
-      // sessionToken is a one-use token, so make sure this is only called once
-      authService.redirect({ sessionToken });
-      props.history.push('/mycontacts')
-    })
-    .catch((err) => {
-      if(!err.errorCode){
-        setAlert({state: true, header: 'server is not working', content: 'try again later'})
-      } else if (err.errorCode == "E0000004"){
-        setAlert({state: true, header: 'Authentication failed', content: 'Username and Password was wrong'})
-      } else if (err.errorCode == "E0000001"){
-        setAlert({state: true, header: 'Authentication failed', content: 'type the validate username and password'})
-      }
-    });
   };     
 
   const handleEmailChange = (e) => {
@@ -53,20 +28,17 @@ const PasswordForgotten: React.FC<{ history:any; }> = (props) => {
     props.history.push('/register')
   }
 
-  if (sessionToken) {
-    // Hide form while sessionToken is converted into id/access tokens
-    return null;
-  }
-
   return (
     <IonPage>
       <div className="header_brand_image justify-content-center">
-        <img src="./assets/imgs/brand_black.png"></img>
+        <img alt="" src="./assets/imgs/brand_black.png"></img>
       </div>
       <IonContent>
         <div className="landing-container text-align-center">
-          <div className="circle-icon huge-icon password-forgotten-huge-icon">
-            <i className="fal fa-lock-alt"></i>
+          <div className="password-forgotten-huge-icon">
+            <span className="circle-icon huge-icon">
+              <i className="fal fa-lock-alt"></i>
+            </span>
           </div>
           <div>
             <IonLabel className="title">
@@ -84,7 +56,7 @@ const PasswordForgotten: React.FC<{ history:any; }> = (props) => {
             </div>
           </div>
           <div className="truble-login-margin">
-            <IonButton onClick={handleSubmit} expand="block" className="margin-top-20 red-button">Send Sign In Link</IonButton>
+            <IonButton onClick={handleSubmit} expand="block" className="margin-top-20 red-button text-transform-none">Send Sign In Link</IonButton>
           </div>
           <div className="truble-login-margin">
             <p className="btn-separator truble-login-margin"><span>OR</span></p>

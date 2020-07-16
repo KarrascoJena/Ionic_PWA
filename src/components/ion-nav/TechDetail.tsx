@@ -1,13 +1,12 @@
 import React from 'react';
 
-import { IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonIcon } from '@ionic/react';
+import { IonHeader, IonContent } from '@ionic/react';
 
 interface SettingDetails {
   content: object;
 }
 
 const TechDetail: React.FC<SettingDetails> = ({ content }) => {
-  console.log(content)
   return (
     <React.Fragment>
       <IonHeader translucent>

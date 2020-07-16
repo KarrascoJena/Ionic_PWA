@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { IonButton, IonRow, IonCol } from '@ionic/react';
-import { useTranslation } from 'react-i18next';
 import { useHistory } from "react-router-dom";
 import './assets/scss/GetStart.scss';
 
@@ -21,7 +20,6 @@ function Dot (props) {
 }
 
 export default function IndicatorDots (props) {
-  const { i18n } = useTranslation();
   let history = useHistory();
 
   const gotoSetting = (e, props) => {
@@ -35,7 +33,7 @@ export default function IndicatorDots (props) {
     return (
       <div>
         <div style={{position: 'absolute', width: '100%', zIndex: 100, top: '15px', textAlign: 'center'}} className="justify-content-space-between brand-title">
-          <img src="./assets/imgs/brand_white.png" className="brand-image"/>
+          <img alt="" src="./assets/imgs/brand_white.png" className="brand-image"/>
           <div onClick={(e) => gotoSetting(e, props)} slot="end" className="align-item-center">
             <i className="far fa-bars custom-icon-size-small white-icon"></i>
           </div>

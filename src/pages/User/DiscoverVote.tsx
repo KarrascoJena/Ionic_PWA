@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonIcon, IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonButtons, IonAvatar, IonButton } from '@ionic/react';
+import { IonIcon, IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonButtons, IonButton } from '@ionic/react';
 import { ellipsisHorizontal } from 'ionicons/icons';
 
 import AwesomeSlider from 'react-awesome-slider';
@@ -12,7 +12,8 @@ import './assets/css/DiscoverVote.scss'
 
 
 
-const gotoBack = (props) => {
+const gotoBack = (e, props) => {
+  e.preventDefault()
   props.history.goBack()
 }
 
@@ -33,7 +34,7 @@ const DiscoverVote: React.FC<{history}> = (props) => {
   ]);
   const [userName, setUserName] = React.useState('Christian')
   
-  const { loading, isSupported, share } = useWebShare();
+  const { share } = useWebShare();
 
   const [animationFinished, setAnimationFinished] = React.useState(false);
   const [imageAnimationFinished, setImageAnimationFinished] = React.useState(false);
@@ -90,7 +91,7 @@ const DiscoverVote: React.FC<{history}> = (props) => {
     <IonPage>
       <IonHeader>
         <IonToolbar className="padding-header">
-          <IonButtons slot="start" onClick={() => {props.history.goBack()}}>
+          <IonButtons slot="start" onClick={(e) => {gotoBack(e, props)}}>
             <i className="fal fa-times custom-icon-size-small"></i>
           </IonButtons>
           <IonButtons slot="end" onClick={() => { shareClick()}}>
@@ -125,7 +126,7 @@ const DiscoverVote: React.FC<{history}> = (props) => {
 
         <div className="position-relative">
           {slider}
-          <img src={userImage}  className={imageAnimationFinished ? '' : "bottom-profile-circle-img flip-in-hor-top"} />
+          <img alt="" src={userImage}  className={imageAnimationFinished ? '' : "bottom-profile-circle-img flip-in-hor-top"} />
         </div>
         <div className="justify-content-space-between margin-10 ">
             <IonButton fill="clear" className="custom-title-font-size black-button-text z-index-3" onClick={gotoNoContacts}>
@@ -136,7 +137,7 @@ const DiscoverVote: React.FC<{history}> = (props) => {
             </IonButton>
         </div>
         <div className="justify-content-center margin-top-20">
-          {value == -1 ? <h4 className={animationFinished ? '' : "slide-in-right"} onAnimationEnd={onAnimationEnd}>{userName}</h4> : <h4 className={animationFinished ? '' : "slide-in-right"} onAnimationEnd={onAnimationEnd}>{valueText[value]}</h4> }
+          {value === -1 ? <h4 className={animationFinished ? '' : "slide-in-right"} onAnimationEnd={onAnimationEnd}>{userName}</h4> : <h4 className={animationFinished ? '' : "slide-in-right"} onAnimationEnd={onAnimationEnd}>{valueText[value]}</h4> }
         </div>
         <EmoticonRating value={value} changeValue={(changedValue) => {onChangeValue(changedValue)}}/>
       </IonContent>

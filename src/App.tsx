@@ -22,12 +22,12 @@ import signUp from './pages/Auth/Signup';
 import passwordForgotten from './pages/Auth/PasswordForgotten';
 import Notifications from './pages/Setting/Notifications/Notifications'
 import SecuritySetting from './pages/Setting/Security/Security'
-
+import EmailAndSMS from './pages/Setting/Notifications/EmailAndSMS';
+import Password from './pages/Setting/Security/Password';
 /* apollo client part */
 import { ApolloClient } from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { HttpLink } from 'apollo-link-http';
 import { WebSocketLink } from 'apollo-link-ws';
 import config from './config';
 
@@ -53,6 +53,7 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import './theme/index.scss';
+
 
 
 const cache = new InMemoryCache();
@@ -91,13 +92,13 @@ const App: React.FC<{}> = (props) => {
                 <Route path="/logout"  component={logout} exact={true} />
                 <Route path="/getstart" component={getStart} exact={true} />
                 <Route path="/setting" component={setting} exact={true} />
-                <Route path="/notifications" component={Notifications}/>
-                <Route path="/security" component={SecuritySetting}/>
-                <Route path="/account_setting" component={AccountSetting}>
-                  {/* <Route path="/notifications" component={Notifications}/> */}
-                  {/* <Route path="/security" component={SecuritySetting}/> */}
-                  {/* <AccountSetting history={props} /> */}
-                </Route>
+
+                <Route path="/account_setting" component={AccountSetting} exact={true} />
+                <Route path="/account_setting/notifications" component={Notifications} exact={true} />
+                <Route path="/account_setting/notifications/emailandsms" component={EmailAndSMS} />
+                <Route path="/account_setting/security" component={SecuritySetting} exact={true} />
+                <Route path="/account_setting/security/password" component={Password} />
+                
                 <Route path="/mycontacts" component={myAccount} exact={true} />
                 <Route path="/no_contacts" component={noContacts} exact={true} />
                 <Route path="/search_overview" component={searchOverview} exact={true} />
@@ -106,7 +107,7 @@ const App: React.FC<{}> = (props) => {
                 <Route path="/selectavatar" component={selectAvatar} exact={true} />
                 <Route path="/discovervote" component={discoverVote} exact={true} />
                 <Route path="/discover" component={discover} exact={true} />
-                <Route path="/matchs" component={matchs} exact={true} />
+                <Route path="/matches" component={matchs} exact={true} />
                 <Route path="/experiences" component={experiences} exact={true} />
                 <Route path="/implicit/callback" component={LoginCallback} exact />
                 <Route path="/" render={() => <Redirect to="/getstart" />} exact={true} />
@@ -119,9 +120,3 @@ const App: React.FC<{}> = (props) => {
   );
 }
 export default App;
-
-const Test: React.FC = () => {
-  return (
-    <h1>I am here</h1>
-  );
-};

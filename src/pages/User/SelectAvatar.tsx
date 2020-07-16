@@ -4,7 +4,6 @@ import { } from 'ionicons/icons';
 import avatarIcons from './avatar-icons'
 
 import './assets/css/SelectAvatar.scss'
-import { CONNREFUSED } from 'dns';
 
 const gotoBack = (e, props) => {
   e.preventDefault();

@@ -1,32 +1,27 @@
 import React from 'react'
-import {IonPage, IonList, IonItem, IonRow, IonCol, IonHeader, IonToolbar, IonTitle, IonContent, IonButton,IonNav } from '@ionic/react'
+import {IonPage, IonList, IonItem, IonRow, IonCol, IonHeader, IonToolbar, IonTitle, IonContent, IonButton } from '@ionic/react'
 
 import BottomTabBar from '../../components/bottom-tab-bar';
 import './assets/scss/Experiences.scss';
 
 const Personal_Matches = [
   {
-    icon: 'fal fa-lock-alt',
+    icon: 'fal fa-book-heart',
     title: 'Available',
     text: 'experiences are waiting for you'
   },
   {
-    icon: 'fal fa-lock-alt',
+    icon: 'fal fa-shopping-cart',
     title: 'Bought',
     text: '3 experiences you can gift to your favorites'
   },
   {
-    icon: 'fal fa-lock-alt',
+    icon: 'fal fa-chart-line',
     title: 'Statistic',
     text: 'Badge Level: hero You completed 16 experiences'
   },
   {
-    icon: 'fal fa-lock-alt',
-    title: 'Statistic',
-    text: 'Badge Level: hero You completed 16 experiences'
-  },
-  {
-    icon: 'fal fa-lock-alt',
+    icon: 'fal fa-wallet',
     title: 'Wallet',
     text: '€ 23,- are available for your next experience'
   }
@@ -38,9 +33,11 @@ const Experiences: React.FC<{history}> = (props) => {
     return (
       <IonItem key={index} lines="none" className="background-grey-light">
         <IonRow className="background-grey-light margin-top-10 width-100">
-          <IonCol size="3" className="avatar-border padding-right-10 padding-left-20">
-            <div className="circle-icon large-icon password-forgotten-huge-icon">
-              <i className={item.icon}></i>
+          <IonCol size="3">
+            <div>
+              <span className="circle-icon large-icon">
+                <i className={item.icon} ></i>
+              </span>
             </div>
           </IonCol>
           <IonCol size="9" className="align-items-center">

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { useRouteMatch} from 'react-router-dom';
+// import { Route, Switch } from 'react-router-dom';
 import { IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonButton, IonLabel, IonList, IonItem, IonBackButton } from '@ionic/react';
 import BottomTabBar from '../../components/bottom-tab-bar';
-import Notifications from './Notifications/Notifications'
-import Security from './Security/Security'
-import {useHistory} from 'react-router-dom'
+// import Notifications from './Notifications/Notifications'
+// import Security from './Security/Security'
 
 import './assets/scss/AccountSetting.scss';
 
@@ -40,17 +40,12 @@ const settings = [
 
 
 
-const Index: React.FC<{history}> = (props) => {
-  let history = useHistory()
-
-  const gotoSubLink = (e, url) => {
-    e.preventDefault();
-    history.push('/notifications')
-  }
-
+const SettingIndex: React.FC<{history}> = (props) => {
+  let { path } = useRouteMatch();
+  
   const settingList = settings.map((item, i) => {
     return (
-      <IonItem button onClick={(e) => {history.push(item.url)}} lines="none"  className="ion-react-nav-detail-btn" key={i}>
+      <IonItem button onClick={(e) => {props.history.push(path + item.url)}} lines="none"  className="ion-react-nav-detail-btn" key={i}>
         <div className="justify-content-center align-item-center">
           <span className="account-setting-icon-font-size">
             <i className={item.icon}></i>
@@ -64,8 +59,8 @@ const Index: React.FC<{history}> = (props) => {
    <IonPage>
       <IonHeader>
         <IonToolbar className="padding-header">
-          <IonButtons slot="start">
-            <IonBackButton defaultHref="/login" text="" className="disabled-button"/>
+          <IonButtons slot="start" onClick={(e) => {props.history.goBack()}}>
+            <IonBackButton text="" className="disabled-button"/>
           </IonButtons>
           <IonTitle>Settings</IonTitle>
         </IonToolbar>
@@ -86,21 +81,23 @@ const Index: React.FC<{history}> = (props) => {
 };
 
 
-const Test: React.FC = () => {
-  return (
-    <h1>I am here</h1>
-  );
-};
+// const Settings: React.FC<{history}> = (props) => {
+//   let { path, url } = useRouteMatch();
+//   return (
+//     <React.Fragment>
+//       <SettingIndex history={props.history}/>
+//       <BottomTabBar history={props.history} />
+//       <Switch>
+//         <Route path={`${path}/notifications`}>
+//           <Notifications />
+//         </Route>
+//         <Route path={`${path}/security`}>
+//           <Security />
+//         </Route>
+//       </Switch>
+//     </React.Fragment>
+//   );
+// };
 
-const Settings: React.FC<{history}> = (props) => {
-  return (
-    <React.Fragment>
-      <Route path="/notifications" component={Notifications} exact={true} />
-      <Route path="/security" component={Security} exact={true} />
-      <Route component={Index} />
-    </React.Fragment>
-  );
-};
 
-
-export default Settings;
+export default SettingIndex;
