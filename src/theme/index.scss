@@ -365,3 +365,9 @@ ion-toolbar {
     font-size: 64px;
   }
 }
+
+.object-fit-cover {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}

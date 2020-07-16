@@ -33,7 +33,7 @@ const MyAccount: React.FC<{history}> = (props) => {
   const contactList = contacts.map((item, index) => {
     return(
       <IonCol onClick={(e) => gotoContactDetail(e, props)} size="4" className="grid-img height-140" key={index}>
-        <img className="img-auto card-effect" src={item.img} alt="" style={{height: '100%', width: '100%', objectFit: 'cover'}}/>
+        <img className="img-auto card-effect object-fit-cover" src={item.img} alt=""/>
         <div className="grid-img-button bottom-circle-icon box-shadow-full-screen">
           <span className="pencil-icon ">
             <i className="fal fa-pencil-alt"></i>
