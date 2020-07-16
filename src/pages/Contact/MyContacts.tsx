@@ -21,10 +21,10 @@ const gotoContactDetail = (e, props) => {
 
 const contacts = [
   {
-    img: 'https://experiencecontent.blob.core.windows.net/user/5717f23a-d765-48d6-ac16-f11169860c19/profile.jpg',
+    img: 'https://experiencecontent.blob.core.windows.net/user/2fb1c8e4-42a4-43a6-a337-b8cc52c83d3f/profile.jpg',
   },
   {
-    img: 'https://experiencecontent.blob.core.windows.net/user/2fb1c8e4-42a4-43a6-a337-b8cc52c83d3f/profile.jpg',
+    img: './assets/imgs/profile1.jpg',
   },
 ];
 
@@ -33,7 +33,7 @@ const MyAccount: React.FC<{history}> = (props) => {
   const contactList = contacts.map((item, index) => {
     return(
       <IonCol onClick={(e) => gotoContactDetail(e, props)} size="4" className="grid-img height-140" key={index}>
-        <img className="img-auto card-effect" src={item.img} width="100%" height="100%" alt=""/>
+        <img className="img-auto card-effect" src={item.img} alt="" style={{height: '100%', width: '100%', objectFit: 'cover'}}/>
         <div className="grid-img-button bottom-circle-icon box-shadow-full-screen">
           <span className="pencil-icon ">
             <i className="fal fa-pencil-alt"></i>

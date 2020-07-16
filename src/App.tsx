@@ -77,7 +77,7 @@ const client = new ApolloClient({
 
 
 
-const App: React.FC<{}> = (props) => {
+const App: React.FC<{history}> = (props) => {
 
   const customAuthHandler = (props) => {props.history.push('/login')}
   return (
