@@ -374,3 +374,7 @@ ion-toolbar {
 ion-toggle {
   --background-checked: red;
 }
+
+.only-border-bottom {
+  border-bottom: 1px solid $color_grey_medium;
+}

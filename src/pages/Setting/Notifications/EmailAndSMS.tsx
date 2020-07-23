@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import { IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonButton, IonLabel, IonList, IonItem, IonToggle, IonBackButton } from '@ionic/react';
+import BottomTabBar from '../../../components/bottom-tab-bar';
 
 import '../assets/scss/AccountSetting.scss';
 
-const EmailAndSMS: React.FC = () => {
+const EmailAndSMS: React.FC<{history}> = (props) => {
   const  [state, setState] = useState({
     PauseAll: true,
     Matches: true,
@@ -52,6 +53,7 @@ const EmailAndSMS: React.FC = () => {
           </IonItem>
         </IonList>
       </IonContent>
+      <BottomTabBar history={props.history} tab=""/>
     </IonPage>
   );
 };

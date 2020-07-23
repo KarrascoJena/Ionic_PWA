@@ -95,7 +95,7 @@ const MyAccount: React.FC<{history}> = (props) => {
           cssClass="bottom-toast-default"
         />
       </IonContent>
-      <BottomTabBar history={props.history} />
+      <BottomTabBar history={props.history} tab="contact"/>
     </IonPage>
   );
 };

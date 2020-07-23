@@ -38,7 +38,7 @@ const Security: React.FC<{history}> = (props) => {
           {settingList}
         </IonList>
       </IonContent>
-      <BottomTabBar history={props.history} />
+      <BottomTabBar history={props.history} tab="search"/>
     </IonPage>
   );
 };

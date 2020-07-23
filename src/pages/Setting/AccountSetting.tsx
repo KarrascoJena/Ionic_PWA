@@ -74,30 +74,10 @@ const SettingIndex: React.FC<{history}> = (props) => {
         <div className="account-setting-version text">
           <IonLabel>Version 1.0</IonLabel>
         </div>
-        <BottomTabBar history={props.history} />
       </IonContent>
+      <BottomTabBar history={props.history} tab=""/>
     </IonPage>
   );
 };
-
-
-// const Settings: React.FC<{history}> = (props) => {
-//   let { path, url } = useRouteMatch();
-//   return (
-//     <React.Fragment>
-//       <SettingIndex history={props.history}/>
-//       <BottomTabBar history={props.history} />
-//       <Switch>
-//         <Route path={`${path}/notifications`}>
-//           <Notifications />
-//         </Route>
-//         <Route path={`${path}/security`}>
-//           <Security />
-//         </Route>
-//       </Switch>
-//     </React.Fragment>
-//   );
-// };
-
 
 export default SettingIndex;

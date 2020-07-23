@@ -1,5 +1,6 @@
 import React from 'react'
 import {IonPage, IonLabel, IonList, IonItem, IonRow, IonCol, IonHeader, IonToolbar, IonTitle, IonContent, IonAvatar} from '@ionic/react'
+import BottomTabBar from '../../components/bottom-tab-bar';
 
 import './assets/scss/matchs.scss';
 
@@ -42,37 +43,37 @@ const Matchs: React.FC<{history}> = (props) => {
 
   const PersonalList = Personal_Matches.map((item, index) => {
     return (
-      <IonItem key={index}>
-        <IonRow>
-          <IonCol size="3" className="avatar-border padding-right-20">
+      <div key={index}>
+        <IonRow  className="only-border-bottom">
+          <IonCol size="2" className="avatar-border padding-right-20">
             <IonAvatar className="avatar-img">
               <img src={item.img} alt="" className="circle-border"/>
             </IonAvatar>
           </IonCol>
-          <IonCol size="9" className="align-items-center">
+          <IonCol size="10" className="align-items-center">
             <div className="title">{item.name}</div>
             <div className="text">Matches: {item.matches}</div>
           </IonCol>
         </IonRow>
-      </IonItem>
+      </div>
     );
   })
 
   const ContactList = Contact_Matches.map((item, index) => {
     return (
-      <IonItem key={index}>
-        <IonRow>
-          <IonCol size="3" className="avatar-border padding-right-20">
+      <div key={index}>
+        <IonRow className="only-border-bottom">
+          <IonCol size="2" className="avatar-border padding-right-20">
             <IonAvatar className="avatar-img">
               <img src={item.img} alt="" className="circle-border"/>
             </IonAvatar>
           </IonCol>
-          <IonCol size="9" className="align-items-center">
+          <IonCol size="10" className="align-items-center">
             <div className="title">{item.name}</div>
             <div className="text">Matches: {item.matches}</div>
           </IonCol>
         </IonRow>
-      </IonItem>
+      </div>
     );
   })
 
@@ -97,6 +98,7 @@ const Matchs: React.FC<{history}> = (props) => {
           </IonList>
         </div>
       </IonContent>
+      <BottomTabBar history={props.history} tab="matche"/>
     </IonPage>
   );
 }

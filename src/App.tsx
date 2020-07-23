@@ -95,7 +95,7 @@ const App: React.FC = (props) => {
 
                 <Route path="/account_setting" component={AccountSetting} exact={true} />
                 <Route path="/account_setting/notifications" component={Notifications} exact={true} />
-                <Route path="/account_setting/notifications/emailandsms" component={EmailAndSMS} />
+                <Route path="/account_setting/notifications/emailandsms" component={EmailAndSMS} exact={true}/>
                 <Route path="/account_setting/security" component={SecuritySetting} exact={true} />
                 <Route path="/account_setting/security/password" component={Password} />
                 

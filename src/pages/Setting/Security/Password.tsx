@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 import { IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonButton, IonList, IonItem, IonBackButton, IonInput } from '@ionic/react';
 
+import BottomTabBar from '../../../components/bottom-tab-bar';
+
 import '../assets/scss/AccountSetting.scss';
 
-const Password: React.FC = () => {
+const Password: React.FC<{history}> = (props) => {
   const  [state, setState] = useState({
     PauseAll: true,
     Matches: true,
@@ -43,6 +45,7 @@ const Password: React.FC = () => {
           </IonItem>
         </IonList>
       </IonContent>
+      <BottomTabBar history={props.history} tab=""/>
     </IonPage>
   );
 };

@@ -178,7 +178,7 @@ const EditProfile: React.FC<{history}> = (props) => {
           </IonCol>
         </IonRow>
       </IonContent>
-      <BottomTabBar history={props.history} />
+      <BottomTabBar history={props.history} tab=""/>
     </IonPage>
   );
 };
