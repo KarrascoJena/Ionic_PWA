@@ -1,5 +1,5 @@
 import React from 'react'
-import {IonPage, IonLabel, IonList, IonItem, IonRow, IonCol, IonHeader, IonToolbar, IonTitle, IonContent, IonAvatar} from '@ionic/react'
+import {IonPage, IonLabel, IonList, IonRow, IonCol, IonHeader, IonToolbar, IonTitle, IonContent, IonAvatar} from '@ionic/react'
 import BottomTabBar from '../../components/bottom-tab-bar';
 
 import './assets/scss/matchs.scss';

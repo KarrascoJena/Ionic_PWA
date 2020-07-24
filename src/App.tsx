@@ -24,6 +24,9 @@ import Notifications from './pages/Setting/Notifications/Notifications'
 import SecuritySetting from './pages/Setting/Security/Security'
 import EmailAndSMS from './pages/Setting/Notifications/EmailAndSMS';
 import Password from './pages/Setting/Security/Password';
+
+import Events from './pages/Event/events';
+import Conformed from './pages/Event/conformed';
 /* apollo client part */
 import { ApolloClient } from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
@@ -99,6 +102,9 @@ const App: React.FC = (props) => {
                 <Route path="/account_setting/security" component={SecuritySetting} exact={true} />
                 <Route path="/account_setting/security/password" component={Password} />
                 
+                <Route path="/events" component={Events} exact={true} />
+                <Route path="/conformed" component={Conformed} exact={true} />
+
                 <Route path="/mycontacts" component={myAccount} exact={true} />
                 <Route path="/no_contacts" component={noContacts} exact={true} />
                 <Route path="/search_overview" component={searchOverview} exact={true} />
