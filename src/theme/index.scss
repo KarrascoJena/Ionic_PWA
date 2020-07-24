@@ -70,8 +70,20 @@
     height: 45px !important;
 }
 
+ion-item {
+  --padding-start: 0px;
+}
+
 ion-toolbar {
     --background: #FBFAFA;
+}
+
+.ion-grey-light-background {
+  --background: #FBFAFA;
+}
+
+.grey-light-background {
+  background-color: $color_grey_light;
 }
 
 .slide-in-right {
@@ -203,6 +215,23 @@ ion-toolbar {
   --border-radius: 4px;
   --background: red;
   --background-activated: rgb(229, 147, 147);
+}
+
+.display-flex {
+  display: flex;
+}
+
+.width-50 {
+  width: 50%;
+}
+
+.info-circle-icon-button {
+  height: 30px;
+  width: 40px;
+}
+
+.font-size-25 {
+  font-size: 25px;
 }
 
 .circle-icon {

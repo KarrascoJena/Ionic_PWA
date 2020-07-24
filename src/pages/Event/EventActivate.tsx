@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import { IonPage, IonContent, IonInput, IonButton, IonLabel } from '@ionic/react';
 
-const Body: React.FC<{ history:any; }> = (props) => { 
+const EventActivate: React.FC<{ history:any; }> = (props) => { 
 
   const [state, setState] = useState({
     validationCode: '',
@@ -197,4 +197,4 @@ const Valid : React.FC<ValidProps> = (props) => {
   );
 }
 
-export default Body;
+export default EventActivate;

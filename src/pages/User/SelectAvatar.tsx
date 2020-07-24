@@ -36,7 +36,7 @@ const SelectAvartar: React.FC = (props) => {
   return (
     <IonPage>
       <IonHeader>
-      <IonToolbar className="padding-header">
+        <IonToolbar className="padding-header">
           <IonButtons slot="start">
             <IonButton onClick={(e) => gotoBack(e, props)} className="cancel-button">Cancel</IonButton>
           </IonButtons>

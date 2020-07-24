@@ -8,7 +8,8 @@ const Personal_Matches = [
   {
     icon: 'fal fa-book-heart',
     title: 'Available',
-    text: 'experiences are waiting for you'
+    text: 'experiences are waiting for you',
+    url: 'events_list'
   },
   {
     icon: 'fal fa-shopping-cart',
@@ -31,7 +32,7 @@ const Experiences: React.FC<{history}> = (props) => {
 
   const PersonalList = Personal_Matches.map((item, index) => {
     return (
-      <IonRow key={index} className="background-grey-light margin-top-10 width-100 ">
+      <IonItem key={index} button onClick={(e) => {props.history.push(item.url)}} className="ion-grey-light-background margin-top-10"  lines="none">
         <IonCol size="3">
           <div>
             <span className="circle-icon large-icon">
@@ -43,7 +44,7 @@ const Experiences: React.FC<{history}> = (props) => {
           <div className="title">{item.title}</div>
           <div className="text">{item.text}</div>
         </IonCol>
-      </IonRow>
+      </IonItem>
     );
   })
 
