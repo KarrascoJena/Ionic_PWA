@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import { IonPage, IonContent, IonButton, IonLabel } from '@ionic/react';
 
-const Conformed : React.FC<{history: any}> = (props) => {
+const Confirmed : React.FC<{history: any}> = (props) => {
   return (
     <IonPage>
       <div className="header_brand_image justify-content-center">
@@ -36,4 +36,4 @@ const Conformed : React.FC<{history: any}> = (props) => {
   );
 }
 
-export default Conformed
+export default Confirmed

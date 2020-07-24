@@ -26,7 +26,7 @@ import EmailAndSMS from './pages/Setting/Notifications/EmailAndSMS';
 import Password from './pages/Setting/Security/Password';
 
 import EventActivate from './pages/Event/EventActivate';
-import Conformed from './pages/Event/Conformed';
+import Confirmed from './pages/Event/Confirmed';
 import Events from './pages/Event/EventsList';
 import EventDetail from './pages/Event/EventDetail';
 import EventBook from './pages/Event/EventBook';
@@ -109,7 +109,7 @@ const App: React.FC = (props) => {
                 <Route path="/event_detail" component={EventDetail} exact={true} />
                 <Route path="/event_book" component={EventBook} exact={true} />
                 <Route path="/events_activate" component={EventActivate} exact={true} />
-                <Route path="/conformed" component={Conformed} exact={true} />
+                <Route path="/conformed" component={Confirmed} exact={true} />
 
                 <Route path="/mycontacts" component={myAccount} exact={true} />
                 <Route path="/no_contacts" component={noContacts} exact={true} />
