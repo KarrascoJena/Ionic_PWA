@@ -188,9 +188,10 @@ const Valid : React.FC<ValidProps> = (props) => {
           <div className="truble-login-margin">
             <p className="btn-separator truble-login-margin"><span>OR</span></p>
           </div>
-          <div className="truble-login-margin">
+          <div>
             <IonButton fill="clear" color="dark" size="small" onClick={(e)=> {}}><span className="title-sub text-transform-none">Back to Activation</span></IonButton>
           </div>
+          <IonButton fill="clear" color="dark" size="small" onClick={(e)=> {props.history.push('go')}}><span className="title-sub text-transform-none">event_activate</span></IonButton>
         </div>
       </IonContent>
     </Fragment>

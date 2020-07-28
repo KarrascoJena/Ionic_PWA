@@ -6,7 +6,7 @@ import { IonReactRouter } from '@ionic/react-router';
 import getStart from './pages/GetStart/GetStart';
 import setting from './pages/Setting/Setting';
 import noContacts from './pages/Contact/NoContact';
-import AccountSetting from './pages/Setting/AccountSetting';
+import accountSetting from './pages/Setting/AccountSetting';
 import searchOverview from './pages/Search/Search';
 import contactDetail from './pages/Contact/ContactDetail';
 import selectAvatar from './pages/User/SelectAvatar';
@@ -15,21 +15,22 @@ import discover from './pages/User/Discover';
 import editProfile from './pages/User/EditProfile';
 import myAccount from './pages/Contact/MyContacts';
 import matchs from './pages/Matchs/matchs';
-import experiences from './pages/Experiences/experiences';
+import experiences from './pages/Experiences/Experiences';
+import addGift from './pages/Experiences/AddGift';
 import login from './pages/Auth/Login';
 import logout from './pages/Auth/Logout';
 import signUp from './pages/Auth/Signup';
 import passwordForgotten from './pages/Auth/PasswordForgotten';
-import Notifications from './pages/Setting/Notifications/Notifications'
-import SecuritySetting from './pages/Setting/Security/Security'
-import EmailAndSMS from './pages/Setting/Notifications/EmailAndSMS';
-import Password from './pages/Setting/Security/Password';
+import notifications from './pages/Setting/Notifications/Notifications'
+import securitySetting from './pages/Setting/Security/Security'
+import emailAndSMS from './pages/Setting/Notifications/EmailAndSMS';
+import password from './pages/Setting/Security/Password';
 
-import EventActivate from './pages/Event/EventActivate';
-import Confirmed from './pages/Event/Confirmed';
-import Events from './pages/Event/EventsList';
-import EventDetail from './pages/Event/EventDetail';
-import EventBook from './pages/Event/EventBook';
+import eventActivate from './pages/Event/EventActivate';
+import confirmed from './pages/Event/Confirmed';
+import events from './pages/Event/EventsList';
+import eventDetail from './pages/Event/EventDetail';
+import eventBook from './pages/Event/EventBook';
 /* apollo client part */
 import { ApolloClient } from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
@@ -99,17 +100,17 @@ const App: React.FC = (props) => {
                 <Route path="/getstart" component={getStart} exact={true} />
                 <Route path="/setting" component={setting} exact={true} />
 
-                <Route path="/account_setting" component={AccountSetting} exact={true} />
-                <Route path="/account_setting/notifications" component={Notifications} exact={true} />
-                <Route path="/account_setting/notifications/emailandsms" component={EmailAndSMS} exact={true}/>
-                <Route path="/account_setting/security" component={SecuritySetting} exact={true} />
-                <Route path="/account_setting/security/password" component={Password} />
+                <Route path="/account_setting" component={accountSetting} exact={true} />
+                <Route path="/account_setting/notifications" component={notifications} exact={true} />
+                <Route path="/account_setting/notifications/emailandsms" component={emailAndSMS} exact={true}/>
+                <Route path="/account_setting/security" component={securitySetting} exact={true} />
+                <Route path="/account_setting/security/password" component={password} />
                 
-                <Route path="/events_list" component={Events} exact={true} />
-                <Route path="/event_detail" component={EventDetail} exact={true} />
-                <Route path="/event_book" component={EventBook} exact={true} />
-                <Route path="/events_activate" component={EventActivate} exact={true} />
-                <Route path="/conformed" component={Confirmed} exact={true} />
+                <Route path="/events_list" component={events} exact={true} />
+                <Route path="/event_detail" component={eventDetail} exact={true} />
+                <Route path="/event_book" component={eventBook} exact={true} />
+                <Route path="/events_activate" component={eventActivate} exact={true} />
+                <Route path="/conformed" component={confirmed} exact={true} />
 
                 <Route path="/mycontacts" component={myAccount} exact={true} />
                 <Route path="/no_contacts" component={noContacts} exact={true} />
@@ -121,6 +122,7 @@ const App: React.FC = (props) => {
                 <Route path="/discover" component={discover} exact={true} />
                 <Route path="/matches" component={matchs} exact={true} />
                 <Route path="/experiences" component={experiences} exact={true} />
+                <Route path="/add_gift" component={addGift} exact={true} />
                 <Route path="/implicit/callback" component={LoginCallback} exact />
                 <Route path="/" render={() => <Redirect to="/getstart" />} exact={true} />
                 <Route component={getStart} />

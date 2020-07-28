@@ -58,10 +58,20 @@ const EventDetail: React.FC<{ history:any; location: any;}> = (props) => {
             
           </div>
           {data.status == 1 ?
-                <IonButton onClick={() => {props.history.push('event_book')}} className="red-button width-50">Book Now</IonButton>
-                :
-                <IonButton onClick={() => {}} className="red-button width-50">Cancel</IonButton>
-              }
+            <>
+              <IonButton onClick={() => {props.history.push('event_book')}} className="red-button width-50">Book Now</IonButton>
+              <div className="text-align-center">
+                <IonButton fill="clear" color="secondary" size="small" onClick={() => {}}><IonLabel className="title-sub" color="primary">Convert</IonLabel></IonButton>
+              </div>
+            </>
+            :
+            <>
+              <IonButton onClick={() => {}} className="red-button width-50">Cancel</IonButton>
+              <div className="text-align-center">
+                <IonButton fill="clear" color="secondary" size="small" onClick={() => {}}><IonLabel className="title-sub" color="primary">Change Request</IonLabel></IonButton>
+              </div>
+            </>
+          }
         </div>
       </IonContent>
     </IonPage>
