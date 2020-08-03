@@ -1,14 +1,18 @@
 
 import React from 'react';
 import LoginForm from './LoginForm';
-import { useOktaAuth } from '@okta/okta-react';
+import { useDispatch } from "react-redux";
+import { RootDispatcher } from "../../store/root-reducer";
+interface Props {
+  history: any
+}
 
-const Login: React.FC<{ issuer }> = (props) => { 
-  const { authState, authService } = useOktaAuth();
+const Logout: React.FC<Props> = (props) => { 
+  const dispatch = useDispatch();
+  const rootDispatcher = new RootDispatcher(dispatch);
+  rootDispatcher.logout();
 
-  return authState.isAuthenticated ?
-    authService.logout('/') :
-    <LoginForm history={props}/>;
+  return (<LoginForm history={props.history} />);
 };
 
-export default Login;
+export default Logout;

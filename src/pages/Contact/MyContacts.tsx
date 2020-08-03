@@ -1,5 +1,7 @@
 import React from 'react';
 import { IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonToast } from '@ionic/react';
+import {useDispatch, useSelector} from "react-redux";
+import {InitialState, RootDispatcher} from "../../store/root-reducer";
 
 import BottomTabBar from '../../components/bottom-tab-bar';
 
@@ -28,7 +30,12 @@ const contacts = [
   },
 ];
 
-const MyAccount: React.FC<{history}> = (props) => {
+const MyContacts: React.FC<{history}> = (props) => {
+  const isLogin = useSelector<InitialState, boolean>((state: InitialState) => {
+    return state.authorized
+  });
+
+  console.log("on Mycontact Pag ", isLogin)
 
   const contactList = contacts.map((item, index) => {
     return(
@@ -100,4 +107,4 @@ const MyAccount: React.FC<{history}> = (props) => {
   );
 };
 
-export default MyAccount;
+export default MyContacts;

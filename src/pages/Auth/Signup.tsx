@@ -1,43 +1,37 @@
 import React, { useState } from 'react';
-import OktaAuth from '@okta/okta-auth-js';
-import { useOktaAuth } from '@okta/okta-react';
 import { IonPage, IonContent, IonInput, IonButton, IonAlert, IonLabel } from '@ionic/react';
+import { useDispatch } from "react-redux";
+import { RootDispatcher } from "../../store/root-reducer";
+
 
 import './assets/scss/auth.scss';
 
 const Signup: React.FC<{ history:any; }> = (props) => { 
-  const { authService } = useOktaAuth();
-  const [sessionToken, setSessionToken] = useState();
-  const [email, setEmail] = useState();
-  const [fullname, setFullname] = useState();
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState('');
+  const [fullname, setFullname] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [alert, setAlert] = useState({
     state: false,
     header: '',
     content:''
   });
   
+  const dispatch = useDispatch();
+  const rootDispatcher = new RootDispatcher(dispatch);
+
   const handleSubmit = (e) => {
-    e.preventDefault();
-    const oktaAuth = new OktaAuth({ issuer: process.env.REACT_APP_ISSUER });
-    oktaAuth.signIn({options: {warnBeforePasswordExpired: true, multiOptionalFactorEnroll: false}, username, password })
-    .then(res => {
-      const sessionToken = res.sessionToken;
-      setSessionToken(sessionToken);
-      // sessionToken is a one-use token, so make sure this is only called once
-      authService.redirect({ sessionToken });
-      props.history.push('/mycontacts')
-    })
-    .catch((err) => {
-      if(!err.errorCode){
+
+    rootDispatcher.register(fullname, username, password, email, fullname).then(res => {
+      const status = res?.status
+      if(status == 401){
         setAlert({state: true, header: 'server is not working', content: 'try again later'})
-      } else if (err.errorCode === "E0000004"){
-        setAlert({state: true, header: 'Authentication failed', content: 'Username and Password was wrong'})
-      } else if (err.errorCode === "E0000001"){
-        setAlert({state: true, header: 'Authentication failed', content: 'type the validate username and password'})
+      } else if (status == 400){
+        setAlert({state: true, header: 'Authentication failed', content: `${res?.data.exceptionMessage}`})
+      } else {
+        props.history.push('/login')
       }
-    });
+    })
   };
        
   const handleEmailChange = (e) => {
@@ -60,11 +54,6 @@ const Signup: React.FC<{ history:any; }> = (props) => {
    props.history.push('/login')
   }
 
-  if (sessionToken) {
-    // Hide form while sessionToken is converted into id/access tokens
-    return null;
-  }
-
   return (
     <IonPage>
       <div className="header_brand_image justify-content-center">
@@ -75,7 +64,7 @@ const Signup: React.FC<{ history:any; }> = (props) => {
           <div className="singup-header-text padding-top-20 title">
             Sign up to find experiences for your friends and you.
           </div>
-          <IonButton onClick={handleSubmit} expand="block" className="margin-top-20 signin-with-facebook red-button color-white justify-content-space-between text-transform-none">
+          <IonButton onClick={()=>{}} expand="block" className="margin-top-20 signin-with-facebook red-button color-white justify-content-space-between text-transform-none">
           <span className="facebook-icon-size">
             <i className="fab fa-facebook-square"></i>
           </span>

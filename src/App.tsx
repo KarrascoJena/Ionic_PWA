@@ -3,6 +3,9 @@ import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 
+import { useSelector } from "react-redux";
+import { InitialState } from "./store/root-reducer";
+
 import getStart from './pages/GetStart/GetStart';
 import setting from './pages/Setting/Setting';
 import noContacts from './pages/Contact/NoContact';
@@ -13,7 +16,7 @@ import selectAvatar from './pages/User/SelectAvatar';
 import discoverVote from './pages/User/DiscoverVote';
 import discover from './pages/User/Discover';
 import editProfile from './pages/User/EditProfile';
-import myAccount from './pages/Contact/MyContacts';
+import myContacts from './pages/Contact/MyContacts';
 import matchs from './pages/Matchs/matchs';
 import experiences from './pages/Experiences/Experiences';
 import addGift from './pages/Experiences/AddGift';
@@ -31,15 +34,6 @@ import confirmed from './pages/Event/Confirmed';
 import events from './pages/Event/EventsList';
 import eventDetail from './pages/Event/EventDetail';
 import eventBook from './pages/Event/EventBook';
-/* apollo client part */
-import { ApolloClient } from 'apollo-boost';
-import { ApolloProvider } from '@apollo/react-hooks';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { WebSocketLink } from 'apollo-link-ws';
-import config from './config';
-
-/* okta auth part */
-import { Security, LoginCallback } from '@okta/okta-react';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -62,75 +56,50 @@ import './theme/variables.css';
 import './theme/index.scss';
 
 
-
-const cache = new InMemoryCache();
-
-const client = new ApolloClient({
-  link: new WebSocketLink({
-    uri: 'wss:experiencehasura.herokuapp.com/v1/graphql',
-    options: {
-      reconnect: true,
-      connectionParams: {
-        headers: {
-          //Authorization: `Bearer ${authToken}`
-          "x-hasura-access-key": "f23aee34c10c1abda86bcb1321c398f2553923f461e5abd2ce704179723cc4ff",
-          "x-hasura-role": "client-app",
-        }
-      }
-    }
-  }),
-  cache: cache
-});
-
-
-
 const App: React.FC = (props) => {
+  const isLogin = useSelector<InitialState, boolean>((state: InitialState) => {
+    return state.authorized
+  });
 
-  const customAuthHandler = (props) => {props.history.push('/login')}
   return (
-    <ApolloProvider client={client}>
-      <IonApp>
-        <Security {...config.okta} onAuthRequired={customAuthHandler}>
-          <IonReactRouter>
-              <IonRouterOutlet>
-                <Route path="/login" component={login} exact={true} />
-                <Route path="/register" component={signUp} exact={true} />
-                <Route path="/password_forgotten" component={passwordForgotten} exact={true} />
-                <Route path="/logout"  component={logout} exact={true} />
-                <Route path="/getstart" component={getStart} exact={true} />
-                <Route path="/setting" component={setting} exact={true} />
+    <IonApp>
+      <IonReactRouter>
+        <IonRouterOutlet>
+          <Route component={getStart} />
+          <Route path="/login" component={login} exact={true} />
+          <Route path="/register" component={signUp} exact={true} />
+          <Route path="/password_forgotten" component={passwordForgotten} exact={true} />
+          <Route path="/logout"  component={logout} exact={true} />
+          <Route path="/getstart" component={getStart} exact={true} />
+          <Route path="/setting" component={setting} exact={true} />
 
-                <Route path="/account_setting" component={accountSetting} exact={true} />
-                <Route path="/account_setting/notifications" component={notifications} exact={true} />
-                <Route path="/account_setting/notifications/emailandsms" component={emailAndSMS} exact={true}/>
-                <Route path="/account_setting/security" component={securitySetting} exact={true} />
-                <Route path="/account_setting/security/password" component={password} />
-                
-                <Route path="/events_list" component={events} exact={true} />
-                <Route path="/event_detail" component={eventDetail} exact={true} />
-                <Route path="/event_book" component={eventBook} exact={true} />
-                <Route path="/events_activate" component={eventActivate} exact={true} />
-                <Route path="/conformed" component={confirmed} exact={true} />
+          <Route path="/account_setting" component={isLogin ? accountSetting : login} exact={true} />
+          <Route path="/account_setting/notifications" component={isLogin ? notifications : login} exact={true} />
+          <Route path="/account_setting/notifications/emailandsms" component={isLogin ? emailAndSMS : login} exact={true}/>
+          <Route path="/account_setting/security" component={isLogin ? securitySetting : login} exact={true} />
+          <Route path="/account_setting/security/password" component={isLogin ? password : login} />
+          
+          <Route path="/events_list" component={isLogin ? login : login} exact={true} />
+          <Route path="/event_detail" component={isLogin ? login : login} exact={true} />
+          <Route path="/event_book" component={isLogin ? login : login} exact={true} />
+          <Route path="/events_activate" component={isLogin ? eventActivate : login} exact={true} />
+          <Route path="/conformed" component={isLogin ? confirmed : login} exact={true} />
 
-                <Route path="/mycontacts" component={myAccount} exact={true} />
-                <Route path="/no_contacts" component={noContacts} exact={true} />
-                <Route path="/search_overview" component={searchOverview} exact={true} />
-                <Route path="/editprofile" component={editProfile} exact={true} />
-                <Route path="/contactdetail" component={contactDetail} exact={true} />
-                <Route path="/selectavatar" component={selectAvatar} exact={true} />
-                <Route path="/discovervote" component={discoverVote} exact={true} />
-                <Route path="/discover" component={discover} exact={true} />
-                <Route path="/matches" component={matchs} exact={true} />
-                <Route path="/experiences" component={experiences} exact={true} />
-                <Route path="/add_gift" component={addGift} exact={true} />
-                <Route path="/implicit/callback" component={LoginCallback} exact />
-                <Route path="/" render={() => <Redirect to="/getstart" />} exact={true} />
-                <Route component={getStart} />
-              </IonRouterOutlet>
-          </IonReactRouter>
-        </Security>
-      </IonApp>
-    </ApolloProvider>
+          <Route path="/mycontacts" component={isLogin ? myContacts : login} exact={true} />
+          <Route path="/no_contacts" component={isLogin ? noContacts : login} exact={true} />
+          <Route path="/search_overview" component={isLogin ? searchOverview : login} exact={true} />
+          <Route path="/editprofile" component={isLogin ? editProfile : login} exact={true} />
+          <Route path="/contactdetail" component={isLogin ? contactDetail : login} exact={true} />
+          <Route path="/selectavatar" component={isLogin ? selectAvatar : login} exact={true} />
+          <Route path="/discovervote" component={isLogin ? discoverVote : login} exact={true} />
+          <Route path="/discover" component={isLogin ? discover : login} exact={true} />
+          <Route path="/matches" component={isLogin ? matchs : login} exact={true} />
+          <Route path="/experiences" component={isLogin ? experiences : login} exact={true} />
+          <Route path="/add_gift" component={isLogin ? addGift : login} exact={true} />
+          <Route path="/" render={() => <Redirect to="/getstart" />} exact={true} />
+        </IonRouterOutlet>
+      </IonReactRouter>
+    </IonApp>
   );
 }
 export default App;

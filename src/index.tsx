@@ -4,12 +4,16 @@ import App from './App';
 import { defineCustomElements } from '@ionic/pwa-elements/loader';
 import * as serviceWorker from './serviceWorker';
 import './i18next';
+import { Provider } from 'react-redux';
+import { store } from './store/index';
 
 defineCustomElements(window);
 
 ReactDOM.render(
   <Suspense fallback={(<div>Loading ~~~</div>)}>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </Suspense>
   , document.getElementById('root'));
 

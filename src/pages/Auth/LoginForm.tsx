@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import OktaAuth from '@okta/okta-auth-js';
-import { useOktaAuth } from '@okta/okta-react';
 import { IonPage, IonInput, IonButton, IonTabBar,  IonAlert, IonTabButton, IonLabel, IonContent } from '@ionic/react';
-import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import { RootDispatcher } from "../../store/root-reducer";
 
 import './assets/scss/auth.scss';
 
-const LoginForm: React.FC<{ history:any; }> = (props) => { 
-  const { authService } = useOktaAuth();
-  const [sessionToken, setSessionToken] = useState();
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
+interface Props {
+  history: any
+}
+
+const LoginForm: React.FC<Props> = (props) => { 
+  const [email, setEmail] = useState<string>('manuel.schwarz@live.at');
+  const [password, setPassword] = useState<string>('Password1234!');
   const [alert, setAlert] = useState({
     state: false,
     header: '',
@@ -20,30 +22,26 @@ const LoginForm: React.FC<{ history:any; }> = (props) => {
   let history = useHistory()
 
 
+  const dispatch = useDispatch();
+  const rootDispatcher = new RootDispatcher(dispatch);
+
+
   const handleSubmit = (e) => {
-    e.preventDefault();
-    const oktaAuth = new OktaAuth({ issuer: process.env.REACT_APP_ISSUER });
-    oktaAuth.signIn({options: {warnBeforePasswordExpired: true, multiOptionalFactorEnroll: false}, username, password })
-    .then(res => {
-      const sessionToken = res.sessionToken;
-      setSessionToken(sessionToken);
-      // sessionToken is a one-use token, so make sure this is only called once
-      authService.redirect({ sessionToken });
-      props.history.push('/mycontacts')
-    })
-    .catch((err) => {
-      if(!err.errorCode){
+
+    rootDispatcher.login(email, password).then(res => {
+      const status = res?.status
+      if(status == 401){
         setAlert({state: true, header: 'server is not working', content: 'try again later'})
-      } else if (err.errorCode === "E0000004"){
-        setAlert({state: true, header: 'Authentication failed', content: 'Username and Password was wrong'})
-      } else if (err.errorCode === "E0000001"){
-        setAlert({state: true, header: 'Authentication failed', content: 'type the validate username and password'})
+      } else if (status == 400){
+        setAlert({state: true, header: 'Authentication failed', content: `${res?.data.exceptionMessage}`})
+      } else {
+        history.push('/mycontacts')
       }
-    });
+    })
   };     
 
   const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
+    setEmail(e.target.value)
   };
 
   const handlePasswordChange = (e) => {
@@ -58,11 +56,6 @@ const LoginForm: React.FC<{ history:any; }> = (props) => {
     history.push('/password_forgotten')
   }
 
-  if (sessionToken) {
-    // Hide form while sessionToken is converted into id/access tokens
-    return null;
-  }
-
   return (
     <IonPage>
       <div>
@@ -73,7 +66,7 @@ const LoginForm: React.FC<{ history:any; }> = (props) => {
       <IonContent>
         <div className="landing-container margin-top-20">
           <div className="bordered-text-input margin-top-20 text-align-left text-box">
-            <IonInput value={username} onIonChange={handleUsernameChange} placeholder = "Username or email" />
+            <IonInput value={email} onIonChange={handleUsernameChange} placeholder = "Username or email" />
           </div>
           <div className="bordered-text-input margin-top-20 text-align-left text-box">
             <IonInput value={password} type="password" onIonChange={handlePasswordChange} placeholder = "Password" />

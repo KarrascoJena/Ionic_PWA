@@ -2,17 +2,19 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import LoginForm from './LoginForm';
-import { useOktaAuth } from '@okta/okta-react';
+import { useSelector } from "react-redux";
+import { InitialState } from "../../store/root-reducer";
+
 
 const Login: React.FC<{ issuer }> = (props) => { 
-  const { authState } = useOktaAuth();
+  const isLogin = useSelector<InitialState, boolean>((state: InitialState) => {
+    return state.authorized
+  });
 
-  if (authState.isPending) { 
-    return <div>Loading...</div>;
-  }
-  return authState.isAuthenticated ?
-    <Redirect to={{ pathname: '/mycontacts' }}/> :
-    <LoginForm history={props}/>;
+  if(isLogin) return <Redirect to="/mycontacts" />
+  return (
+    <LoginForm history={props}/>
+  )
 };
 
 export default Login;

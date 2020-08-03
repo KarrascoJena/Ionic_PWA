@@ -1,19 +1,34 @@
 import React, { useState } from 'react';
 import { IonPage, IonContent, IonInput, IonButton, IonAlert, IonLabel } from '@ionic/react';
+import { useDispatch } from "react-redux";
+import { RootDispatcher } from "../../store/root-reducer";
 
 import './assets/scss/auth.scss';
 import './assets/scss/passwordForgotten.scss';
 
 const PasswordForgotten: React.FC<{ history:any; }> = (props) => { 
-  const [email, setEmail] = useState();
+  const [email, setEmail] = useState('');
   const [alert, setAlert] = useState({
     state: false,
     header: '',
     content:''
   });
   
+  const dispatch = useDispatch();
+  const rootDispatcher = new RootDispatcher(dispatch);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    rootDispatcher.forgetPassword(email).then(res => {
+      const status = res?.status
+      if(status == 401){
+        setAlert({state: true, header: 'server is not working', content: 'try again later'})
+      } else if (status == 400){
+        setAlert({state: true, header: 'Authentication failed', content: `${res?.data.exceptionMessage}`})
+      } else {
+        setAlert({state: true, header: 'Authentication failed', content: `Email sent to ${email}. Please check your inbox`})
+      }
+    })
   };     
 
   const handleEmailChange = (e) => {
