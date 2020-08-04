@@ -16,7 +16,6 @@ const EventActivate: React.FC<{ history:any; }> = (props) => {
   const handleValidationCodeSubmit = (e) => {
     e.preventDefault();
     if(state.validationCode == "12345"){
-      console.log(e.target.value)
       setStep({...step, validate: true, current: 1})
     } else {
       setStep({...step, validate: false})

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonToast } from '@ionic/react';
-import {useDispatch, useSelector} from "react-redux";
-import {InitialState, RootDispatcher} from "../../store/root-reducer";
+import { useDispatch } from "react-redux";
+import { RootDispatcher } from "../../store/root-reducer";
 
 import BottomTabBar from '../../components/bottom-tab-bar';
 
@@ -21,26 +21,28 @@ const gotoContactDetail = (e, props) => {
   props.history.push('/contactdetail');
 }
 
-const contacts = [
-  {
-    img: 'https://experiencecontent.blob.core.windows.net/user/2fb1c8e4-42a4-43a6-a337-b8cc52c83d3f/profile.jpg',
-  },
-  {
-    img: './assets/imgs/profile1.jpg',
-  },
-];
+interface contactsType{
+  id: string, fullname: string, image: string
+}
 
 const MyContacts: React.FC<{history}> = (props) => {
-  const isLogin = useSelector<InitialState, boolean>((state: InitialState) => {
-    return state.authorized
-  });
 
-  console.log("on Mycontact Pag ", isLogin)
+  const [contacts, setContacts] = useState<Array<contactsType>>([])
+  const dispatch = useDispatch();
+  const rootDispatcher = new RootDispatcher(dispatch);
+  
+  useEffect(() => {
+    rootDispatcher.getContacts().then( res => {
+      setContacts(res?.data.contacts)
+    })
+    return () => {
+    }
+  }, [])
 
   const contactList = contacts.map((item, index) => {
     return(
       <IonCol onClick={(e) => gotoContactDetail(e, props)} size="4" className="grid-img height-140" key={index}>
-        <img className="img-auto card-effect object-fit-cover" src={item.img} alt=""/>
+        <img className="img-auto card-effect object-fit-cover" src={item.image ? item.image : './assets/imgs/default_contact_avatar.png'} alt=""/>
         <div className="grid-img-button bottom-circle-icon box-shadow-full-screen">
           <span className="pencil-icon ">
             <i className="fal fa-pencil-alt"></i>
@@ -49,6 +51,7 @@ const MyContacts: React.FC<{history}> = (props) => {
       </IonCol>
     );
   });
+
   const initCard = (key) => {
     return(
       <IonCol size="4" className="grid-img height-140" key={key}>

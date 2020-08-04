@@ -1,4 +1,4 @@
-import {DispatchAction, InitialState, rootReducer} from "./root-reducer";
+import {rootReducer} from "./root-reducer";
 import {createStore} from "redux";
 
 

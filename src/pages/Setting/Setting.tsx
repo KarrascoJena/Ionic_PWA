@@ -7,7 +7,7 @@ import './assets/scss/Setting.scss'
 
 
 const GetStart: React.FC<{history}> = (props) => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   
   const onChangeLanguage = (e) => {
     i18n.changeLanguage(e.target.value)
@@ -33,8 +33,8 @@ const GetStart: React.FC<{history}> = (props) => {
           <IonRow>
             <IonCol size="5" className="select">
               <IonSelect value={i18n.language} onIonChange={(e) => {onChangeLanguage(e)}} interface="popover" className="ion-select-custom relation-ship-width">
-                <IonSelectOption value="en">English</IonSelectOption>
-                <IonSelectOption value="ge">Germany</IonSelectOption>
+                <IonSelectOption value="en">{t('general.english')}</IonSelectOption>
+                <IonSelectOption value="ge">{t('general.german')}</IonSelectOption>
               </IonSelect>
             </IonCol>
           </IonRow>

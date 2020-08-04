@@ -19,6 +19,15 @@ export const initialState: InitialState = {
   userInfo: {}
 };
 
+const format: InitialState = {
+  authorized: false,
+  username: '123',
+  address: '',
+  email: 'manuel.schwarz@live.at',
+  password: 'Password1234!',
+  userInfo: {}
+}
+
 export interface DispatchAction extends Action {
   payload: Partial<InitialState>;
 }
@@ -46,12 +55,10 @@ export const rootReducer: Reducer<InitialState, DispatchAction> = (state = initi
 
     return {...state, username: action.payload.username || ''};
   } else if (action.type === ActionType.Login) {
-    state.authorized = true
-    state.userInfo = {...action.payload.userInfo}
-    return state
+    return { ...state, authorized: true, userInfo: {...action.payload.userInfo}}
   } else if (action.type === ActionType.Logout) {
-    state = initialState
-    return state
+    localStorage.removeItem('state');
+    return {...state, authorized: false};
   }
   else {
     return state;
@@ -71,7 +78,7 @@ export class RootDispatcher {
   
   deleteName = () => this.dispatch({type: ActionType.DeleteName, payload: {}});
 
-  deleteAddress = () => this.dispatch({type: ActionType.DeleteAddress, payload: {}});
+  deleteAddress = () => this.dispatch({type: ActionType.DeleteAddress, payload: {authorized: false}});
 
   login = async (email: string, password: string) => {
     return API.login(email, password).then(res => {
@@ -89,4 +96,8 @@ export class RootDispatcher {
   forgetPassword = async (email: string) => {
     return API.forgetPassword(email)
   };
+
+  getContacts = async () => {
+    return API.getContacts()
+  }
 }

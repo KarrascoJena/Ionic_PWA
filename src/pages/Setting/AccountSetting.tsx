@@ -5,6 +5,8 @@ import { IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBu
 import BottomTabBar from '../../components/bottom-tab-bar';
 // import Notifications from './Notifications/Notifications'
 // import Security from './Security/Security'
+import { useDispatch } from "react-redux";
+import { RootDispatcher } from "../../store/root-reducer";
 
 import './assets/scss/AccountSetting.scss';
 
@@ -41,8 +43,11 @@ const settings = [
 
 
 const SettingIndex: React.FC<{history}> = (props) => {
+
   let { path } = useRouteMatch();
-  
+  const dispatch = useDispatch();
+  const rootDispatcher = new RootDispatcher(dispatch);
+
   const settingList = settings.map((item, i) => {
     return (
       <IonItem button onClick={(e) => {props.history.push(path + item.url)}} lines="none"  className="ion-react-nav-detail-btn" key={i}>
@@ -70,7 +75,7 @@ const SettingIndex: React.FC<{history}> = (props) => {
           {settingList}
         </IonList>
         <hr className="seperator-hr"/>
-        <IonButton fill="clear" onClick={(e) => {props.history.goBack()}} className="link-main text-transform-none">Sign Out</IonButton>
+        <IonButton fill="clear" onClick={(e) => {rootDispatcher.logout()}} className="link-main text-transform-none">Sign Out</IonButton>
         <div className="account-setting-version text">
           <IonLabel>Version 1.0</IonLabel>
         </div>

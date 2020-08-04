@@ -21,7 +21,6 @@ import matchs from './pages/Matchs/matchs';
 import experiences from './pages/Experiences/Experiences';
 import addGift from './pages/Experiences/AddGift';
 import login from './pages/Auth/Login';
-import logout from './pages/Auth/Logout';
 import signUp from './pages/Auth/Signup';
 import passwordForgotten from './pages/Auth/PasswordForgotten';
 import notifications from './pages/Setting/Notifications/Notifications'
@@ -60,7 +59,6 @@ const App: React.FC = (props) => {
   const isLogin = useSelector<InitialState, boolean>((state: InitialState) => {
     return state.authorized
   });
-
   return (
     <IonApp>
       <IonReactRouter>
@@ -69,37 +67,45 @@ const App: React.FC = (props) => {
           <Route path="/login" component={login} exact={true} />
           <Route path="/register" component={signUp} exact={true} />
           <Route path="/password_forgotten" component={passwordForgotten} exact={true} />
-          <Route path="/logout"  component={logout} exact={true} />
           <Route path="/getstart" component={getStart} exact={true} />
           <Route path="/setting" component={setting} exact={true} />
 
-          <Route path="/account_setting" component={isLogin ? accountSetting : login} exact={true} />
-          <Route path="/account_setting/notifications" component={isLogin ? notifications : login} exact={true} />
-          <Route path="/account_setting/notifications/emailandsms" component={isLogin ? emailAndSMS : login} exact={true}/>
-          <Route path="/account_setting/security" component={isLogin ? securitySetting : login} exact={true} />
-          <Route path="/account_setting/security/password" component={isLogin ? password : login} />
-          
-          <Route path="/events_list" component={isLogin ? login : login} exact={true} />
-          <Route path="/event_detail" component={isLogin ? login : login} exact={true} />
-          <Route path="/event_book" component={isLogin ? login : login} exact={true} />
-          <Route path="/events_activate" component={isLogin ? eventActivate : login} exact={true} />
-          <Route path="/conformed" component={isLogin ? confirmed : login} exact={true} />
+          <Route path="/account_setting" component={isLogin ? accountSetting : redirectToLogin} exact={true} />
 
-          <Route path="/mycontacts" component={isLogin ? myContacts : login} exact={true} />
-          <Route path="/no_contacts" component={isLogin ? noContacts : login} exact={true} />
-          <Route path="/search_overview" component={isLogin ? searchOverview : login} exact={true} />
-          <Route path="/editprofile" component={isLogin ? editProfile : login} exact={true} />
-          <Route path="/contactdetail" component={isLogin ? contactDetail : login} exact={true} />
-          <Route path="/selectavatar" component={isLogin ? selectAvatar : login} exact={true} />
-          <Route path="/discovervote" component={isLogin ? discoverVote : login} exact={true} />
-          <Route path="/discover" component={isLogin ? discover : login} exact={true} />
-          <Route path="/matches" component={isLogin ? matchs : login} exact={true} />
-          <Route path="/experiences" component={isLogin ? experiences : login} exact={true} />
-          <Route path="/add_gift" component={isLogin ? addGift : login} exact={true} />
+          <Route path="/account_setting/notifications" component={isLogin ? notifications : redirectToLogin} exact={true} />
+          <Route path="/account_setting/notifications/emailandsms" component={isLogin ? emailAndSMS : redirectToLogin} exact={true}/>
+          <Route path="/account_setting/security" component={isLogin ? securitySetting : redirectToLogin} exact={true} />
+          <Route path="/account_setting/security/password" component={isLogin ? password : redirectToLogin} />
+          
+          <Route path="/events_list" component={isLogin ? events : redirectToLogin} exact={true} />
+          <Route path="/event_detail" component={isLogin ? eventDetail : redirectToLogin} exact={true} />
+          <Route path="/event_book" component={isLogin ? eventBook : redirectToLogin} exact={true} />
+          <Route path="/events_activate" component={isLogin ? eventActivate : redirectToLogin} exact={true} />
+          <Route path="/conformed" component={isLogin ? confirmed : redirectToLogin} exact={true} />
+
+          <Route path="/mycontacts" component={isLogin ? myContacts : redirectToLogin} exact={true} />
+
+          <Route path="/no_contacts" component={isLogin ? noContacts : redirectToLogin} exact={true} />
+          <Route path="/search_overview" component={isLogin ? searchOverview : redirectToLogin} exact={true} />
+          <Route path="/editprofile" component={isLogin ? editProfile : redirectToLogin} exact={true} />
+          <Route path="/contactdetail" component={isLogin ? contactDetail : redirectToLogin} exact={true} />
+          <Route path="/selectavatar" component={isLogin ? selectAvatar : redirectToLogin} exact={true} />
+          <Route path="/discovervote" component={isLogin ? discoverVote : redirectToLogin} exact={true} />
+          <Route path="/discover" component={isLogin ? discover : redirectToLogin} exact={true} />
+          <Route path="/matches" component={isLogin ? matchs : redirectToLogin} exact={true} />
+          <Route path="/experiences" component={isLogin ? experiences : redirectToLogin} exact={true} />
+          <Route path="/add_gift" component={isLogin ? addGift : redirectToLogin} exact={true} />
           <Route path="/" render={() => <Redirect to="/getstart" />} exact={true} />
         </IonRouterOutlet>
       </IonReactRouter>
     </IonApp>
+  );
+}
+
+
+const redirectToLogin: React.FC = (props) => {
+  return(
+    <Redirect to="login" />
   );
 }
 export default App;

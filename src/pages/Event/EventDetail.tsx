@@ -3,7 +3,6 @@ import { IonPage, IonContent, IonBadge, IonButton, IonLabel, IonHeader, IonToolb
 
 const EventDetail: React.FC<{ history:any; location: any;}> = (props) => { 
   const data = props.location.state;
-  console.log(data)
   return (
     <IonPage>
       <IonHeader>

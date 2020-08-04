@@ -8,5 +8,10 @@
     "1": "I'm Sticky Footer Menu that everyone requested, packed with tons of awesome features.",
     "2": "Sticky Mobile is very fast, easy to use and looks absolutely amazing.",
     "3": "StickyMobile allows you to easily change your background color or highlight color."
+  },
+  "general": {
+    "language": "Language",
+    "german": "German",
+    "english": "English"
   }
 }

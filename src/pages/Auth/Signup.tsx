@@ -11,12 +11,14 @@ const Signup: React.FC<{ history:any; }> = (props) => {
   const [fullname, setFullname] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  
   const [alert, setAlert] = useState({
     state: false,
     header: '',
     content:''
   });
-  
+  const [signupDisabled, setSignupDisabled] = useState<boolean>(true)
+
   const dispatch = useDispatch();
   const rootDispatcher = new RootDispatcher(dispatch);
 
@@ -29,26 +31,43 @@ const Signup: React.FC<{ history:any; }> = (props) => {
       } else if (status == 400){
         setAlert({state: true, header: 'Authentication failed', content: `${res?.data.exceptionMessage}`})
       } else {
-        props.history.push('/login')
+        rootDispatcher.login(email, password).then(res => {
+          const status = res?.status
+          if(status == 401){
+            setAlert({state: true, header: 'server is not working', content: 'try again later'})
+          } else if (status == 400){
+            setAlert({state: true, header: 'Authentication failed', content: `${res?.data.exceptionMessage}`})
+          } else {
+            props.history.push('/mycontacts')
+          }
+        })
       }
     })
   };
        
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
+    checkFilled()
   };
 
   const handleFullNameChange = (e) => {
     setFullname(e.target.value);
+    checkFilled()
   };
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
+    checkFilled()
   };
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
+    checkFilled()
   };
   
+  const checkFilled = () => {
+    if(email && fullname && username && password)
+    setSignupDisabled(false)
+  }
 
   const gotoSignIn = () => {
    props.history.push('/login')
@@ -60,7 +79,7 @@ const Signup: React.FC<{ history:any; }> = (props) => {
         <img alt="" src="./assets/imgs/brand_black.png"></img>
       </div>
       <IonContent>
-        <div className="landing-container">
+        <div className="landing-container text-align-center">
           <div className="singup-header-text padding-top-20 title">
             Sign up to find experiences for your friends and you.
           </div>
@@ -83,7 +102,7 @@ const Signup: React.FC<{ history:any; }> = (props) => {
           <div className="bordered-text-input margin-top-10 text-align-left text-box">
             <IonInput value={password} type="password" onIonChange={handlePasswordChange} placeholder = "Password" />
           </div>
-          <IonButton onClick={handleSubmit} expand="block" className="margin-top-20 red-button text-transform-none">Sign Up</IonButton>
+          <IonButton onClick={handleSubmit} disabled={signupDisabled} expand="block" className="margin-top-20 red-button text-transform-none">Sign Up</IonButton>
           <IonAlert
             isOpen={alert.state}
             onDidDismiss={() => setAlert({state: false, header: '', content: ''})}
