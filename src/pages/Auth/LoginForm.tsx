@@ -18,6 +18,7 @@ const LoginForm: React.FC<Props> = (props) => {
     header: '',
     content:''
   });
+  const [signinDisabled, setSigninDisabled] = useState<boolean>(true)
   
   let history = useHistory()
 
@@ -34,7 +35,7 @@ const LoginForm: React.FC<Props> = (props) => {
         setAlert({state: true, header: 'server is not working', content: 'try again later'})
       } else if (status == 400){
         setAlert({state: true, header: 'Authentication failed', content: `${res?.data.exceptionMessage}`})
-      } else {
+      } else if (status == 200){
         history.push('/mycontacts')
       }
     })
@@ -42,10 +43,12 @@ const LoginForm: React.FC<Props> = (props) => {
 
   const handleUsernameChange = (e) => {
     setEmail(e.target.value)
+    checkFilled()
   };
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
+    checkFilled()
   };
 
   const gotoSignUp = () => {
@@ -55,7 +58,10 @@ const LoginForm: React.FC<Props> = (props) => {
   const gotoForgottenPassword = () => {
     history.push('/password_forgotten')
   }
-
+  const checkFilled = () => {
+    if(email && password) setSigninDisabled(false)
+    else console.log("123")
+  }
   return (
     <IonPage>
       <div>
@@ -71,7 +77,7 @@ const LoginForm: React.FC<Props> = (props) => {
           <div className="bordered-text-input margin-top-20 text-align-left text-box">
             <IonInput value={password} type="password" onIonChange={handlePasswordChange} placeholder = "Password" />
           </div>
-          <IonButton onClick={handleSubmit} expand="block" className="margin-top-20 signin-button red-button text-transform-none">Sign In</IonButton>
+          <IonButton onClick={handleSubmit} disabled={signinDisabled} expand="block" className="margin-top-20 signin-button red-button text-transform-none">Sign In</IonButton>
           <IonAlert
             isOpen={alert.state}
             onDidDismiss={() => setAlert({state: false, header: '', content: ''})}

@@ -1,5 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, Fragment} from 'react';
 import { IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonToast } from '@ionic/react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { RootDispatcher } from "../../store/root-reducer";
 
@@ -17,8 +18,8 @@ const gotoEditProfile = (e, props) => {
   props.history.push('/editprofile');
 }
 
-const gotoContactDetail = (e, props) => {
-  props.history.push('/contactdetail');
+const gotoContactDetail = (e, history) => {
+  history.push('/contactdetail');
 }
 
 interface contactsType{
@@ -31,17 +32,54 @@ const MyContacts: React.FC<{history}> = (props) => {
   const dispatch = useDispatch();
   const rootDispatcher = new RootDispatcher(dispatch);
   
+
+
   useEffect(() => {
     rootDispatcher.getContacts().then( res => {
       setContacts(res?.data.contacts)
     })
-    return () => {
-    }
   }, [])
 
-  const contactList = contacts.map((item, index) => {
+  const accountActivated = (e) => {
+  }
+
+  return (
+    <IonPage>
+      <IonHeader>
+        <IonToolbar className="padding-header">
+          <div onClick={(e) => gotoSetting(e, props)} slot="start">
+            <i className="fal fa-cog custom-icon-size-small" slot="start"></i>
+          </div>
+          <div onClick={(e) => gotoEditProfile(e, props)} slot="end">
+            <i className="far fa-user custom-icon-size-small" slot="end" ></i>
+          </div>
+          <IonTitle>My Contacts</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+
+      <IonContent className="padding-content justify-content-center">
+        <IonRow className="grid-container">
+          <ContactList contacts = {contacts}/>
+        </IonRow>
+        <IonToast
+          isOpen={true}
+          onDidDismiss={(e) => accountActivated(e)}
+          message="Activated successfully."
+          duration={2000}
+          cssClass="bottom-toast-default"
+        />
+      </IonContent>
+      <BottomTabBar history={props.history} tab="contact"/>
+    </IonPage>
+  );
+};
+
+const ContactList: React.FC<{contacts: contactsType[]}> = (props) => {
+  let history = useHistory()
+
+  const realContacts = props.contacts.map((item, index) => {
     return(
-      <IonCol onClick={(e) => gotoContactDetail(e, props)} size="4" className="grid-img height-140" key={index}>
+      <IonCol onClick={(e) => gotoContactDetail(e, history)} size="4" className="grid-img height-140" key={index}>
         <img className="img-auto card-effect object-fit-cover" src={item.image ? item.image : './assets/imgs/default_contact_avatar.png'} alt=""/>
         <div className="grid-img-button bottom-circle-icon box-shadow-full-screen">
           <span className="pencil-icon ">
@@ -68,46 +106,18 @@ const MyContacts: React.FC<{history}> = (props) => {
 
   const empty = () => {
     var tem = [] as any;
-    for(var i = contacts.length; i < 9; i++){
+    for(var i = props.contacts.length; i < 9; i++){
       tem.push(initCard(i));
     }
     return tem
   }
 
-  const accountActivated = (e) => {
-
-  }
-
   return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar className="padding-header">
-          <div onClick={(e) => gotoSetting(e, props)} slot="start">
-            <i className="fal fa-cog custom-icon-size-small" slot="start"></i>
-          </div>
-          <div onClick={(e) => gotoEditProfile(e, props)} slot="end">
-            <i className="far fa-user custom-icon-size-small" slot="end" ></i>
-          </div>
-          <IonTitle>My Contacts</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-
-      <IonContent className="padding-content justify-content-center">
-        <IonRow className="grid-container">
-          {contactList}
-          {empty()}
-        </IonRow>
-        <IonToast
-          isOpen={true}
-          onDidDismiss={(e) => accountActivated(e)}
-          message="Activated successfully."
-          duration={2000}
-          cssClass="bottom-toast-default"
-        />
-      </IonContent>
-      <BottomTabBar history={props.history} tab="contact"/>
-    </IonPage>
-  );
-};
+    <Fragment>
+      { realContacts }
+      { empty() }
+    </Fragment>
+  )
+}
 
 export default MyContacts;

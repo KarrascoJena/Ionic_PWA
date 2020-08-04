@@ -65,8 +65,8 @@ const Signup: React.FC<{ history:any; }> = (props) => {
   };
   
   const checkFilled = () => {
-    if(email && fullname && username && password)
-    setSignupDisabled(false)
+    if(email && fullname && username && password) setSignupDisabled(false)
+    else setSignupDisabled(true);
   }
 
   const gotoSignIn = () => {

@@ -6,7 +6,7 @@ import config from '../../config';
 import './assets/scss/Setting.scss'
 
 
-const GetStart: React.FC<{history}> = (props) => {
+const Setting: React.FC<{history}> = (props) => {
   const { i18n, t } = useTranslation();
   
   const onChangeLanguage = (e) => {
@@ -67,4 +67,4 @@ const GetStart: React.FC<{history}> = (props) => {
   );
 };
 
-export default GetStart;
+export default Setting;

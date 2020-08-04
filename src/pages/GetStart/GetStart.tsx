@@ -2,8 +2,6 @@ import React from 'react';
 import { IonPage } from '@ionic/react';
 import Carousel from 're-carousel'
 import { useTranslation } from 'react-i18next';
-import { useOktaAuth } from '@okta/okta-react';
-import { Redirect } from 'react-router-dom';
 
 import IndicatorDots from './indicatorDots'
 import './assets/scss/GetStart.scss'

@@ -14,19 +14,10 @@ export const initialState: InitialState = {
   authorized: false,
   username: '',
   address: '',
-  email: 'manuel.schwarz@live.at',
-  password: 'Password1234!',
+  email: '',
+  password: '',
   userInfo: {}
 };
-
-const format: InitialState = {
-  authorized: false,
-  username: '123',
-  address: '',
-  email: 'manuel.schwarz@live.at',
-  password: 'Password1234!',
-  userInfo: {}
-}
 
 export interface DispatchAction extends Action {
   payload: Partial<InitialState>;
