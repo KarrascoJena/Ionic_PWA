@@ -75,10 +75,10 @@ const App: React.FC = (props) => {
           <Route path="/setting" component={setting} exact={true} />
           <Route path="/account_setting" component={isLogin ? accountSetting : redirectToLogin} exact={true} />
           <Route path="/account_setting/notifications" component={isLogin ? notifications : redirectToLogin} exact={true} />
-          <Route path="/account_setting/notifications/emailandsms" component={isLogin ? emailAndSMS : redirectToLogin} exact={true}/>
+          <Route path="/account_setting/notifications/emailandsms" component={isLogin ? emailAndSMS : redirectToLogin} exact={true} />
           <Route path="/account_setting/security" component={isLogin ? securitySetting : redirectToLogin} exact={true} />
           <Route path="/account_setting/security/password" component={isLogin ? password : redirectToLogin} />
-          
+
           <Route path="/events_list" component={isLogin ? events : redirectToLogin} exact={true} />
           <Route path="/event_detail" component={isLogin ? eventDetail : redirectToLogin} exact={true} />
           <Route path="/event_book" component={isLogin ? eventBook : redirectToLogin} exact={true} />
@@ -109,7 +109,7 @@ const App: React.FC = (props) => {
 
 
 const redirectToLogin: React.FC = (props) => {
-  return(
+  return (
     <Redirect to="login" />
   );
 }

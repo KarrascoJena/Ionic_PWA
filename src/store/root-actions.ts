@@ -5,7 +5,9 @@ const API = {
   login: async (email, password) => {
     return axios.post(`${config.serverAddress}/Accounts/Login`, { identifier: email, password: password}).then((res) => {
       if(res.status == 200) {
+        console.log(res.data.result.token.accessToken)
         axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.result.token.accessToken}`;
+        console.log(axios.defaults.headers.common['Authorization'])
         return {status: res.status, data: res.data.result}
       }
     }).catch((error) => {
@@ -46,6 +48,7 @@ const API = {
   },
 
   addContact: async (data) => {
+    console.log(axios.defaults.headers.common['Authorization'])
     return axios.post(`${config.serverAddress}/Contacts`, data).then((res) => {
       if(res.status == 200) return {status: res.status, data: res.data.result}
     }).catch((error) => {
