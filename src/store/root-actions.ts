@@ -35,6 +35,10 @@ const API = {
     }).catch((error) => {
       return {status: 400, data: error.response.data.responseException}
     })
+  },
+
+  setLanguage: (language) => {
+    axios.defaults.headers.common['Accept-Language'] = `${language}`;
   }
 }
 

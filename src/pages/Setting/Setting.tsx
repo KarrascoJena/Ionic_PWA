@@ -2,15 +2,20 @@ import React from 'react';
 import { IonPage, IonRow, IonCol, IonLabel, IonHeader, IonToolbar, IonTitle, IonSelect, IonSelectOption, IonButton } from '@ionic/react';
 import { useTranslation } from 'react-i18next';
 import config from '../../config';
+import { useDispatch } from "react-redux";
+import { RootDispatcher } from "../../store/root-reducer";
 
 import './assets/scss/Setting.scss'
 
 
 const Setting: React.FC<{history}> = (props) => {
+  const dispatch = useDispatch();
+  const rootDispatcher = new RootDispatcher(dispatch);
   const { i18n, t } = useTranslation();
   
   const onChangeLanguage = (e) => {
     i18n.changeLanguage(e.target.value)
+    rootDispatcher.setLanguage(e.target.value);
   }
 
   const gotoBack = (e, props) => {
@@ -34,7 +39,7 @@ const Setting: React.FC<{history}> = (props) => {
             <IonCol size="5" className="select">
               <IonSelect value={i18n.language} onIonChange={(e) => {onChangeLanguage(e)}} interface="popover" className="ion-select-custom relation-ship-width">
                 <IonSelectOption value="en">{t('general.english')}</IonSelectOption>
-                <IonSelectOption value="ge">{t('general.german')}</IonSelectOption>
+                <IonSelectOption value="de">{t('general.german')}</IonSelectOption>
               </IonSelect>
             </IonCol>
           </IonRow>

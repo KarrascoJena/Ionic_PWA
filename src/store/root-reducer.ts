@@ -73,7 +73,7 @@ export class RootDispatcher {
 
   login = async (email: string, password: string) => {
     return API.login(email, password).then(res => {
-      this.dispatch({type: ActionType.Login, payload: {userInfo: res?.data}})
+      if(res?.status === 200) this.dispatch({type: ActionType.Login, payload: {userInfo: res?.data}})
       return res
     });
   };
@@ -90,5 +90,9 @@ export class RootDispatcher {
 
   getContacts = async () => {
     return API.getContacts()
+  };
+
+  setLanguage = (language: string) => {
+    API.setLanguage(language)
   }
 }
