@@ -8,15 +8,18 @@ import { InitialState } from "./store/root-reducer";
 
 import getStart from './pages/GetStart/GetStart';
 import setting from './pages/Setting/Setting';
-import noContacts from './pages/Contact/NoContact';
 import accountSetting from './pages/Setting/AccountSetting';
 import searchOverview from './pages/Search/Search';
+
+import myContacts from './pages/Contact/MyContacts';
 import contactDetail from './pages/Contact/ContactDetail';
+import addContact from './pages/Contact/AddContact';
+import noContacts from './pages/Contact/NoContact';
+
 import selectAvatar from './pages/User/SelectAvatar';
 import discoverVote from './pages/User/DiscoverVote';
 import discover from './pages/User/Discover';
 import editProfile from './pages/User/EditProfile';
-import myContacts from './pages/Contact/MyContacts';
 import matchs from './pages/Matchs/matchs';
 import experiences from './pages/Experiences/Experiences';
 import addGift from './pages/Experiences/AddGift';
@@ -68,10 +71,9 @@ const App: React.FC = (props) => {
           <Route path="/register" component={signUp} exact={true} />
           <Route path="/password_forgotten" component={passwordForgotten} exact={true} />
           <Route path="/getstart" component={getStart} exact={true} />
+
           <Route path="/setting" component={setting} exact={true} />
-
           <Route path="/account_setting" component={isLogin ? accountSetting : redirectToLogin} exact={true} />
-
           <Route path="/account_setting/notifications" component={isLogin ? notifications : redirectToLogin} exact={true} />
           <Route path="/account_setting/notifications/emailandsms" component={isLogin ? emailAndSMS : redirectToLogin} exact={true}/>
           <Route path="/account_setting/security" component={isLogin ? securitySetting : redirectToLogin} exact={true} />
@@ -84,14 +86,17 @@ const App: React.FC = (props) => {
           <Route path="/conformed" component={isLogin ? confirmed : redirectToLogin} exact={true} />
 
           <Route path="/mycontacts" component={isLogin ? myContacts : redirectToLogin} exact={true} />
-
+          <Route path="/contactdetail" component={isLogin ? contactDetail : redirectToLogin} exact={true} />
+          <Route path="/addcontact" component={isLogin ? addContact : redirectToLogin} exact={true} />
           <Route path="/no_contacts" component={isLogin ? noContacts : redirectToLogin} exact={true} />
+
           <Route path="/search_overview" component={isLogin ? searchOverview : redirectToLogin} exact={true} />
           <Route path="/editprofile" component={isLogin ? editProfile : redirectToLogin} exact={true} />
-          <Route path="/contactdetail" component={isLogin ? contactDetail : redirectToLogin} exact={true} />
           <Route path="/selectavatar" component={isLogin ? selectAvatar : redirectToLogin} exact={true} />
+
           <Route path="/discovervote" component={isLogin ? discoverVote : redirectToLogin} exact={true} />
           <Route path="/discover" component={isLogin ? discover : redirectToLogin} exact={true} />
+
           <Route path="/matches" component={isLogin ? matchs : redirectToLogin} exact={true} />
           <Route path="/experiences" component={isLogin ? experiences : redirectToLogin} exact={true} />
           <Route path="/add_gift" component={isLogin ? addGift : redirectToLogin} exact={true} />

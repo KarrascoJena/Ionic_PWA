@@ -81,7 +81,11 @@ export class RootDispatcher {
   logout = () => this.dispatch({type: ActionType.Logout, payload: {}})
   
   register = async (fullName: string, password: string, userName: string, email: string, phoneNumber: string) => {
-    return API.register(fullName, password, userName, email, phoneNumber)
+    return API.register(fullName, password, userName, email, phoneNumber).then(res => {
+      console.log(res)
+      this.dispatch({type: ActionType.Login, payload: {userInfo: res?.data}})
+      return res
+    })
   };
 
   forgetPassword = async (email: string) => {
@@ -92,7 +96,21 @@ export class RootDispatcher {
     return API.getContacts()
   };
 
+  getContactDetail = async (id: string) => {
+    return API.getContactsDetail(id)
+  };
+
+  addContact = async (data: any) => {
+    return API.addContact(data)
+  };
+
+  getUserRelationshipStatus = async () => {
+    return API.getUserRelationshipStatus()
+  };
+
   setLanguage = (language: string) => {
     API.setLanguage(language)
-  }
+  };
+
+  
 }

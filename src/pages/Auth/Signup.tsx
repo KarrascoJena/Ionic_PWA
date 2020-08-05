@@ -31,16 +31,18 @@ const Signup: React.FC<{ history:any; }> = (props) => {
       } else if (status == 400){
         setAlert({state: true, header: 'Authentication failed', content: `${res?.data.exceptionMessage}`})
       } else {
-        rootDispatcher.login(email, password).then(res => {
-          const status = res?.status
-          if(status == 401){
-            setAlert({state: true, header: 'server is not working', content: 'try again later'})
-          } else if (status == 400){
-            setAlert({state: true, header: 'Authentication failed', content: `${res?.data.exceptionMessage}`})
-          } else {
-            props.history.push('/mycontacts')
-          }
-        })
+        props.history.push('/mycontacts')
+
+        // rootDispatcher.login(email, password).then(res => {
+        //   const status = res?.status
+        //   if(status == 401){
+        //     setAlert({state: true, header: 'server is not working', content: 'try again later'})
+        //   } else if (status == 400){
+        //     setAlert({state: true, header: 'Authentication failed', content: `${res?.data.exceptionMessage}`})
+        //   } else {
+        //     props.history.push('/mycontacts')
+        //   }
+        // })
       }
     })
   };

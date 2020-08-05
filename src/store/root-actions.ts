@@ -37,9 +37,33 @@ const API = {
     })
   },
 
+  getContactsDetail: async (id) => {
+    return axios.get(`${config.serverAddress}/Contacts/${id}`).then((res) => {
+      if(res.status == 200) return {status: res.status, data: res.data.result}
+    }).catch((error) => {
+      return {status: 400, data: error.response.data.responseException}
+    })
+  },
+
+  addContact: async (data) => {
+    return axios.post(`${config.serverAddress}/Contacts`, data).then((res) => {
+      if(res.status == 200) return {status: res.status, data: res.data.result}
+    }).catch((error) => {
+      return {status: 400, data: error.response.data.responseException}
+    })
+  },
+
+  getUserRelationshipStatus: async () => {
+    return axios.get(`${config.serverAddress}/UserRelationshipStatus`).then((res) => {
+      if(res.status == 200) return {status: res.status, data: res.data.result}
+    }).catch((error) => {
+      return {status: 400, data: error.response.data.responseException}
+    })
+  },
+
   setLanguage: (language) => {
     axios.defaults.headers.common['Accept-Language'] = `${language}`;
-  }
+  },
 }
 
 export default API

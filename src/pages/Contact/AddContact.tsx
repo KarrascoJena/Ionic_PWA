@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import { IonDatetime, IonSelect, IonSelectOption, IonToggle, IonAvatar, IonLabel, IonRange, IonInput, IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonButton, IonButtons, IonItem, IonAlert } from '@ionic/react';
 import { useLocation } from "react-router-dom";
 
@@ -23,24 +23,36 @@ const gotoMyContacts = (e, props) => {
   props.history.push('/mycontacts');
 }
 
-const ContactDetail: React.FC<{history}> = (props) => {
-  const location = useLocation()
-  const [contact] = useState<any>(location.state);
-  const [fetched, setFetched] = useState<boolean>(false);
+const AddContact: React.FC<{history}> = (props) => {
   const [showAlert, setShowAlert] = useState(false);
-  const [relationshipStatus, setRelationshipStatus] = useState([]);
   const [validEmailError, setValidEmailError] = useState('');
+  const [relationshipStatus, setRelationshipStatus] = useState([]);
 
-  const [state, setState] = useState<any>();
+  const [state, setState] = useState<any>(
+    {
+      fullName: '',
+      gender: 'Male',
+      birthday: '1957-07-25T00:00:00',
+      contactRelationshipTypeId: '',
+      city: '',
+      travelRadius: 0,
+      events: {
+      },
+      interests: {
+      },
+      characteristics: {
+      },
+      connections: {
+      }
+    }
+  );
 
   const dispatch = useDispatch();
   const rootDispatcher = new RootDispatcher(dispatch);
 
+  console.log(state)
+
   useLayoutEffect(() => {
-    rootDispatcher.getContactDetail(contact.id).then( res => {
-      setState({ ...res?.data})
-      setFetched(true);
-    })
 
     rootDispatcher.getUserRelationshipStatus().then (res => {
       setRelationshipStatus(res?.data)
@@ -49,33 +61,40 @@ const ContactDetail: React.FC<{history}> = (props) => {
 
   }, [])
 
-  console.log(state)
-
   const onChangeName = (e) => {
-    // setState({...state, name: e.target.value})
+    setState({...state, fullName: e.target.value})
   }
   const onChangeBirthday = (e) => {
-    // setState({...state, birthday: e})
+    setState({...state, birthday: e.detail.value})
   }
 
   const onChangeGender = (e) => {
-    // setState({...state, gender: e.target.value})
+    setState({...state, gender: e.target.value})
   }
 
   const onChangeCity = (e) => {
-    // setState({...state, city: e.target.value})
+    setState({...state, city: e.target.value})
   }  
   
   const onChangeRelationship = (e) => {
-    // setState({...state, relationship: e.target.value})
+    setState({...state, contactRelationshipTypeId: e.target.value})
   }
 
-  const onChangeCheck = (e, field) => {
-    // setState({...state, [field]: !state[field]})
+  const onChangeEvent = (e, field) => {
+    if(state.events[field] == undefined || state.events[field].isActive == '0') setState({...state, events: {...state.events, [field]: {isActive: '1'}}})
+    else if(state.events[field].isActive == '1') setState({...state, events: {...state.events, [field]: {isActive: '0'}}})
   }
   
-  const onChangeConnections = (e, field) => {
-    setState({...state, [field]: e.target.value})
+  const onChangeInterest = (e, field) => {
+    setState({...state, interests: {...state.interests, [field]: {rating: e.detail.value.toString()}}})
+  }
+
+  const onChangeCharacteristics = (e, field) => {
+    setState({...state, characteristics: {...state.characteristics, [field]: {rating: e.detail.value.toString()}}})
+  }
+
+  const onChangeConnections = (e, field, subfiled) => {
+    setState({...state, connections: {...state.connections, [field]: {[subfiled]: e.target.value}}})
     if(field === 'contactEmail'){
       if(!/.+@.+\.[A-Za-z]+$/.test(e.target.value)){
         setValidEmailError('please enter a valid email address')
@@ -84,7 +103,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
       }
     }
   }
-  if(fetched === false) return (<></>)
+
   return (
     <IonPage>
       <IonHeader>
@@ -105,7 +124,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
             <IonCol size="2"></IonCol>
             <IonCol size="8" className="justify-content-center">
               <IonAvatar class="profile-img-cover">
-                <img src={state.user.image} alt=""/>
+                <img src={state.image ? state.image : './assets/imgs/default_contact_avatar.png'} alt=""/>
               </IonAvatar>
             </IonCol>
             <IonCol size="2"></IonCol>
@@ -119,7 +138,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
             </IonCol>
             <IonCol size="9">
               <IonItem>
-                <IonInput value={state.user.fullName} autofocus={true} clearInput={true} className="" onIonChange={(e) => onChangeName(e)}></IonInput>
+                <IonInput value={state.fullName} autofocus={true} clearInput={true} className="" onIonChange={(e) => onChangeName(e)}></IonInput>
               </IonItem>
             </IonCol>
           </IonRow>
@@ -131,8 +150,8 @@ const ContactDetail: React.FC<{history}> = (props) => {
             <IonCol size="9" className="gender-padding-left">
               <FormControl component="fieldset">
                 <RadioGroup row aria-label="position" name="position" defaultValue="top">
-                  <FormControlLabel value="male" control={<Radio color="primary" />} label="female" checked={state.user.gender === 'Female'} onChange={(e) => {onChangeGender(e)}}/>
-                  <FormControlLabel value="female" control={<Radio color="primary" />} label="male" checked={state.user.gender === 'Male'} onChange={(e) => {onChangeGender(e)}}/>
+                  <FormControlLabel value="Male" control={<Radio color="primary" />} label="male" checked={state.gender === 'Male'} onChange={(e) => {onChangeGender(e)}}/>
+                  <FormControlLabel value="Female" control={<Radio color="primary" />} label="female" checked={state.gender === 'Female'} onChange={(e) => {onChangeGender(e)}}/>
                 </RadioGroup>
               </FormControl>
             </IonCol>
@@ -144,7 +163,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
             </IonCol>
             <IonCol size="9">
               <IonItem>
-                <IonDatetime value={state.user.birthday} onIonChange={(e) => {onChangeBirthday(e)}} placeholder="Select Date" className="ion-datetime-custom"></IonDatetime>
+                <IonDatetime value={state.birthday} onIonChange={(e) => {onChangeBirthday(e)}} placeholder="Select Date" className="ion-datetime-custom"></IonDatetime>
               </IonItem>
             </IonCol>
           </IonRow>
@@ -155,14 +174,14 @@ const ContactDetail: React.FC<{history}> = (props) => {
             </IonCol>
             <IonCol size="9">
               <IonItem>
-                <IonSelect value={state.user.userRelationshipStatusId} onIonChange={(e) => {onChangeRelationship(e)}} interface="popover" className="ion-select-custom relation-ship-width">
-                  {
-                    relationshipStatus.map((item: any, key: number) => {
-                      return (
-                        <IonSelectOption value={item.id} key = {key}>{item.name}</IonSelectOption>
-                      )
-                    })
-                  }
+                <IonSelect value={state.contactRelationshipTypeId} onIonChange={(e) => {onChangeRelationship(e)}} interface="popover" className="ion-select-custom relation-ship-width">
+                {
+                  relationshipStatus.map((item: any, key: number) => {
+                    return (
+                      <IonSelectOption value={item.id} key = {key}>{item.name}</IonSelectOption>
+                    )
+                  })
+                }
                 </IonSelect>
               </IonItem>
             </IonCol>
@@ -174,14 +193,14 @@ const ContactDetail: React.FC<{history}> = (props) => {
             </IonCol>
             <IonCol size="9">
               <IonItem>
-                <IonInput value={state.user.city} clearInput={true} className="" onIonChange={(e) => onChangeCity(e)}></IonInput>
+                <IonInput value={state.city} clearInput={true} className="" onIonChange={(e) => onChangeCity(e)}></IonInput>
               </IonItem>
             </IonCol>
           </IonRow>
 
           <br/>
           <label className="label-padding-left">Travel Readiness [km]</label>
-          <IonRange min={50} max={500} color="secondary" value={state.user.travelRadius}>
+          <IonRange min={50} max={500} color="secondary" value={state.travelRadius} onIonChange = {(e) => {setState({...state, travelRadius: e.detail.value})}}>
             <IonLabel slot="start">50</IonLabel>
             <IonLabel slot="end">500</IonLabel>
           </IonRange>
@@ -196,7 +215,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
               {renderOccasionIcon("fal fa-birthday-cake fa-1x", "Birthday")}
             </IonCol>
             <IonCol size="2">
-              <IonToggle checked={state.contact.events.birthday.isActive == "1" ? true : false} onIonChange={(e) => onChangeCheck(e, 'checkBirthday')}/>
+              <IonToggle checked={state.events.birthday !== undefined ? state.events.birthday.isActive == "1" ? true : false : false} onIonChange={(e) => onChangeEvent(e, 'birthday')}/>
             </IonCol>
           </IonRow>
           <br/>
@@ -205,7 +224,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
               {renderOccasionIcon("fal fa-tree-christmas fa-1x", "Chrismas")}
             </IonCol>
             <IonCol size="2">
-              <IonToggle checked={state.contact.events.chrismas.isActive == "1" ? true : false} onIonChange={(e) => onChangeCheck(e, 'checkChrismas')}/>
+              <IonToggle checked={state.events.chrismas !== undefined ? state.events.chrismas.isActive == "1" ? true : false : false} onIonChange={(e) => onChangeEvent(e, 'chrismas')}/>
             </IonCol>
           </IonRow>
           <br/>
@@ -215,7 +234,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
               {renderOccasionIcon("fal fa-island-tropical fa-1x", "Vacation")}
             </IonCol>
             <IonCol size="2">
-              <IonToggle checked={state.contact.events.vacation.isActive == "1" ? true : false} onIonChange={(e) => onChangeCheck(e, 'checkVacation')}/>
+              <IonToggle checked={state.events.vacation !== undefined ? state.events.vacation.isActive == "1" ? true : false : false} onIonChange={(e) => onChangeEvent(e, 'vacation')}/>
             </IonCol>
           </IonRow>
           <br/>
@@ -225,40 +244,41 @@ const ContactDetail: React.FC<{history}> = (props) => {
               {renderOccasionIcon("fal fa-calendar-day fa-1x", "Weekend")}
             </IonCol>
             <IonCol size="2">
-              <IonToggle checked={state.contact.events.weekend.isActive == "1" ? true : false} onIonChange={(e) => onChangeCheck(e, 'checkWeekend')}/>
+              <IonToggle checked={state.events.weekend !== undefined ? state.events.weekend.isActive == "1" ? true : false : false} onIonChange={(e) => onChangeEvent(e, 'weekend')}/>
             </IonCol>
           </IonRow>
           <br/>
 
-          <IonRow hidden={state.user.userRelationshipStatusId !== "82d33a98-699a-43df-b3b8-46f81b52e22f"}>
+          <IonRow hidden={state.contactRelationshipTypeId !== "82d33a98-699a-43df-b3b8-46f81b52e22f"}>
             <IonCol size="10" className="input-label-custom">
               {renderOccasionIcon("fal fa-kiss-wink-heart fa-1x", "Valentine")}
             </IonCol>
             <IonCol size="2">
-              <IonToggle checked={state.contact.events.valentine.isActive == "1" ? true : false} onIonChange={(e) => onChangeCheck(e, 'checkValentine')}/>
+              <IonToggle checked={state.events.valentine !== undefined ? state.events.valentine.isActive == "1" ? true : false : false} onIonChange={(e) => onChangeEvent(e, 'valentine')}/>
             </IonCol>
+            <br/>
           </IonRow>
-          <br/>
           
-          <IonRow hidden={state.user.userRelationshipStatusId !== "82d33a98-699a-43df-b3b8-46f81b52e22f"}>
+          <IonRow hidden={state.contactRelationshipTypeId !== "82d33a98-699a-43df-b3b8-46f81b52e22f"}>
             <IonCol size="10" className="input-label-custom">
               {renderOccasionIcon("fal fa-kiss-wink-heart fa-1x", "Father or Mother day")}
             </IonCol>
             <IonCol size="2">
-              <IonToggle checked={state.contact.events.parentsday.isActive == "1" ? true : false} onIonChange={(e) => onChangeCheck(e, 'parentsday')}/>
+              {/* <IonToggle checked={state.fatherAndMotherday} onIonChange={(e) => onChangeEvent(e, 'fatherAndMotherday')}/> */}
             </IonCol>
           </IonRow>
           <br/>
 
-          <IonRow hidden={state.user.userRelationshipStatusId !== "82d33a98-699a-43df-b3b8-46f81b52e22f"}>
+          <IonRow hidden={state.contactRelationshipTypeId !== "82d33a98-699a-43df-b3b8-46f81b52e22f"}>
             <IonCol size="10" className="input-label-custom">
               {renderOccasionIcon("far fa-heart fa-1x", "Anniversary")}
             </IonCol>
             <IonCol size="2">
-              <IonToggle checked={state.contact.events.anniversary.isActive == "1" ? true : false} onIonChange={(e) => onChangeCheck(e, 'anniversary')}/>
+              <IonToggle checked={state.events.anniversary !== undefined ? state.events.anniversary.isActive == "1" ? true : false : false} onIonChange={(e) => onChangeEvent(e, 'anniversary')}/>
             </IonCol>
           </IonRow>
-          <IonRow hidden={state.user.userRelationshipStatusId !== "82d33a98-699a-43df-b3b8-46f81b52e22f" || state.contact.events.anniversary.isActive == "0"}>
+          
+          <IonRow hidden={state.contactRelationshipTypeId !== "82d33a98-699a-43df-b3b8-46f81b52e22f" || state.events.anniversary == "0"}>
             <IonCol size="12">
               <IonItem>
                 <IonDatetime value={state.birthday} placeholder="Select Date" className="ion-datetime-custom"></IonDatetime>
@@ -272,8 +292,8 @@ const ContactDetail: React.FC<{history}> = (props) => {
           <label className="grey-text">Defiine preferences of you favourite</label>
 
           <div className="range-div-padding-top">
-            <label className="label-padding-left">Dinner & Culinary</label>
-            <IonRange min={0} max={10} color="secondary" value={state.user.interests.dinner_culture.rating}>
+            <label className="label-padding-left">Dinner & Culture</label>
+            <IonRange min={0} max={10} color="secondary" value={state.interests.dinner_culture ? state.interests.dinner_culture.rating : 0} onIonChange = {(e) => onChangeInterest(e, 'dinner_culture')}>
               <IonLabel slot="start">low</IonLabel>
               <IonLabel slot="end">high</IonLabel>
             </IonRange>
@@ -281,15 +301,15 @@ const ContactDetail: React.FC<{history}> = (props) => {
 
           <div className="range-div-padding-top">
             <label className="label-padding-left">Short holiday & Overnight stay</label>
-            {/* <IonRange min={0} max={10} color="secondary" value={state.rangeType2}>
+            <IonRange min={0} max={10} color="secondary" value={state.interests.vacation_overnightstay ? state.interests.vacation_overnightstay.rating : 0} onIonChange = {(e) => onChangeInterest(e, 'vacation_overnightstay')}>
             <IonLabel slot="start">low</IonLabel>
               <IonLabel slot="end">high</IonLabel>
-            </IonRange> */}
+            </IonRange>
           </div>
 
           <div className="range-div-padding-top">
             <label className="label-padding-left">Flying & Falling</label>
-            <IonRange min={0} max={10} color="secondary" value={state.user.interests.fly_fall.rating}>
+            <IonRange min={0} max={10} color="secondary" value={state.interests.fly_fall ? state.interests.fly_fall.rating : 0} onIonChange = {(e) => onChangeInterest(e, 'fly_fall')}>
             <IonLabel slot="start">low</IonLabel>
               <IonLabel slot="end">high</IonLabel>
             </IonRange>
@@ -297,7 +317,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
 
           <div className="range-div-padding-top">
             <label className="label-padding-left">Driving fun & Motorsport</label>
-            <IonRange min={0} max={10} color="secondary" value={state.user.interests.driving_motosport.rating}>
+            <IonRange min={0} max={10} color="secondary" value={state.interests.driving_motosport ? state.interests.driving_motosport.rating : 0} onIonChange = {(e) => onChangeInterest(e, 'driving_motosport')}>
             <IonLabel slot="start">low</IonLabel>
               <IonLabel slot="end">high</IonLabel>
             </IonRange>
@@ -305,7 +325,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
 
           <div className="range-div-padding-top">
             <label className="label-padding-left">Sport, Action & Natur</label>
-            <IonRange min={0} max={10} color="secondary" value={state.user.interests.sport_action_nature.rating}>
+            <IonRange min={0} max={10} color="secondary" value={state.interests.sport_action_nature ? state.interests.sport_action_nature.rating : 0} onIonChange = {(e) => onChangeInterest(e, 'sport_action_nature')}>
             <IonLabel slot="start">low</IonLabel>
               <IonLabel slot="end">high</IonLabel>
             </IonRange>
@@ -313,7 +333,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
 
           <div className="range-div-padding-top">
             <label className="label-padding-left">Wellness & Beauty</label>
-            <IonRange min={0} max={10} color="secondary" value={state.user.interests.wellness_beauty.rating}>
+            <IonRange min={0} max={10} color="secondary" value={state.interests.wellness_beauty ? state.interests.wellness_beauty.rating : 0} onIonChange = {(e) => onChangeInterest(e, 'wellness_beauty')}>
             <IonLabel slot="start">low</IonLabel>
               <IonLabel slot="end">high</IonLabel>
             </IonRange>
@@ -321,7 +341,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
 
           <div className="range-div-padding-top">
             <label className="label-padding-left">Culture & Creative</label>
-            <IonRange min={0} max={10} color="secondary" value={state.user.interests.culture_creative.rating}>
+            <IonRange min={0} max={10} color="secondary" value={state.interests.culture_creative ? state.interests.culture_creative.rating : 0} onIonChange = {(e) => onChangeInterest(e, 'culture_creative')}>
             <IonLabel slot="start">low</IonLabel>
               <IonLabel slot="end">high</IonLabel>
             </IonRange>
@@ -329,7 +349,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
 
           <div className="range-div-padding-top">
             <label className="label-padding-left">Wind & Water</label>
-            <IonRange min={0} max={10} color="secondary" value={state.user.interests.wind_water.rating}>
+            <IonRange min={0} max={10} color="secondary" value={state.interests.wind_water ? state.interests.wind_water.rating : 0} onIonChange = {(e) => onChangeInterest(e, 'wind_water')}>
             <IonLabel slot="start">low</IonLabel>
               <IonLabel slot="end">high</IonLabel>
             </IonRange>
@@ -342,7 +362,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
 
           <div className="range-div-padding-top">
             <label className="label-padding-left">Fitness Level</label>
-            <IonRange min={0} max={10} color="secondary" value={state.user.characteristics.fitness_level.rating}>
+            <IonRange min={0} max={10} color="secondary" value={state.characteristics.fitness_level ? state.characteristics.fitness_level.rating : 0} onIonChange = {(e) => onChangeCharacteristics(e, 'fitness_level')}>
               <IonLabel slot="start">low</IonLabel>
               <IonLabel slot="end">high</IonLabel>
             </IonRange>
@@ -350,7 +370,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
 
           <div className="range-div-padding-top">
             <label className="label-padding-left">Personality</label>
-            <IonRange min={0} max={10} color="secondary" value={state.user.characteristics.personality.rating}>
+            <IonRange min={0} max={10} color="secondary" value={state.characteristics.personality ? state.characteristics.personality.rating : 0} onIonChange = {(e) => onChangeCharacteristics(e, 'personality')}>
               <IonLabel slot="start">calm</IonLabel>
               <IonLabel slot="end">wild</IonLabel>
             </IonRange>
@@ -358,7 +378,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
 
           <div className="range-div-padding-top">
             <label className="label-padding-left">Sociality</label>
-            <IonRange min={0} max={10} color="secondary" value={state.user.characteristics.sociality.rating}>
+            <IonRange min={0} max={10} color="secondary" value={state.characteristics.sociality ? state.characteristics.sociality.rating : 0} onIonChange = {(e) => onChangeCharacteristics(e, 'sociality')}>
               <IonLabel slot="start">solo</IonLabel>
               <IonLabel slot="end">group</IonLabel>
             </IonRange>
@@ -374,7 +394,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
             </IonCol>
             <IonCol size="11">
               <IonItem>
-                <IonInput value={state.user.connections.email.address} type="email" clearInput={true} className="" onIonChange={(e) => onChangeConnections(e, 'contactEmail')}></IonInput>
+                <IonInput value={state.connections.email ? state.connections.email.address : ''} type="email" clearInput={true} className="" onIonChange={(e) => onChangeConnections(e, 'email', 'address')}></IonInput>
               </IonItem>
               <div className="text-align-center">
                 <IonLabel color="danger">{validEmailError}</IonLabel>
@@ -388,7 +408,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
             </IonCol>
             <IonCol size="11">
               <IonItem>
-                <IonInput value={state.user.connections.phone.number} type="tel" clearInput={true} className="" onIonChange={(e) => onChangeConnections(e, 'telNumber')}></IonInput>
+                <IonInput value={state.connections.phone ? state.connections.phone.number : ''} type="tel" clearInput={true} className="" onIonChange={(e) => onChangeConnections(e, 'phone', 'number')}></IonInput>
               </IonItem>
             </IonCol>
           </IonRow>
@@ -399,7 +419,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
             </IonCol>
             <IonCol size="11">
               <IonItem>
-                <IonInput value={state.user.connections.facebook.username} type="text" clearInput={true} className="" onIonChange={(e) => onChangeConnections(e, 'facebookUsername')}></IonInput>
+                <IonInput value={state.connections.facebook ? state.connections.facebook.username : ''} type="text" clearInput={true} className="" onIonChange={(e) => onChangeConnections(e, 'facebook', 'username')}></IonInput>
               </IonItem>
             </IonCol>
           </IonRow>
@@ -410,7 +430,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
             </IonCol>
             <IonCol size="11">
               <IonItem>
-                <IonInput value={state.user.connections.instagram.username} type="email" clearInput={true} className="" onIonChange={(e) => onChangeConnections(e, 'instagramEmail')}></IonInput>
+                <IonInput value={state.connections.instagram ? state.connections.instagram.username : ''} type="email" clearInput={true} className="" onIonChange={(e) => onChangeConnections(e, 'instagram', 'username')}></IonInput>
               </IonItem>
             </IonCol>
           </IonRow>
@@ -421,14 +441,14 @@ const ContactDetail: React.FC<{history}> = (props) => {
             </IonCol>
             <IonCol size="11">
               <IonItem>
-                <IonInput value={state.user.connections.whatsapp.number} type="text" clearInput={true} className="" onIonChange={(e) => onChangeConnections(e, 'whatsAppNumber')}></IonInput>
+                <IonInput value={state.connections.whatsapp ? state.connections.whatsapp.number : ''} type="text" clearInput={true} className="" onIonChange={(e) => onChangeConnections(e, 'whatsapp', 'number')}></IonInput>
               </IonItem>
             </IonCol>
           </IonRow>
         </div>
 
         <div id="delete-connect" className="delete-contact">
-          <IonButton fill="clear" onClick={() => setShowAlert(true)}>Delete contact</IonButton>
+          <IonButton fill="clear" onClick={() => setShowAlert(true)}>Add contact</IonButton>
         </div>
 
         <IonAlert
@@ -436,15 +456,21 @@ const ContactDetail: React.FC<{history}> = (props) => {
           onDidDismiss={() => setShowAlert(false)}
           cssClass='my-custom-class'
           header={'Are you sure?'}
-          message={'Your contact will be deleted for ever'}
-          buttons={['No', 'Yes']}
-        />
+          message={'Are you sure to add new contact?'}
+          buttons={[
+            'No',
+            {
+              text: "Yes",
+              role: 'add contact',
+              handler: (state) => {rootDispatcher.addContact(state).then(res => {console.log(res)})}
+            }
+          ]}/>
       </IonContent>
     </IonPage>
   );
 };
 
-export default ContactDetail;
+export default AddContact;
 
 
 const renderOccasionIcon = (icons, title) => {

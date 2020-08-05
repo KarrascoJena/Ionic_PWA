@@ -18,8 +18,8 @@ const gotoEditProfile = (e, props) => {
   props.history.push('/editprofile');
 }
 
-const gotoContactDetail = (e, history) => {
-  history.push('/contactdetail');
+const gotoContactDetail = (e, history, id: string) => {
+  history.push('/contactdetail', {id: id});
 }
 
 interface contactsType{
@@ -79,7 +79,7 @@ const ContactList: React.FC<{contacts: contactsType[]}> = (props) => {
 
   const realContacts = props.contacts.map((item, index) => {
     return(
-      <IonCol onClick={(e) => gotoContactDetail(e, history)} size="4" className="grid-img height-140" key={index}>
+      <IonCol onClick={(e) => gotoContactDetail(e, history, item.id)} size="4" className="grid-img height-140" key={index}>
         <img className="img-auto card-effect object-fit-cover" src={item.image ? item.image : './assets/imgs/default_contact_avatar.png'} alt=""/>
         <div className="grid-img-button bottom-circle-icon box-shadow-full-screen">
           <span className="pencil-icon ">
@@ -92,7 +92,7 @@ const ContactList: React.FC<{contacts: contactsType[]}> = (props) => {
 
   const initCard = (key) => {
     return(
-      <IonCol size="4" className="grid-img height-140" key={key}>
+      <IonCol size="4" className="grid-img height-140" key={key} onClick={() => {history.push('addcontact')}}>
         <div className="empty-img card-effect">
         </div>
         <div className="grid-img-button bottom-circle-icon box-shadow-full-screen full-fill-red-icon">
