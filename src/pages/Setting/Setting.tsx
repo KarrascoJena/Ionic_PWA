@@ -67,7 +67,6 @@ const Setting: React.FC<{history}> = (props) => {
           </IonRow>
         </div>
       </div>
-
     </IonPage>
   );
 };

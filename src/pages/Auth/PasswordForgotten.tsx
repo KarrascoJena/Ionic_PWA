@@ -46,7 +46,7 @@ const PasswordForgotten: React.FC<{ history:any; }> = (props) => {
   return (
     <IonPage>
       <div className="header_brand_image justify-content-center">
-        <img alt="" src="./assets/imgs/brand_black.png"></img>
+        <img alt="" src="./assets/imgs/brand_black.png" onClick={() => {props.history.push('')}}></img>
       </div>
       <IonContent>
         <div className="landing-container text-align-center">

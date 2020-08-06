@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IonPage, IonInput, IonButton, IonTabBar,  IonAlert, IonTabButton, IonLabel, IonContent } from '@ionic/react';
+import { IonPage, IonInput, IonButton, IonTabBar,  IonAlert, IonTabButton, IonLabel, IonContent, IonLoading } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { RootDispatcher } from "../../store/root-reducer";
@@ -13,6 +13,7 @@ interface Props {
 const LoginForm: React.FC<Props> = (props) => { 
   const [email, setEmail] = useState<string>('manuel.schwarz@live.at');
   const [password, setPassword] = useState<string>('Password1234!');
+  const [showLoading, setShowLoading] = useState<boolean>(false);
   const [alert, setAlert] = useState({
     state: false,
     header: '',
@@ -28,9 +29,10 @@ const LoginForm: React.FC<Props> = (props) => {
 
 
   const handleSubmit = (e) => {
-
+    setShowLoading(true)
     rootDispatcher.login(email, password).then(res => {
       const status = res?.status
+      setShowLoading(false)
       if(status == 401){
         setAlert({state: true, header: 'server is not working', content: 'try again later'})
       } else if (status == 400){
@@ -59,17 +61,25 @@ const LoginForm: React.FC<Props> = (props) => {
     history.push('/password_forgotten')
   }
   const checkFilled = () => {
-    if(email && password) setSigninDisabled(false)
-    else console.log("123")
+    if(email !== '' && password !== '') {
+      setSigninDisabled(false)
+    } else {
+      setSigninDisabled(true)
+    }
   }
   return (
     <IonPage>
       <div>
         <div className="header_brand_image justify-content-center">
-          <img alt="" src="./assets/imgs/brand_black.png"></img>
+          <img alt="" src="./assets/imgs/brand_black.png" onClick={() => {history.push('')}}></img>
         </div>
       </div>
       <IonContent>
+        <IonLoading
+          cssClass='my-custom-class'
+          isOpen={showLoading}
+          message={'Please wait...'}
+        />
         <div className="landing-container margin-top-20">
           <div className="bordered-text-input margin-top-20 text-align-left text-box">
             <IonInput value={email} onIonChange={handleUsernameChange} placeholder = "Username or email" />
