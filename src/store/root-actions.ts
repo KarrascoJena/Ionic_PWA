@@ -5,8 +5,8 @@ const API = {
   login: async (email, password) => {
     return axios.post(`${config.serverAddress}/Accounts/Login`, { identifier: email, password: password}).then((res) => {
       if(res.status == 200) {
-        console.log(res.data.result.token.accessToken)
-        axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.result.token.accessToken}`;
+        window.localStorage.setItem("accessToken", res.data.result.token.accessToken)
+        axios.defaults.headers.common['Authorization'] = `Bearer ${window.localStorage.getItem("accessToken")}`;
         console.log(axios.defaults.headers.common['Authorization'])
         return {status: res.status, data: res.data.result}
       }
@@ -33,9 +33,11 @@ const API = {
 
   getContacts: async () => {
     return axios.get(`${config.serverAddress}/Contacts`).then((res) => {
+      console.log("request success: ", res)
       if(res.status == 200) return {status: res.status, data: res.data.result}
     }).catch((error) => {
-      return {status: 400, data: error.response.data.responseException}
+      console.log("request error: ", error.response)
+      return {status: error.response.status, data: error.response.data.responseException}
     })
   },
 
@@ -57,7 +59,7 @@ const API = {
   },
 
   getUserRelationshipStatus: async () => {
-    return axios.get(`${config.serverAddress}/UserRelationshipStatus`).then((res) => {
+    return axios.get(`${config.serverAddress}/ContactRelationshipTypes`).then((res) => {
       if(res.status == 200) return {status: res.status, data: res.data.result}
     }).catch((error) => {
       return {status: 400, data: error.response.data.responseException}

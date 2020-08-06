@@ -105,7 +105,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
             <IonCol size="2"></IonCol>
             <IonCol size="8" className="justify-content-center">
               <IonAvatar class="profile-img-cover">
-                <img src={state.user.image} alt=""/>
+                <img src={state.user.image ? state.user.image : './assets/imgs/default_contact_avatar.png'} alt=""/>
               </IonAvatar>
             </IonCol>
             <IonCol size="2"></IonCol>

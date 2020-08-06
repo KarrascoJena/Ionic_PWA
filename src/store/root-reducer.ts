@@ -1,4 +1,5 @@
 import {Action, Reducer, Dispatch} from "redux";
+
 import API from './root-actions'
 
 export interface InitialState {
@@ -93,7 +94,10 @@ export class RootDispatcher {
   };
 
   getContacts = async () => {
-    return API.getContacts()
+    return API.getContacts().then(res => {
+      if(res?.status == 401) this.logout()
+      else return res
+    })
   };
 
   getContactDetail = async (id: string) => {

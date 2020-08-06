@@ -29,6 +29,7 @@ interface contactsType{
 const MyContacts: React.FC<{history}> = (props) => {
 
   const [contacts, setContacts] = useState<Array<contactsType>>([])
+  const [fetched, setFetched] = useState<boolean>(false)
   const dispatch = useDispatch();
   const rootDispatcher = new RootDispatcher(dispatch);
   
@@ -36,7 +37,12 @@ const MyContacts: React.FC<{history}> = (props) => {
 
   useEffect(() => {
     rootDispatcher.getContacts().then( res => {
-      setContacts(res?.data.contacts)
+      if(res?.status == 200){
+        setContacts(res?.data.contacts)
+        setFetched(true)
+      } else {
+        setFetched(true)
+      }
     })
   }, [])
 
@@ -59,7 +65,8 @@ const MyContacts: React.FC<{history}> = (props) => {
 
       <IonContent className="padding-content justify-content-center">
         <IonRow className="grid-container">
-          <ContactList contacts = {contacts}/>
+          
+          {fetched == false ? null : <ContactList contacts = {contacts}/>}
         </IonRow>
         <IonToast
           isOpen={true}
@@ -106,6 +113,7 @@ const ContactList: React.FC<{contacts: contactsType[]}> = (props) => {
 
   const empty = () => {
     var tem = [] as any;
+    if(props.contacts.length >= 9) tem.push(initCard(props.contacts.length));
     for(var i = props.contacts.length; i < 9; i++){
       tem.push(initCard(i));
     }
