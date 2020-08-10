@@ -38,7 +38,6 @@ const MyContacts: React.FC<{history}> = (props) => {
     rootDispatcher.getContacts().then( res => {
       if(res?.status == 200){
         setContacts(res?.data.contacts)
-      } else {
       }
     })
   }, [])
