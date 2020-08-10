@@ -23,7 +23,6 @@ const LoginForm: React.FC<Props> = (props) => {
   
   let history = useHistory()
 
-
   const dispatch = useDispatch();
   const rootDispatcher = new RootDispatcher(dispatch);
 

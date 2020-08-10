@@ -50,7 +50,7 @@ export const rootReducer: Reducer<InitialState, DispatchAction> = (state = initi
     return { ...state, authorized: true, userInfo: {...action.payload.userInfo}}
   } else if (action.type === ActionType.Logout) {
     localStorage.removeItem('state');
-    return {...state, authorized: false};
+    return initialState;
   }
   else {
     return state;
@@ -101,7 +101,10 @@ export class RootDispatcher {
   };
 
   getContactDetail = async (id: string) => {
-    return API.getContactsDetail(id)
+    return API.getContactsDetail(id).then(res => {
+      if(res?.status == 401) this.logout()
+      else return res
+    })
   };
 
   addContact = async (data: any) => {
@@ -110,6 +113,13 @@ export class RootDispatcher {
 
   getUserRelationshipStatus = async () => {
     return API.getUserRelationshipStatus()
+  };
+
+  deleteContact = async (id: string) => {
+    return API.deleteContact(id).then(res => {
+      if(res?.status == 401) this.logout()
+      else return res
+    })
   };
 
   setLanguage = (language: string) => {

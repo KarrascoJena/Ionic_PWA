@@ -29,7 +29,6 @@ interface contactsType{
 const MyContacts: React.FC<{history}> = (props) => {
 
   const [contacts, setContacts] = useState<Array<contactsType>>([])
-  const [fetched, setFetched] = useState<boolean>(false)
   const dispatch = useDispatch();
   const rootDispatcher = new RootDispatcher(dispatch);
   
@@ -39,9 +38,7 @@ const MyContacts: React.FC<{history}> = (props) => {
     rootDispatcher.getContacts().then( res => {
       if(res?.status == 200){
         setContacts(res?.data.contacts)
-        setFetched(true)
       } else {
-        setFetched(true)
       }
     })
   }, [])
@@ -66,7 +63,7 @@ const MyContacts: React.FC<{history}> = (props) => {
       <IonContent className="padding-content justify-content-center">
         <IonRow className="grid-container">
           
-          {fetched == false ? null : <ContactList contacts = {contacts}/>}
+          <ContactList contacts = {contacts}/>
         </IonRow>
         <IonToast
           isOpen={true}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import { IonDatetime, IonSelect, IonSelectOption, IonToggle, IonAvatar, IonLabel, IonRange, IonInput, IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonButton, IonButtons, IonItem, IonAlert } from '@ionic/react';
 import { useLocation } from "react-router-dom";
 
@@ -48,8 +48,6 @@ const ContactDetail: React.FC<{history}> = (props) => {
     })
 
   }, [])
-
-  console.log(state)
 
   const onChangeName = (e) => {
     // setState({...state, name: e.target.value})
@@ -437,7 +435,15 @@ const ContactDetail: React.FC<{history}> = (props) => {
           cssClass='my-custom-class'
           header={'Are you sure?'}
           message={'Your contact will be deleted for ever'}
-          buttons={['No', 'Yes']}
+          buttons={[
+            'No',
+            {
+              text: 'Yes',
+              handler: () => {rootDispatcher.deleteContact(contact.id).then(res => {
+                props.history.push('mycontacts')
+              })}
+            }
+          ]}
         />
       </IonContent>
     </IonPage>

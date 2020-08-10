@@ -72,8 +72,6 @@ const AddContact: React.FC<{history}> = (props) => {
   const dispatch = useDispatch();
   const rootDispatcher = new RootDispatcher(dispatch);
 
-  console.log(state)
-
   useLayoutEffect(() => {
 
     rootDispatcher.getUserRelationshipStatus().then (res => {

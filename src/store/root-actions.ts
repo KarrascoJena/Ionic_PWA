@@ -7,7 +7,6 @@ const API = {
       if(res.status == 200) {
         window.localStorage.setItem("accessToken", res.data.result.token.accessToken)
         axios.defaults.headers.common['Authorization'] = `Bearer ${window.localStorage.getItem("accessToken")}`;
-        console.log(axios.defaults.headers.common['Authorization'])
         return {status: res.status, data: res.data.result}
       }
     }).catch((error) => {
@@ -36,7 +35,6 @@ const API = {
       console.log("request success: ", res)
       if(res.status == 200) return {status: res.status, data: res.data.result}
     }).catch((error) => {
-      console.log("request error: ", error.response)
       return {status: error.response.status, data: error.response.data.responseException}
     })
   },
@@ -45,7 +43,15 @@ const API = {
     return axios.get(`${config.serverAddress}/Contacts/${id}`).then((res) => {
       if(res.status == 200) return {status: res.status, data: res.data.result}
     }).catch((error) => {
-      return {status: 400, data: error.response.data.responseException}
+      return {status: error.response.status, data: error.response.data.responseException}
+    })
+  },
+
+  deleteContact: async (id) => {
+    return axios.delete(`${config.serverAddress}/Contacts/${id}`).then((res) => {
+      if(res.status == 200) return {status: res.status, data: res.data.result}
+    }).catch((error) => {
+      return {status: error.response.status, data: error.response.data.responseException}
     })
   },
 
