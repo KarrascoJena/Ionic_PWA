@@ -102,17 +102,23 @@ export class RootDispatcher {
 
   getContactDetail = async (id: string) => {
     return API.getContactsDetail(id).then(res => {
-      if(res?.status == 401) this.logout()
+      if(res?.status === 401) this.logout()
       else return res
     })
   };
 
   addContact = async (data: any) => {
-    return API.addContact(data)
+    return API.addContact(data).then(res => {
+      if(res?.status === 401) this.logout()
+      else return res
+    })
   };
 
   getUserRelationshipStatus = async () => {
-    return API.getUserRelationshipStatus()
+    return API.getUserRelationshipStatus().then(res => {
+      if(res?.status == 401) this.logout()
+      else return res
+    })
   };
 
   deleteContact = async (id: string) => {

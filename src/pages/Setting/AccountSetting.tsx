@@ -75,12 +75,12 @@ const SettingIndex: React.FC<{history}> = (props) => {
           {settingList}
         </IonList>
         <hr className="seperator-hr"/>
-        <IonButton fill="clear" onClick={(e) => {rootDispatcher.logout()}} className="link-main text-transform-none">Sign Out</IonButton>
+        <IonButton fill="clear" onClick={(e) => {rootDispatcher.logout();}} className="link-main text-transform-none">Sign Out</IonButton>
         <div className="account-setting-version text">
           <IonLabel>Version 1.0</IonLabel>
         </div>
       </IonContent>
-      <BottomTabBar history={props.history} tab=""/>
+      {/* <BottomTabBar history={props.history} tab=""/> */}
     </IonPage>
   );
 };

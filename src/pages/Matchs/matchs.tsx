@@ -11,7 +11,7 @@ const Personal_Matches = [
     matches: 'nothing found'
   },
   {
-    img: './assets/imgs/slides/slide9.jpeg',
+    img: './assets/imgs/slides/slide3.jpg',
     name: 'Morina',
     matches: 'nothing found'
   },
@@ -24,17 +24,17 @@ const Personal_Matches = [
 
 const Contact_Matches = [
   {
-    img: './assets/imgs/slides/slide4.jpg',
+    img: './assets/imgs/slides/slide3.jpg',
     name: 'Daniela',
     matches: 'nothing found'
   },
   {
-    img: './assets/imgs/slides/slide5.jpg',
+    img: './assets/imgs/slides/slide2.jpg',
     name: 'John',
     matches: 'nothing found'
   },
   {
-    img: './assets/imgs/slides/slide6.jpg',
+    img: './assets/imgs/slides/slide2.jpg',
     name: 'Zakia',
     matches: 'nothing found'
   }

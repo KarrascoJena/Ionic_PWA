@@ -45,7 +45,7 @@ const Password: React.FC<{history}> = (props) => {
           </IonItem>
         </IonList>
       </IonContent>
-      <BottomTabBar history={props.history} tab=""/>
+      {/* <BottomTabBar history={props.history} tab=""/> */}
     </IonPage>
   );
 };

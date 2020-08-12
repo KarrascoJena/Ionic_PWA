@@ -26,7 +26,7 @@ interface contactsType{
   id: string, fullname: string, image: string
 }
 
-const MyContacts: React.FC<{history}> = (props) => {
+const Contacts: React.FC<{history}> = (props) => {
 
   const [contacts, setContacts] = useState<Array<contactsType>>([])
   const dispatch = useDispatch();
@@ -35,7 +35,9 @@ const MyContacts: React.FC<{history}> = (props) => {
 
 
   useEffect(() => {
+    console.log("11111111111")
     rootDispatcher.getContacts().then( res => {
+      console.log(res)
       if(res?.status == 200){
         setContacts(res?.data.contacts)
       }
@@ -72,7 +74,7 @@ const MyContacts: React.FC<{history}> = (props) => {
           cssClass="bottom-toast-default"
         />
       </IonContent>
-      <BottomTabBar history={props.history} tab="contact"/>
+      {/* <BottomTabBar history={props.history} tab="contact"/> */}
     </IonPage>
   );
 };
@@ -81,6 +83,7 @@ const ContactList: React.FC<{contacts: contactsType[]}> = (props) => {
   let history = useHistory()
 
   const realContacts = props.contacts.map((item, index) => {
+    console.log(item)
     return(
       <IonCol onClick={(e) => gotoContactDetail(e, history, item.id)} size="4" className="grid-img height-140" key={index}>
         <img className="img-auto card-effect object-fit-cover" src={item.image ? item.image : './assets/imgs/default_contact_avatar.png'} alt=""/>
@@ -95,7 +98,7 @@ const ContactList: React.FC<{contacts: contactsType[]}> = (props) => {
 
   const initCard = (key) => {
     return(
-      <IonCol size="4" className="grid-img height-140" key={key} onClick={() => {history.push('addcontact')}}>
+      <IonCol size="4" className="grid-img height-140" key={key} onClick={() => {history.push('/addcontact')}}>
         <div className="empty-img card-effect">
         </div>
         <div className="grid-img-button bottom-circle-icon box-shadow-full-screen full-fill-red-icon">
@@ -124,4 +127,4 @@ const ContactList: React.FC<{contacts: contactsType[]}> = (props) => {
   )
 }
 
-export default MyContacts;
+export default Contacts;

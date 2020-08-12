@@ -89,7 +89,7 @@ const Experiences: React.FC<{history}> = (props) => {
           
         </div>
       </IonContent>
-      <BottomTabBar history={props.history} tab="experience"/>
+      {/* <BottomTabBar history={props.history} tab="experience"/> */}
     </IonPage>
   );
 }

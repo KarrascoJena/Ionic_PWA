@@ -63,7 +63,7 @@ const Search: React.FC<{history}> = (props) => {
         </div>
       </IonContent>
       
-      <BottomTabBar history={props.history} tab="search"/>
+      {/* <BottomTabBar history={props.history} tab="search"/> */}
     </IonPage>
   );
 };

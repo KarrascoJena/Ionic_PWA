@@ -56,7 +56,7 @@ const Notifications: React.FC<{history}> = (props) => {
           {settingList}
         </IonList>
       </IonContent>
-      <BottomTabBar history={props.history} tab=""/>
+      {/* <BottomTabBar history={props.history} tab=""/> */}
     </IonPage>
   );
 };

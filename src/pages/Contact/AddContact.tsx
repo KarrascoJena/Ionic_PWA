@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect, useRef } from 'react';
 import { IonDatetime, IonSelect, IonSelectOption, IonToggle, IonAvatar, IonLabel, IonRange, IonInput, IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonButton, IonButtons, IonItem, IonAlert } from '@ionic/react';
 
 import { useDispatch } from "react-redux";
@@ -10,11 +10,13 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import ChoosePhoto from '../../components/change-photo';
 
+import { initState } from './InitContactData'
+
 import './assets/scss/ContactDetail.scss';
 
 const gotoBack = (e, props) => {
   e.preventDefault();
-  props.history.push('/mycontacts')
+  props.history.goBack();
 }
 
 const gotoMyContacts = (e, props) => {
@@ -23,54 +25,21 @@ const gotoMyContacts = (e, props) => {
 }
 
 const AddContact: React.FC<{history}> = (props) => {
-  const [showAlert, setShowAlert] = useState(false);
-  const [validEmailError, setValidEmailError] = useState('');
+  const [showAlert, setShowAlert] = useState<boolean>(false);
+  const [deleteText, setDeleteText] = useState<string>('');
+  const [validEmailError, setValidEmailError] = useState<string>('');
   const [relationshipStatus, setRelationshipStatus] = useState([]);
 
-  const [state, setState] = useState<any>(
-    {
-      fullName: '',
-      gender: 'male',
-      birthday: '1988-04-12T00:00:42.793Z',
-      contactRelationshipTypeId: '',
-      city: '',
-      travelRadius: 0,
-      events: {
-        weekend: { isActive: '0' },
-        birthday: { isActive: '1' },
-        chrismas: { isActive: '0' },
-        vacation: { isActive: '0'},
-        valentine: { isActive: '0' },
-        parentsday: { isActive: '0' },
-        anniversary: { date: '0000-00-00', isActive: '0' }
-      },
-      interests: {
-        fly_fall: { rating: '0' },
-        wind_water: { rating: '0' },
-        dinner_culture: { rating: '0' },
-        wellness_beauty: { rating: '0' },
-        culture_creative: { rating: '0' },
-        driving_motosport: { rating: '0' },
-        sport_action_nature: { rating: '0' },
-        vacation_overnightstay: { rating: '0' }
-      },
-      characteristics: {
-        sociality: { rating: '0' },
-        personality: { rating: '0' },
-        fitness_level: { rating: '0' }
-      },
-      connections: {
-        email: { address: '' },
-        phone: { number: '' },
-        facebook: { username: '' },
-        whatsapp: { number: '' },
-        instagram: { username: '' }
-      }
-    }
-  );
-
+  const [state, setState] = useState<any>({...initState});
+  const [alert, setAlert] = useState({
+    state: false,
+    header: '',
+    content:''
+  });
   const dispatch = useDispatch();
   const rootDispatcher = new RootDispatcher(dispatch);
+  const ref = useRef()
+
 
   useLayoutEffect(() => {
 
@@ -124,15 +93,17 @@ const AddContact: React.FC<{history}> = (props) => {
     }
   }
 
+  console.log(state)
+
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar className="padding-header header-bacground-color">
           <IonButtons slot="start">
-            <IonButton onClick={(e) => gotoBack(e, props)} className="cancel-button">Cancel</IonButton>
+            <IonButton onClick={(e) => {setState({...initState}); gotoBack(e, props)}} className="cancel-button">Cancel</IonButton>
           </IonButtons>
           <IonButtons slot="end">
-            <IonButton onClick={(e) => gotoMyContacts(e, props)} strong={true} className="done-button">Done</IonButton>
+            <IonButton onClick={() => setShowAlert(true)} strong={true} className="done-button">Done</IonButton>
           </IonButtons>
           <IonTitle>Edit Contact</IonTitle>
         </IonToolbar>
@@ -468,7 +439,7 @@ const AddContact: React.FC<{history}> = (props) => {
         </div>
 
         <div id="delete-connect" className="delete-contact">
-          <IonButton fill="clear" onClick={() => setShowAlert(true)}>Add contact</IonButton>
+              <IonButton fill="clear" onClick={() => {rootDispatcher.deleteContact(state.contactId)}}>{deleteText}</IonButton>
         </div>
 
         <IonAlert
@@ -484,10 +455,27 @@ const AddContact: React.FC<{history}> = (props) => {
               role: 'add contact',
               handler: () => {
                 
-                rootDispatcher.addContact(state).then(res => {console.log(res)})
+                rootDispatcher.addContact(state).then(res => {
+                  console.log(res);
+                  if(res?.status !== 200){
+                    setAlert({...alert, state: true, content: res?.data.exceptionMessage})
+                  } else {
+                    setState({...state, contactId: res.data.contact.id})
+                    setDeleteText('delete contact')
+                  }
+                })
               }
             }
           ]}/>
+
+        <IonAlert
+          isOpen={alert.state}
+          onDidDismiss={() => setAlert({state: false, header: '', content: ''})}
+          cssClass='my-custom-class'
+          header={alert.header}
+          message={alert.content}
+          buttons={['OK']}
+        />
       </IonContent>
     </IonPage>
   );
