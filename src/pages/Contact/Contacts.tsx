@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { RootDispatcher } from "../../store/root-reducer";
 
-import BottomTabBar from '../../components/bottom-tab-bar';
 
 import './assets/scss/MyContacts.scss';
 
@@ -36,9 +35,14 @@ const Contacts: React.FC<{history}> = (props) => {
 
   useEffect(() => {
     console.log("11111111111")
+    
+    rootDispatcher.getCountries().then( res => {
+      console.log(res)
+    })
+
     rootDispatcher.getContacts().then( res => {
       console.log(res)
-      if(res?.status == 200){
+      if(res?.status === 200){
         setContacts(res?.data.contacts)
       }
     })

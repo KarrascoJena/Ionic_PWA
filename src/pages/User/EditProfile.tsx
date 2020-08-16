@@ -5,7 +5,9 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import ChoosePhoto from '../../components/change-photo';
-import BottomTabBar from '../../components/bottom-tab-bar';
+
+import { useSelector } from "react-redux";
+import { InitialState } from "../../store/root-reducer";
 
 import './assets/css/EditProfile.scss'
 
@@ -20,10 +22,13 @@ const gotoMyContacts = (e, props) => {
 }
 
 const EditProfile: React.FC<{history}> = (props) => {
-
+  const userInfo = useSelector<InitialState, any>((state: InitialState) => {
+    return state.userInfo
+  });
+  console.log(userInfo)
   const [state, setState] = useState({
     name: 'Edina',
-    username: 'edina23',
+    username: userInfo.userName,
     gender: 'female',
     birthday: Date(),
     city: 'Graz',

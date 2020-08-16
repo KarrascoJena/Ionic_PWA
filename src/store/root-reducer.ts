@@ -64,16 +64,9 @@ export class RootDispatcher {
   constructor(dispatch: Dispatch<DispatchAction>){
     this.dispatch = dispatch; 
   }
-  updateName = (username: string) => this.dispatch({type: ActionType.UpdateName, payload: {username}});
-  
-  updateAddress = (address: string) => this.dispatch({type: ActionType.UpdateAddress, payload: {address}});
-  
-  deleteName = () => this.dispatch({type: ActionType.DeleteName, payload: {}});
-
-  deleteAddress = () => this.dispatch({type: ActionType.DeleteAddress, payload: {authorized: false}});
 
   login = async (email: string, password: string) => {
-    return API.login(email, password).then(res => {
+    return API.login(email, password).then( res => {
       if(res?.status === 200) this.dispatch({type: ActionType.Login, payload: {userInfo: res?.data}})
       return res
     });
@@ -82,7 +75,7 @@ export class RootDispatcher {
   logout = () => this.dispatch({type: ActionType.Logout, payload: {}})
   
   register = async (fullName: string, password: string, userName: string, email: string, phoneNumber: string) => {
-    return API.register(fullName, password, userName, email, phoneNumber).then(res => {
+    return API.register(fullName, password, userName, email, phoneNumber).then( res => {
       console.log(res)
       this.dispatch({type: ActionType.Login, payload: {userInfo: res?.data}})
       return res
@@ -94,14 +87,14 @@ export class RootDispatcher {
   };
 
   getContacts = async () => {
-    return API.getContacts().then(res => {
-      if(res?.status == 401) this.logout()
+    return API.getContacts().then( res => {
+      if(res?.status === 401) this.logout()
       else return res
     })
   };
 
   getContactDetail = async (id: string) => {
-    return API.getContactsDetail(id).then(res => {
+    return API.getContactsDetail(id).then( res => {
       if(res?.status === 401) this.logout()
       else return res
     })
@@ -115,15 +108,22 @@ export class RootDispatcher {
   };
 
   getUserRelationshipStatus = async () => {
-    return API.getUserRelationshipStatus().then(res => {
-      if(res?.status == 401) this.logout()
+    return API.getUserRelationshipStatus().then( res => {
+      if(res?.status === 401) this.logout()
       else return res
     })
   };
 
   deleteContact = async (id: string) => {
-    return API.deleteContact(id).then(res => {
-      if(res?.status == 401) this.logout()
+    return API.deleteContact(id).then( res => {
+      if(res?.status === 401) this.logout()
+      else return res
+    })
+  };
+
+  getCountries = async () => {
+    return API.getCountries().then( res => {
+      if(res?.status === 401) this.logout()
       else return res
     })
   };

@@ -27,7 +27,7 @@ const EventDetail: React.FC<{ history:any; location: any;}> = (props) => {
                 <IonLabel>Status:&nbsp;</IonLabel>
                 {badge(data.status)}
               </div>
-              {data.status == 1 ?
+              {data.status === 1 ?
                 null
                 :
                 <>
@@ -56,7 +56,7 @@ const EventDetail: React.FC<{ history:any; location: any;}> = (props) => {
           <div className="justify-content-center margin-top-20">
             
           </div>
-          {data.status == 1 ?
+          {data.status === 1 ?
             <>
               <IonButton onClick={() => {props.history.push('event_book')}} className="red-button width-50">Book Now</IonButton>
               <div className="text-align-center">

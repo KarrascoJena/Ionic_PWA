@@ -32,11 +32,11 @@ const LoginForm: React.FC<Props> = (props) => {
     rootDispatcher.login(email, password).then(res => {
       const status = res?.status
       setShowLoading(false)
-      if(status == 401){
+      if(status === 401){
         setAlert({state: true, header: 'server is not working', content: 'try again later'})
-      } else if (status == 400){
+      } else if (status === 400){
         setAlert({state: true, header: 'Authentication failed', content: `${res?.data.exceptionMessage}`})
-      } else if (status == 200){
+      } else if (status === 200){
         history.push('/main_page/contacts')
       }
     })

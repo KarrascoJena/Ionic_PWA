@@ -15,7 +15,7 @@ const EventActivate: React.FC<{ history:any; }> = (props) => {
   
   const handleValidationCodeSubmit = (e) => {
     e.preventDefault();
-    if(state.validationCode == "12345"){
+    if(state.validationCode === "12345"){
       setStep({...step, validate: true, current: 1})
     } else {
       setStep({...step, validate: false})
@@ -35,7 +35,7 @@ const EventActivate: React.FC<{ history:any; }> = (props) => {
   }
   return (
     <IonPage>
-      {step.current == 0 ?
+      {step.current === 0 ?
         <CheckIn Success={step.validate} history={props.history} ValidationCode={state.validationCode} handleValidationCodeChange={handleValidationCodeChange} handleValidationCodeSubmit={handleValidationCodeSubmit} />
         :
         <Valid history={props.history} ValidationCode={state.validationCode} PartnerPincode={state.partnerPincode} handlePartnerPinChange={handlePartnerPinChange} handleActivateEvent={handleActivateEvent} />

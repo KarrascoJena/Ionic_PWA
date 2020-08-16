@@ -3,10 +3,13 @@ import axios from 'axios';
 
 const API = {
   login: async (email, password) => {
-    return axios.post(`${config.serverAddress}/Accounts/Login`, { identifier: email, password: password}).then((res) => {
+    return axios.post(`${config.serverAddress}/Accounts/Login`, { identifier: email, password: password}).then(res => {
       if(res.status == 200) {
         window.localStorage.setItem("accessToken", res.data.result.token.accessToken)
         axios.defaults.headers.common['Authorization'] = `Bearer ${window.localStorage.getItem("accessToken")}`;
+        axios.get(`${config.serverAddress}/users/${res.data.result.id}`).then(res => {
+          console.log(res)
+        })
         return {status: res.status, data: res.data.result}
       }
     }).catch((error) => {
@@ -17,7 +20,7 @@ const API = {
   register: async (fullName, userName, password, email, phoneNumber) => {
     console.log("register = ", axios.defaults.headers.common['Authorization'])
     return axios.post(`${config.serverAddress}/Accounts/Register`, { fullName: fullName, userName: userName, password: password, email: email, phoneNumber: phoneNumber}).then((res) => {
-      if(res.status == 200) return {status: res.status, data: res.data.result}
+      if(res.status === 200) return {status: res.status, data: res.data.result}
     }).catch((error) => {
       return {status: 400, data: error.response.data.responseException}
     })
@@ -25,8 +28,8 @@ const API = {
 
   forgetPassword: async (email) => {
     console.log("forget password = ", axios.defaults.headers.common['Authorization'])
-    return axios.post(`${config.serverAddress}/Accounts/ForgotPassword`, { email: email}).then((res) => {
-      if(res.status == 200) return {status: res.status, data: res.data.result}
+    return axios.post(`${config.serverAddress}/Accounts/ForgotPassword`, { email: email}).then(res => {
+      if(res.status === 200) return {status: res.status, data: res.data.result}
     }).catch((error) => {
       return {status: 400, data: error.response.data.responseException}
     })
@@ -34,8 +37,8 @@ const API = {
 
   getContacts: async () => {
     console.log("get contacts = ", axios.defaults.headers.common['Authorization'])
-    return axios.get(`${config.serverAddress}/Contacts`).then((res) => {
-      if(res.status == 200) return {status: res.status, data: res.data.result}
+    return axios.get(`${config.serverAddress}/Contacts`).then(res => {
+      if(res.status === 200) return {status: res.status, data: res.data.result}
     }).catch((error) => {
       return {status: error.response.status, data: error.response.data.responseException}
     })
@@ -43,8 +46,8 @@ const API = {
 
   getContactsDetail: async (id) => {
     console.log("get contacts details", axios.defaults.headers.common['Authorization'])
-    return axios.get(`${config.serverAddress}/Contacts/${id}`).then((res) => {
-      if(res.status == 200) return {status: res.status, data: res.data.result}
+    return axios.get(`${config.serverAddress}/Contacts/${id}`).then(res => {
+      if(res.status === 200) return {status: res.status, data: res.data.result}
     }).catch((error) => {
       return {status: error.response.status, data: error.response.data.responseException}
     })
@@ -53,9 +56,9 @@ const API = {
   deleteContact: async (id) => {
     console.log("delete contact", axios.defaults.headers.common['Authorization'])
 
-    return axios.delete(`${config.serverAddress}/Contacts/${id}`).then((res) => {
+    return axios.delete(`${config.serverAddress}/Contacts/${id}`).then(res => {
       console.log(res)
-      if(res.status == 200) return {status: res.status, data: res.data.result}
+      if(res.status === 200) return {status: res.status, data: res.data.result}
     }).catch((error) => {
       console.log(error)
       return {status: error.response.status, data: error.response.data.responseException}
@@ -65,8 +68,8 @@ const API = {
   addContact: async (data) => {
     console.log("add contact", axios.defaults.headers.common['Authorization'])
     return axios.post(`${config.serverAddress}/Contacts`, data).then((res) => {
-      if(res.status == 200) return {status: res.status, data: res.data.result}
-    }).catch((error) => {
+      if(res.status === 200) return {status: res.status, data: res.data.result}
+    }).catch(error => {
       return {status: error.response.status, data: error.response.data.responseException}
     })
   },
@@ -74,9 +77,17 @@ const API = {
   getUserRelationshipStatus: async () => {
     console.log("get user relationship status", axios.defaults.headers.common['Authorization'])
 
-    return axios.get(`${config.serverAddress}/ContactRelationshipTypes`).then((res) => {
-      if(res.status == 200) return {status: res.status, data: res.data.result}
-    }).catch((error) => {
+    return axios.get(`${config.serverAddress}/ContactRelationshipTypes`).then(res => {
+      if(res.status === 200) return {status: res.status, data: res.data.result}
+    }).catch(error => {
+      return {status: error.response.status, data: error.response.data.responseException}
+    })
+  },
+
+  getCountries: async () => {
+    return axios.get(`${config.serverAddress}/Countries`).then(res => {
+      if(res.status === 200) return {status: res.status, data: res.data.result}
+    }).catch(error => {
       return {status: error.response.status, data: error.response.data.responseException}
     })
   },

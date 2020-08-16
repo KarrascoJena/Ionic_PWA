@@ -213,7 +213,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
               {renderOccasionIcon("fal fa-birthday-cake fa-1x", "Birthday")}
             </IonCol>
             <IonCol size="2">
-              <IonToggle checked={state.events.birthday.isActive == "1" ? true : false} onIonChange={(e) => onChangeCheck(e, 'checkBirthday')}/>
+              <IonToggle checked={state.events.birthday.isActive === "1" ? true : false} onIonChange={(e) => onChangeCheck(e, 'checkBirthday')}/>
             </IonCol>
           </IonRow>
           <br/>
@@ -222,7 +222,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
               {renderOccasionIcon("fal fa-tree-christmas fa-1x", "Chrismas")}
             </IonCol>
             <IonCol size="2">
-              <IonToggle checked={state.events.chrismas.isActive == "1" ? true : false} onIonChange={(e) => onChangeCheck(e, 'checkChrismas')}/>
+              <IonToggle checked={state.events.chrismas.isActive === "1" ? true : false} onIonChange={(e) => onChangeCheck(e, 'checkChrismas')}/>
             </IonCol>
           </IonRow>
           <br/>
@@ -232,7 +232,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
               {renderOccasionIcon("fal fa-island-tropical fa-1x", "Vacation")}
             </IonCol>
             <IonCol size="2">
-              <IonToggle checked={state.events.vacation.isActive == "1" ? true : false} onIonChange={(e) => onChangeCheck(e, 'checkVacation')}/>
+              <IonToggle checked={state.events.vacation.isActive === "1" ? true : false} onIonChange={(e) => onChangeCheck(e, 'checkVacation')}/>
             </IonCol>
           </IonRow>
           <br/>
@@ -242,7 +242,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
               {renderOccasionIcon("fal fa-calendar-day fa-1x", "Weekend")}
             </IonCol>
             <IonCol size="2">
-              <IonToggle checked={state.events.weekend.isActive == "1" ? true : false} onIonChange={(e) => onChangeCheck(e, 'checkWeekend')}/>
+              <IonToggle checked={state.events.weekend.isActive === "1" ? true : false} onIonChange={(e) => onChangeCheck(e, 'checkWeekend')}/>
             </IonCol>
           </IonRow>
           <br/>
@@ -252,7 +252,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
               {renderOccasionIcon("fal fa-kiss-wink-heart fa-1x", "Valentine")}
             </IonCol>
             <IonCol size="2">
-              <IonToggle checked={state.events.valentine.isActive == "1" ? true : false} onIonChange={(e) => onChangeCheck(e, 'checkValentine')}/>
+              <IonToggle checked={state.events.valentine.isActive === "1" ? true : false} onIonChange={(e) => onChangeCheck(e, 'checkValentine')}/>
             </IonCol>
           </IonRow>
           <br/>
@@ -262,7 +262,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
               {renderOccasionIcon("fal fa-kiss-wink-heart fa-1x", "Father or Mother day")}
             </IonCol>
             <IonCol size="2">
-              <IonToggle checked={state.events.parentsday.isActive == "1" ? true : false} onIonChange={(e) => onChangeCheck(e, 'parentsday')}/>
+              <IonToggle checked={state.events.parentsday.isActive === "1" ? true : false} onIonChange={(e) => onChangeCheck(e, 'parentsday')}/>
             </IonCol>
           </IonRow>
           <br/>
@@ -272,10 +272,10 @@ const ContactDetail: React.FC<{history}> = (props) => {
               {renderOccasionIcon("far fa-heart fa-1x", "Anniversary")}
             </IonCol>
             <IonCol size="2">
-              <IonToggle checked={state.events.anniversary.isActive == "1" ? true : false} onIonChange={(e) => onChangeCheck(e, 'anniversary')}/>
+              <IonToggle checked={state.events.anniversary.isActive === "1" ? true : false} onIonChange={(e) => onChangeCheck(e, 'anniversary')}/>
             </IonCol>
           </IonRow>
-          <IonRow hidden={state.contactRelationshipTypeId !== "82d33a98-699a-43df-b3b8-46f81b52e22f" || state.contact.events.anniversary.isActive == "0"}>
+          <IonRow hidden={state.contactRelationshipTypeId !== "82d33a98-699a-43df-b3b8-46f81b52e22f" || state.contact.events.anniversary.isActive === "0"}>
             <IonCol size="12">
               <IonItem>
                 <IonDatetime value={state.birthday} placeholder="Select Date" className="ion-datetime-custom"></IonDatetime>

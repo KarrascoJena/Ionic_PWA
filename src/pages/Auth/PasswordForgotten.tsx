@@ -21,9 +21,9 @@ const PasswordForgotten: React.FC<{ history:any; }> = (props) => {
     e.preventDefault();
     rootDispatcher.forgetPassword(email).then(res => {
       const status = res?.status
-      if(status == 401){
+      if(status === 401){
         setAlert({state: true, header: 'server is not working', content: 'try again later'})
-      } else if (status == 400){
+      } else if (status === 400){
         setAlert({state: true, header: 'Authentication failed', content: `${res?.data.exceptionMessage}`})
       } else {
         setAlert({state: true, header: 'Authentication failed', content: `Email sent to ${email}. Please check your inbox`})

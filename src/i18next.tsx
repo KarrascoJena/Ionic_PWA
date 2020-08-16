@@ -9,7 +9,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 
 const Languages = ['en', 'de'];
 let defaultLanguage: string = 'en'
-if (window.navigator.language == 'de') defaultLanguage = 'de'
+if (window.navigator.language === 'de') defaultLanguage = 'de'
 
 i18n
   // load translation using http -> see /public/locales (i.e. https://github.com/i18next/react-i18next/tree/master/example/react/public/locales)

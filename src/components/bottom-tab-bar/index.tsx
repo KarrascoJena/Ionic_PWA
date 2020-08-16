@@ -34,7 +34,7 @@ const BottomTabBar: React.FC<propsData> = (props) => {
 
         <IonTabButton tab="schedule" onClick={() => {props.history.push('./matches')}}>
           <span className="tab-bar-icon custom-icon-size-small ">
-            <i className={props.tab == 'matche' ? 'fas fa-heart' : 'fal fa-heart'}></i>
+            <i className={props.tab === 'matche' ? 'fas fa-heart' : 'fal fa-heart'}></i>
           </span>
           <label className="bottom-tab-bar-button">Matches</label>
           <IonBadge>2</IonBadge>
@@ -43,14 +43,14 @@ const BottomTabBar: React.FC<propsData> = (props) => {
       
         <IonTabButton tab="map" onClick={() => {props.history.push('./experiences')}}>
           <span className="tab-bar-icon custom-icon-size-small">
-            <i  className={props.tab == 'experience' ? 'fas fa-book-spells' : 'fal fa-book-spells'}></i>
+            <i  className={props.tab === 'experience' ? 'fas fa-book-spells' : 'fal fa-book-spells'}></i>
           </span>
           <IonLabel className="bottom-tab-bar-button">Experiences</IonLabel>
         </IonTabButton>
 
         <IonTabButton tab="search_overview"  onClick={() => {props.history.push('./search_overview')}}>
           <span className="tab-bar-icon custom-icon-size-small">
-            <i className={props.tab == 'search' ? 'fas fa-search' : 'fal fa-search'}></i>
+            <i className={props.tab === 'search' ? 'fas fa-search' : 'fal fa-search'}></i>
           </span>
           <IonLabel className="bottom-tab-bar-button">Search</IonLabel>
 
@@ -58,7 +58,7 @@ const BottomTabBar: React.FC<propsData> = (props) => {
         
         <IonTabButton tab="about"   onClick={() => {props.history.push('./myContacts')}}>
           <span className="tab-bar-icon custom-icon-size-small">
-            <i className={props.tab == 'contact' ? 'fas fa-user-friends' : 'fal fa-user-friends'}></i>
+            <i className={props.tab === 'contact' ? 'fas fa-user-friends' : 'fal fa-user-friends'}></i>
           </span>
           <IonLabel className="bottom-tab-bar-button">Contacts</IonLabel>
         </IonTabButton>
