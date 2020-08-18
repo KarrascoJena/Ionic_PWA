@@ -2,8 +2,6 @@ import React from 'react';
 import { IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonList, IonItem, IonBackButton } from '@ionic/react';
 import {useRouteMatch} from 'react-router-dom'
 
-import BottomTabBar from '../../../components/bottom-tab-bar';
-
 import '../assets/scss/AccountSetting.scss';
 
 const settings = [
@@ -15,7 +13,7 @@ const settings = [
 
 
 const Security: React.FC<{history}> = (props) => {
-  let { path, url } = useRouteMatch();
+  let { path } = useRouteMatch();
   const settingList = settings.map((item, i) => {
     return (
       <IonItem button onClick={(e) => {e.preventDefault(); props.history.push(`${path}/${item.url}`)}} lines="none"  className="ion-react-nav-detail-btn" key={i}>
@@ -38,7 +36,6 @@ const Security: React.FC<{history}> = (props) => {
           {settingList}
         </IonList>
       </IonContent>
-      {/* <BottomTabBar history={props.history} tab="search"/> */}
     </IonPage>
   );
 };

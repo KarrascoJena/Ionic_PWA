@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React from 'react';
 import { IonPage, IonContent, IonButton, IonLabel } from '@ionic/react';
 
 const Confirmed : React.FC<{history: any}> = (props) => {

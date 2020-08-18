@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { RootDispatcher } from "../../store/root-reducer";
 
-
 import './assets/scss/MyContacts.scss';
 
 const gotoSetting = (e, props) => {
@@ -31,12 +30,9 @@ const Contacts: React.FC<{history}> = (props) => {
   const dispatch = useDispatch();
   const rootDispatcher = new RootDispatcher(dispatch);
   
-
-
   useEffect(() => {
-    console.log("11111111111")
-    
-    rootDispatcher.getCountries().then( res => {
+
+    rootDispatcher.getDiscoveries().then (res => {
       console.log(res)
     })
 

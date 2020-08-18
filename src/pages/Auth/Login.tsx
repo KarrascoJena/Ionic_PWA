@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IonPage, IonInput, IonButton, IonTabBar,  IonAlert, IonTabButton, IonLabel, IonContent, IonLoading, IonHeader } from '@ionic/react';
+import { IonPage, IonInput, IonButton, IonTabBar,  IonAlert, IonTabButton, IonLabel, IonContent, IonLoading } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { RootDispatcher } from "../../store/root-reducer";

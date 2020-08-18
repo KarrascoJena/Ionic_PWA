@@ -1,6 +1,6 @@
 import React from 'react';
-import { Redirect, Route, BrowserRouter } from 'react-router-dom';
-import { IonApp, IonRouterOutlet, IonRedirect, IonRoute } from '@ionic/react';
+import { Redirect, Route } from 'react-router-dom';
+import { IonApp } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 
 import { useSelector } from "react-redux";
@@ -108,10 +108,4 @@ const App: React.FC = (props) => {
   );
 }
 
-
-const redirectToLogin: React.FC = (props) => {
-  return (
-    <Redirect to="login" />
-  );
-}
 export default App;

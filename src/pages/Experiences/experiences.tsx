@@ -1,7 +1,6 @@
 import React from 'react'
-import {IonPage, IonList, IonItem, IonRow, IonCol, IonHeader, IonToolbar, IonTitle, IonContent, IonButton } from '@ionic/react'
+import {IonPage, IonList, IonItem, IonCol, IonHeader, IonToolbar, IonTitle, IonContent, IonButton } from '@ionic/react'
 
-import BottomTabBar from '../../components/bottom-tab-bar';
 import './assets/scss/Experiences.scss';
 
 const Personal_Matches = [

@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { IonDatetime, IonSelect, IonSelectOption, IonToggle, IonAvatar, IonLabel, IonRange, IonInput, IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonButton, IonButtons, IonItem, IonAlert } from '@ionic/react';
 
 import { useDispatch } from "react-redux";
@@ -19,11 +19,6 @@ const gotoBack = (e, props) => {
   props.history.goBack();
 }
 
-const gotoMyContacts = (e, props) => {
-  e.preventDefault();
-  props.history.push('/mycontacts');
-}
-
 const AddContact: React.FC<{history}> = (props) => {
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [deleteText, setDeleteText] = useState<string>('');
@@ -38,10 +33,8 @@ const AddContact: React.FC<{history}> = (props) => {
   });
   const dispatch = useDispatch();
   const rootDispatcher = new RootDispatcher(dispatch);
-  const ref = useRef()
 
-
-  useLayoutEffect(() => {
+  useEffect(() => {
 
     rootDispatcher.getUserRelationshipStatus().then (res => {
       setRelationshipStatus(res?.data)

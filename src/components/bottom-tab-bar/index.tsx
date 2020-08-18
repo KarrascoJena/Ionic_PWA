@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import { IonTabBar, IonTabButton, IonBadge, IonLabel } from '@ionic/react';
 
 import './assets/css/bottomTabBar.scss';

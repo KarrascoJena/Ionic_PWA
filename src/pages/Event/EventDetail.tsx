@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { IonPage, IonContent, IonBadge, IonButton, IonLabel, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle } from '@ionic/react';
 
 const EventDetail: React.FC<{ history:any; location: any;}> = (props) => { 
@@ -19,7 +19,7 @@ const EventDetail: React.FC<{ history:any; location: any;}> = (props) => {
             <div className="title">{data.name}</div>
             <IonLabel>Supplier 1</IonLabel>
           </div>
-          <img src="./assets/imgs/event_detail1.png"/>
+          <img src="./assets/imgs/event_detail1.png" alt=""/>
           <div className="justify-content-space-between text-align-left">
             <div>
               <br />

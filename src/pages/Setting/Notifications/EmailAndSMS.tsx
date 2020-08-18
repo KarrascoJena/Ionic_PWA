@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import { IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonButton, IonLabel, IonList, IonItem, IonToggle, IonBackButton } from '@ionic/react';
-import BottomTabBar from '../../../components/bottom-tab-bar';
 
 import '../assets/scss/AccountSetting.scss';
 

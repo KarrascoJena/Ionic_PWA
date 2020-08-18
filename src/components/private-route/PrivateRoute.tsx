@@ -1,8 +1,6 @@
 import React from "react";
-import { Route, Redirect } from "react-router-dom";
-import { IonRedirect, IonRoute } from '@ionic/react';
-
-import Login from "../../pages/Auth/Login"
+import { Redirect } from "react-router-dom";
+import { IonRoute } from '@ionic/react';
 
 const PrivateRoute = ({ component: Component, isLogin, ...rest }) => (
   <IonRoute {...rest} render={ props => isLogin === true ? <Component {...props} /> : <Redirect to = "/login"/>}/>

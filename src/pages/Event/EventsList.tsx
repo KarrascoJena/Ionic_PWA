@@ -1,7 +1,5 @@
 import React from 'react'
-import {IonPage, IonList, IonBadge, IonCol, IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonButtons, IonBackButton, IonAvatar } from '@ionic/react'
-
-import BottomTabBar from '../../components/bottom-tab-bar';
+import {IonPage, IonList, IonBadge, IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonButtons, IonBackButton, IonAvatar } from '@ionic/react'
 
 const events = [
   {

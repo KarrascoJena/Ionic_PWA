@@ -8,6 +8,7 @@ export interface InitialState {
     address: string;
     email: string;
     password: string;
+    count: number;
     userInfo: object
 }
 
@@ -17,6 +18,7 @@ export const initialState: InitialState = {
   address: '',
   email: '',
   password: '',
+  count: 0,
   userInfo: {}
 };
 
@@ -31,21 +33,20 @@ export enum ActionType {
   UpdateAddress,
   DeleteName,
   DeleteAddress,
+  Count
 }
 
 export const rootReducer: Reducer<InitialState, DispatchAction> = (state = initialState, action) => {
   if (action.type === ActionType.UpdateName) {
-
     return {...state, username: action.payload.username || ''};
   } else if (action.type === ActionType.DeleteName) {
-
     return {...state, username: ''};
   } else if (action.type === ActionType.DeleteAddress) {
-
     return {...state, address: ''};
   } else if (action.type === ActionType.UpdateAddress) {
-
     return {...state, username: action.payload.username || ''};
+  } else if (action.type === ActionType.Count){
+    return {...state, count: state.count++}
   } else if (action.type === ActionType.Login) {
     return { ...state, authorized: true, userInfo: {...action.payload.userInfo}}
   } else if (action.type === ActionType.Logout) {
@@ -63,6 +64,10 @@ export class RootDispatcher {
   
   constructor(dispatch: Dispatch<DispatchAction>){
     this.dispatch = dispatch; 
+  }
+
+  counter = async () => {
+    this.dispatch({type: ActionType.Count, payload: {}})
   }
 
   login = async (email: string, password: string) => {
@@ -84,6 +89,20 @@ export class RootDispatcher {
 
   forgetPassword = async (email: string) => {
     return API.forgetPassword(email)
+  };
+
+  getUsers = async (id: string) => {
+    return API.getUsers(id).then( res => {
+      if(res?.status === 401) this.logout()
+      else return res
+    })
+  };
+
+  deleteUsers = async (id: string) => {
+    return API.deleteUsers(id).then( res => {
+      if(res?.status === 401) this.logout()
+      else return res
+    })
   };
 
   getContacts = async () => {
@@ -128,9 +147,84 @@ export class RootDispatcher {
     })
   };
 
+  getCountry = async (countryId: string) => {
+    return API.getCountry(countryId).then( res => {
+      if(res?.status === 401) this.logout()
+      else return res
+    })
+  };
+
+  getDiscoveries = async () => {
+    return API.getDiscoveries().then( res => {
+      if(res?.status === 401) this.logout()
+      else return res
+    })
+  };
+
+  getExperiences = async (id: string) => {
+    return API.getExperiences(id).then( res => {
+      if(res?.status === 401) this.logout()
+      else return res
+    })
+  };
+
+  getMatches = async () => {
+    return API.getMatches().then( res => {
+      if(res?.status === 401) this.logout()
+      else return res
+    })
+  };
+
+  deletematche = async (matchId: string) => {
+    return API.deleteContact(matchId).then( res => {
+      if(res?.status === 401) this.logout()
+      else return res
+    })
+  };
+
+  sendMatchNotification = async (id: string) => {
+    return API.sendMatchNotification(id).then( res => {
+      if(res?.status === 401) this.logout()
+      else return res
+    })
+  };
+
+  setMatchViwed = async (id: string) => {
+    return API.setMatchViewed(id).then( res => {
+      if(res?.status === 401) this.logout()
+      else return res
+    })
+  };
+
+  setMatchQuality = async (id: string, value: number) => {
+    return API.setMatchQuality(id, value).then( res => {
+      if(res?.status === 401) this.logout()
+      else return res
+    })
+  };
+  
+  getProducts = async (id: string) => {
+    return API.getProducts(id).then( res => {
+      if(res?.status === 401) this.logout()
+      else return res
+    })
+  };
+
+  getRating = async (experienceId: string, contactId: string, rate: number) => {
+    return API.getRatings(experienceId, contactId, rate).then( res => {
+      if(res?.status === 401) this.logout()
+      else return res
+    })
+  };
+
+  isPersonalRatingRequired = async (experienceId: string) => {
+    return API.isPersonalRatingRequired(experienceId).then( res => {
+      if(res?.status === 401) this.logout()
+      else return res
+    })
+  };
+
   setLanguage = (language: string) => {
     API.setLanguage(language)
   };
-
-  
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IonPage, IonInput, IonButton, IonText, IonBackButton, IonLabel, IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonCol, IonRow, IonSelectOption, IonTextarea } from '@ionic/react';
+import { IonPage, IonInput, IonButton, IonBackButton, IonLabel, IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonCol, IonRow } from '@ionic/react';
 
 const AddGift: React.FC<{ history:any; }> = (props) => { 
   const [state, setState] = useState({

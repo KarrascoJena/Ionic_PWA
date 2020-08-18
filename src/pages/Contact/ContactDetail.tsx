@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { IonDatetime, IonSelect, IonSelectOption, IonToggle, IonAvatar, IonLabel, IonRange, IonInput, IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonButton, IonButtons, IonItem, IonAlert } from '@ionic/react';
 import { useLocation } from "react-router-dom";
 
@@ -37,7 +37,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
   const dispatch = useDispatch();
   const rootDispatcher = new RootDispatcher(dispatch);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     rootDispatcher.getUserRelationshipStatus().then (res => {
       setRelationshipStatus(res?.data)
       console.log(res)
@@ -59,13 +59,8 @@ const ContactDetail: React.FC<{history}> = (props) => {
         characteristics: {...state.characteristics, ...res?.data.user.characteristics},
         connections: {...state.connections, ...res?.data.user.connections}
       })
-      console.log(state)
-      console.log(res)
       setFetched(true);
     })
-
-    
-
   }, [])
 
   const onChangeName = (e) => {

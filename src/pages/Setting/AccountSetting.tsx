@@ -1,10 +1,6 @@
 import React from 'react';
 import { useRouteMatch} from 'react-router-dom';
-// import { Route, Switch } from 'react-router-dom';
 import { IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonButton, IonLabel, IonList, IonItem, IonBackButton } from '@ionic/react';
-import BottomTabBar from '../../components/bottom-tab-bar';
-// import Notifications from './Notifications/Notifications'
-// import Security from './Security/Security'
 import { useDispatch } from "react-redux";
 import { RootDispatcher } from "../../store/root-reducer";
 
@@ -80,7 +76,6 @@ const SettingIndex: React.FC<{history}> = (props) => {
           <IonLabel>Version 1.0</IonLabel>
         </div>
       </IonContent>
-      {/* <BottomTabBar history={props.history} tab=""/> */}
     </IonPage>
   );
 };

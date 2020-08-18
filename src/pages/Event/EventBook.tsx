@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IonPage, IonInput, IonButton, IonRow,  IonDatetime, IonTabButton, IonLabel, IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonCol, IonSelect, IonSelectOption, IonTextarea } from '@ionic/react';
+import { IonPage, IonButton, IonRow,  IonDatetime, IonLabel, IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonCol, IonSelect, IonSelectOption, IonTextarea } from '@ionic/react';
 
 import './assets/scss/events.scss';
 

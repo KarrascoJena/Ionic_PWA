@@ -1,10 +1,7 @@
 import React, { Fragment } from 'react';
-import { Redirect, Route } from 'react-router-dom';
 import {
-  IonApp, IonTabs, IonRouterOutlet, IonTabButton, IonTabBar, IonLabel, IonBadge
+  IonTabButton, IonTabBar, IonLabel, IonBadge
 } from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
-import { apps, flash, send } from 'ionicons/icons';
 import { useSelector } from "react-redux";
 import { InitialState } from "../store/root-reducer";
 
@@ -16,10 +13,6 @@ import SearchOverview from '../pages/Search/Search';
 import Experiences from '../pages/Experiences/Experiences';
 import Matchs from '../pages/Matchs/matchs';
 import DiscoverVote from '../pages/User/DiscoverVote';
-
-
-import BottomTabBar from '../components/bottom-tab-bar';
-
 
 const MainPage: React.FC = (props) => {
   const isLogin = useSelector<InitialState, boolean>((state: InitialState) => {

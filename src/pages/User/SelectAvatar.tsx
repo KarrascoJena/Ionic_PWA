@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import { IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonButton, IonButtons } from '@ionic/react';
-import { } from 'ionicons/icons';
 import avatarIcons from './avatar-icons'
 
 import './assets/css/SelectAvatar.scss'

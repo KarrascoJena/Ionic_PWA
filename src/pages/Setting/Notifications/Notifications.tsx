@@ -3,16 +3,7 @@ import { IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem 
 import { IonButtons, IonBackButton } from '@ionic/react';
 import {useRouteMatch} from 'react-router-dom'
 
-import BottomTabBar from '../../../components/bottom-tab-bar';
-
 import '../assets/scss/AccountSetting.scss';
-
-
-const Test: React.FC = () => {
-  return (
-    <h1>I am here</h1>
-  );
-};
 
 const settings = [
   {
@@ -32,7 +23,7 @@ const settings = [
 
 const Notifications: React.FC<{history}> = (props) => {
 
-  let { path, url } = useRouteMatch();
+  let { path } = useRouteMatch();
 
   const settingList = settings.map((item, i) => {
     return (
@@ -56,7 +47,6 @@ const Notifications: React.FC<{history}> = (props) => {
           {settingList}
         </IonList>
       </IonContent>
-      {/* <BottomTabBar history={props.history} tab=""/> */}
     </IonPage>
   );
 };
