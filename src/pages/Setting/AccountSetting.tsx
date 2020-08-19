@@ -3,6 +3,7 @@ import { useRouteMatch} from 'react-router-dom';
 import { IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonButton, IonLabel, IonList, IonItem, IonBackButton } from '@ionic/react';
 import { useDispatch } from "react-redux";
 import { RootDispatcher } from "../../store/root-reducer";
+import { BackButton } from '../../components/ion-custom/customElement'
 
 import './assets/scss/AccountSetting.scss';
 
@@ -60,14 +61,12 @@ const SettingIndex: React.FC<{history}> = (props) => {
    <IonPage>
       <IonHeader>
         <IonToolbar className="padding-header">
-          <IonButtons slot="start" onClick={(e) => {props.history.goBack()}}>
-            <IonBackButton text="" className="disabled-button"/>
-          </IonButtons>
+          <BackButton goBack={e => {props.history.goBack()}}/>
           <IonTitle>Settings</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonList >
+        <IonList className="ion-list">
           {settingList}
         </IonList>
         <hr className="seperator-hr"/>

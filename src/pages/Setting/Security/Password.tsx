@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonButton, IonList, IonItem, IonBackButton, IonInput } from '@ionic/react';
+import { BackButton } from '../../../components/ion-custom/customElement'
 
 import '../assets/scss/AccountSetting.scss';
 
@@ -18,10 +19,8 @@ const Password: React.FC<{history}> = (props) => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar className="padding-header text-align-center">
-          <IonButtons slot="start">
-            <IonBackButton defaultHref="/login" text="" className="disabled-button"/>
-          </IonButtons>
+        <IonToolbar className="padding-header">
+          <BackButton goBack={e => {props.history.goBack()}}/>
           <IonButtons slot="end">
             <IonButton onClick={(e) => {}} strong={true}className="done-button">Save</IonButton>
           </IonButtons>
@@ -29,7 +28,7 @@ const Password: React.FC<{history}> = (props) => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonList >
+        <IonList className="ion-list">
           <IonItem lines="none" className="justify-content-space-between">
             <IonInput type="password" onIonChange={(e) => onChangeCheck(e, 'old_password')} placeholder="Current Password"/>
           </IonItem>

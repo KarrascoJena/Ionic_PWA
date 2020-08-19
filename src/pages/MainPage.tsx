@@ -13,7 +13,11 @@ import SearchOverview from '../pages/Search/Search';
 import Experiences from '../pages/Experiences/Experiences';
 import Matchs from '../pages/Matchs/matchs';
 import DiscoverVote from '../pages/User/DiscoverVote';
-
+import AccountSetting from '../pages/Setting/AccountSetting';
+import Notifications from '../pages/Setting/Notifications/Notifications'
+import SecuritySetting from '../pages/Setting/Security/Security'
+import EmailAndSMS from '../pages/Setting/Notifications/EmailAndSMS';
+import Password from '../pages/Setting/Security/Password';
 const MainPage: React.FC = (props) => {
   const isLogin = useSelector<InitialState, boolean>((state: InitialState) => {
     return state.authorized
@@ -22,15 +26,22 @@ const MainPage: React.FC = (props) => {
   return(
     <Fragment>
       
-      <PrivateRoute path="/main_page/discovervote" component={DiscoverVote} isLogin = {isLogin} exact={true} />
+      {/* <PrivateRoute path="/main_page/discovervote" component={DiscoverVote} isLogin = {isLogin} exact={true} /> */}
       <PrivateRoute path="/main_page/matchs" component={Matchs} isLogin = {isLogin} exact={true} />
       <PrivateRoute path="/main_page/experiences" component={Experiences} isLogin = {isLogin} exact={true} />
       <PrivateRoute path="/main_page/search_overview" component={SearchOverview} isLogin = {isLogin} exact={true} />
       <PrivateRoute path="/main_page/contacts" component={Contacts} isLogin = {isLogin} exact={true} />
+      
+      <PrivateRoute path="/main_page/account_setting" component={AccountSetting} isLogin = {isLogin} exact={true} />
+      <PrivateRoute path="/main_page/account_setting/notifications" component={Notifications} isLogin = {isLogin} exact={true} />
+      <PrivateRoute path="/main_page/account_setting/notifications/emailandsms" component={EmailAndSMS} isLogin = {isLogin} exact={true} />
+      <PrivateRoute path="/main_page/account_setting/security" component={SecuritySetting} isLogin = {isLogin} exact={true} />
+      <PrivateRoute path="/main_page/account_setting/security/password" component={Password} isLogin = {isLogin} />
+      
       <PrivateRoute path="/main_page/" component={Contacts} isLogin = {isLogin} exact={true} />
         
       <IonTabBar slot="bottom" className="bottom-tab-bar-background-color bottom-icon-height" style={{position: 'fixed', width: '100%', bottom: '0', left: '0'}} >
-        <IonTabButton tab="discovervote" href="/main_page/discovervote" onClick={() => {console.log('123')}}>
+        <IonTabButton tab="discovervote" href="/discovervote" onClick={() => {console.log('123')}}>
           <span className="tab-bar-icon custom-icon-size-small">
             <i className="fal fa-telescope"></i>
           </span>

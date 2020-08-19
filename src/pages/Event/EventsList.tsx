@@ -1,5 +1,6 @@
 import React from 'react'
 import {IonPage, IonList, IonBadge, IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonButtons, IonBackButton, IonAvatar } from '@ionic/react'
+import { BackButton } from '../../components/ion-custom/customElement'
 
 const events = [
   {
@@ -53,7 +54,7 @@ const Experiences: React.FC<{history}> = (props) => {
 
   const eventList = events.map((item, i) => {
     return (
-      <IonItem button onClick={(e) => {props.history.push('/event_detail', item)}} lines="none"  className="ion-grey-light-background margin-top-10" key={i}>
+      <IonItem button onClick={(e) => {props.history.push('event_detail', item)}} lines="none"  className="ion-grey-light-background margin-top-10" key={i}>
         <div className="avatar-border padding-right-10">
           <IonAvatar className="avatar-img">
             <img src={item.img} alt="" className="circle-border"/>
@@ -71,9 +72,7 @@ const Experiences: React.FC<{history}> = (props) => {
     <IonPage>
       <IonHeader>
         <IonToolbar className="padding-header">
-          <IonButtons slot="start" onClick={(e) => {props.history.goBack()}}>
-            <IonBackButton text="" className="disabled-button"/>
-          </IonButtons>
+          <BackButton goBack={e => {props.history.goBack()}}/>
           <IonTitle className="text-align-center">Avaliable</IonTitle>
         </IonToolbar>
       </IonHeader>
@@ -87,7 +86,6 @@ const Experiences: React.FC<{history}> = (props) => {
           
         </div>
       </IonContent>
-      {/* <BottomTabBar history={props.history} tab="experience"/> */}
     </IonPage>
   );
 }

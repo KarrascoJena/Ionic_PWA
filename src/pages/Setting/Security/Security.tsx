@@ -1,6 +1,7 @@
 import React from 'react';
-import { IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonList, IonItem, IonBackButton } from '@ionic/react';
+import { IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem } from '@ionic/react';
 import {useRouteMatch} from 'react-router-dom'
+import { BackButton } from '../../../components/ion-custom/customElement'
 
 import '../assets/scss/AccountSetting.scss';
 
@@ -25,14 +26,12 @@ const Security: React.FC<{history}> = (props) => {
     <IonPage>
       <IonHeader>
         <IonToolbar className="padding-header">
-          <IonButtons slot="start" onClick={(e) => {props.history.goBack()}}>
-            <IonBackButton text="" className="disabled-button"/>
-          </IonButtons>
+          <BackButton goBack={e => {props.history.goBack()}}/>
           <IonTitle>Security</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
-        <IonList >
+      <IonContent>
+        <IonList className="ion-list">
           {settingList}
         </IonList>
       </IonContent>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { IonPage, IonInput, IonButton, IonBackButton, IonLabel, IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonCol, IonRow } from '@ionic/react';
+import { IonPage, IonInput, IonButton, IonLabel, IonContent, IonHeader, IonTitle, IonToolbar, IonCol, IonRow } from '@ionic/react';
+import { BackButton } from '../../components/ion-custom/customElement'
 
 const AddGift: React.FC<{ history:any; }> = (props) => { 
   const [state, setState] = useState({
@@ -13,9 +14,7 @@ const AddGift: React.FC<{ history:any; }> = (props) => {
     <IonPage>
       <IonHeader>
         <IonToolbar className="padding-header">
-          <IonButtons slot="start" onClick={(e) => {props.history.history('experiences')}}>
-            <IonBackButton text="" className="disabled-button"/>
-          </IonButtons>
+          <BackButton goBack={e => {props.history.goBack()}}/>
           <IonTitle>Add</IonTitle>
         </IonToolbar>
       </IonHeader>

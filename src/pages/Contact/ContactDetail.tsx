@@ -14,16 +14,6 @@ import { initState } from './InitContactData'
 
 import './assets/scss/ContactDetail.scss';
 
-const gotoBack = (e, props) => {
-  e.preventDefault();
-  props.history.goBack()
-}
-
-const gotoMyContacts = (e, props) => {
-  e.preventDefault();
-  props.history.push('/mycontacts');
-}
-
 const ContactDetail: React.FC<{history}> = (props) => {
   const location = useLocation()
   const [contact] = useState<any>(location.state);
@@ -37,6 +27,20 @@ const ContactDetail: React.FC<{history}> = (props) => {
   const dispatch = useDispatch();
   const rootDispatcher = new RootDispatcher(dispatch);
 
+  const gotoBack = (e, props) => {
+    e.preventDefault();
+    props.history.goBack()
+  }
+  
+  const gotoMyContacts = (e, props) => {
+    e.preventDefault();
+    console.log(state)
+    rootDispatcher.updateContact(contact.id, state).then(res => {
+      console.log(res)
+      props.history.push('/main_page/contacts');
+    })
+  }
+  
   useEffect(() => {
     rootDispatcher.getUserRelationshipStatus().then (res => {
       setRelationshipStatus(res?.data)
@@ -46,7 +50,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
     rootDispatcher.getContactDetail(contact.id).then( res => {
       setState({
         ...state,
-        contactId: res?.data.contact.id,
+        id: contact.id,
         fullName: res?.data.user.fullName,
         gender: res?.data.user.gender,
         birthday: res?.data.user.birthday,
@@ -71,6 +75,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
   }
 
   const onChangeGender = (e) => {
+    console.log(e.target.value)
     setState({...state, gender: e.target.value})
   }
 
@@ -143,8 +148,8 @@ const ContactDetail: React.FC<{history}> = (props) => {
             <IonCol size="9" className="gender-padding-left">
               <FormControl component="fieldset">
                 <RadioGroup row aria-label="position" name="position" defaultValue="top">
-                  <FormControlLabel value="Male" control={<Radio color="primary" />} label="female" checked={state.gender === 'Female'} onChange={(e) => {onChangeGender(e)}}/>
-                  <FormControlLabel value="Female" control={<Radio color="primary" />} label="male" checked={state.gender === 'Male'} onChange={(e) => {onChangeGender(e)}}/>
+                  <FormControlLabel value="Female" control={<Radio color="primary" />} label="female" checked={state.gender === 'Female'} onChange={(e) => {onChangeGender(e)}}/>
+                  <FormControlLabel value="Male" control={<Radio color="primary" />} label="male" checked={state.gender === 'Male'} onChange={(e) => {onChangeGender(e)}}/>
                 </RadioGroup>
               </FormControl>
             </IonCol>

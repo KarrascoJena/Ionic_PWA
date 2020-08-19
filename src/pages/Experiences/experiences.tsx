@@ -8,7 +8,7 @@ const Personal_Matches = [
     icon: 'fal fa-book-heart',
     title: 'Available',
     text: 'experiences are waiting for you',
-    url: 'events_list'
+    url: '/events_list'
   },
   {
     icon: 'fal fa-shopping-cart',
@@ -58,7 +58,7 @@ const Experiences: React.FC<{history}> = (props) => {
         <div className="page-container">
           <br />
           <div className="justify-content-center">
-            <IonButton className="red-button text-transform-none" onClick={() => {props.history.push('add_gift')}}>Add Gifted Experience</IonButton>
+            <IonButton className="red-button text-transform-none" onClick={() => {props.history.push('/add_gift')}}>Add Gifted Experience</IonButton>
           </div>
           <br />
           <IonList>

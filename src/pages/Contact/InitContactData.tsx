@@ -1,5 +1,4 @@
 export const initState = {
-  contactId: '',
   fullName: '',
   gender: 'Male',
   birthday: '1988-04-12T00:00:42.793Z',

@@ -8,7 +8,7 @@ import './assets/scss/MyContacts.scss';
 
 const gotoSetting = (e, props) => {
   e.preventDefault();
-  props.history.push('/account_setting');
+  props.history.push('/main_page/account_setting');
 }
 
 const gotoEditProfile = (e, props) => {
@@ -32,12 +32,7 @@ const Contacts: React.FC<{history}> = (props) => {
   
   useEffect(() => {
 
-    rootDispatcher.getDiscoveries().then (res => {
-      console.log(res)
-    })
-
     rootDispatcher.getContacts().then( res => {
-      console.log(res)
       if(res?.status === 200){
         setContacts(res?.data.contacts)
       }
@@ -74,7 +69,6 @@ const Contacts: React.FC<{history}> = (props) => {
           cssClass="bottom-toast-default"
         />
       </IonContent>
-      {/* <BottomTabBar history={props.history} tab="contact"/> */}
     </IonPage>
   );
 };
@@ -83,7 +77,6 @@ const ContactList: React.FC<{contacts: contactsType[]}> = (props) => {
   let history = useHistory()
 
   const realContacts = props.contacts.map((item, index) => {
-    console.log(item)
     return(
       <IonCol onClick={(e) => gotoContactDetail(e, history, item.id)} size="4" className="grid-img height-140" key={index}>
         <img className="img-auto card-effect object-fit-cover" src={item.image ? item.image : './assets/imgs/default_contact_avatar.png'} alt=""/>

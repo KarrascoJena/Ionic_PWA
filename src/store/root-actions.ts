@@ -7,9 +7,7 @@ const API = {
       if(res.status === 200) {
         window.localStorage.setItem("accessToken", res.data.result.token.accessToken)
         axios.defaults.headers.common['Authorization'] = `Bearer ${window.localStorage.getItem("accessToken")}`;
-        axios.get(`${config.serverAddress}/users/${res.data.result.id}`).then(res => {
-          console.log(res)
-        })
+        delete res.data.result.token
         return {status: res.status, data: res.data.result}
       }
     }).catch((error) => {
@@ -84,6 +82,15 @@ const API = {
   addContact: async (data) => {
     console.log("add contact", axios.defaults.headers.common['Authorization'])
     return axios.post(`${config.serverAddress}/Contacts`, data).then((res) => {
+      if(res.status === 200) return {status: res.status, data: res.data.result}
+    }).catch(error => {
+      return {status: error.response.status, data: error.response.data.responseException}
+    })
+  },
+
+  updateContact: async (data, id) => {
+    console.log("update contact", axios.defaults.headers.common['Authorization'])
+    return axios.put(`${config.serverAddress}/Contacts/${id}`, data).then((res) => {
       if(res.status === 200) return {status: res.status, data: res.data.result}
     }).catch(error => {
       return {status: error.response.status, data: error.response.data.responseException}

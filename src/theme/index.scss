@@ -74,6 +74,13 @@
   font-size: 8px;
   color: #262626;
 }
+.ion-list {
+  margin-left: 10px;
+}
+.back-button {
+  --padding-start: 0px;
+  --padding-end: 0px;
+}
 
 ion-item {
   --padding-start: 0px;

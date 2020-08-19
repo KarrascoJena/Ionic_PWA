@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { IonDatetime, IonSelect, IonSelectOption, IonLabel, IonAvatar, IonInput, IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonButton, IonButtons, IonItem } from '@ionic/react';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -8,6 +8,9 @@ import ChoosePhoto from '../../components/change-photo';
 
 import { useSelector } from "react-redux";
 import { InitialState } from "../../store/root-reducer";
+import { useDispatch } from "react-redux";
+import { RootDispatcher } from "../../store/root-reducer";
+
 
 import './assets/css/EditProfile.scss'
 
@@ -25,16 +28,30 @@ const EditProfile: React.FC<{history}> = (props) => {
   const userInfo = useSelector<InitialState, any>((state: InitialState) => {
     return state.userInfo
   });
+
+  const dispatch = useDispatch();
+  const rootDispatcher = new RootDispatcher(dispatch);
+
+
+
   console.log(userInfo)
   const [state, setState] = useState({
+    fetched: false,
     name: 'Edina',
     username: userInfo.userName,
     gender: 'female',
-    birthday: Date(),
-    city: 'Graz',
+    birthday: '',
+    city: '',
     status: 'Relationship',
-    children: 2
+    children: 2,
+    fullName: ''
   })
+
+  useEffect(() => {
+    rootDispatcher.getUsers(userInfo.id).then(res => {
+      setState({...state, ...res?.data})
+    })
+  }, []);
 
   const onChangeName = (e) => {
     setState({...state, name: e.target.value})
@@ -97,7 +114,7 @@ const EditProfile: React.FC<{history}> = (props) => {
           </IonCol>
           <IonCol size="9">
             <IonItem>
-              <IonInput value={state.name} autofocus={true} clearInput={true} className="" onIonChange={(e) => onChangeName(e)}></IonInput>
+              <IonInput value={state.fullName} autofocus={true} clearInput={true} className="" onIonChange={(e) => onChangeName(e)}></IonInput>
             </IonItem>
           </IonCol>
         </IonRow>
@@ -121,8 +138,8 @@ const EditProfile: React.FC<{history}> = (props) => {
           <IonCol size="9" className="gender-padding-left">
             <FormControl component="fieldset">
               <RadioGroup row aria-label="position" name="position" defaultValue="top">
-                <FormControlLabel value="male" control={<Radio color="primary" />} label="female" checked={state.gender === 'male'} onChange={(e) => {onChangeGender(e)}}/>
-                <FormControlLabel value="female" control={<Radio color="primary" />} label="male" checked={state.gender === 'female'} onChange={(e) => {onChangeGender(e)}}/>
+                <FormControlLabel value="Male" control={<Radio color="primary" />} label="female" checked={state.gender === 'Male'} onChange={(e) => {onChangeGender(e)}}/>
+                <FormControlLabel value="Female" control={<Radio color="primary" />} label="male" checked={state.gender === 'Female'} onChange={(e) => {onChangeGender(e)}}/>
               </RadioGroup>
             </FormControl>
           </IonCol>
@@ -173,6 +190,7 @@ const EditProfile: React.FC<{history}> = (props) => {
           <IonCol size="9">
             <IonItem>
               <IonSelect value={state.children} onIonChange={(e) => {onChangeChildren(e)}} interface="popover" className="ion-select-custom">
+                <IonSelectOption value={0}>0</IonSelectOption>
                 <IonSelectOption value={1}>1</IonSelectOption>
                 <IonSelectOption value={2}>2</IonSelectOption>
                 <IonSelectOption value={3}>3</IonSelectOption>

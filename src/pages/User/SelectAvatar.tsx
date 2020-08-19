@@ -11,7 +11,7 @@ const gotoBack = (e, props) => {
 
 const gotoContactDetail = (e, props) => {
   e.preventDefault();
-  props.history.push('/contactdetail');
+  props.history.goBack();
 }
 
 const changeAvatar = (e, props) => {

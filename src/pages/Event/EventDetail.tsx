@@ -1,5 +1,6 @@
 import React from 'react';
 import { IonPage, IonContent, IonBadge, IonButton, IonLabel, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle } from '@ionic/react';
+import { BackButton } from '../../components/ion-custom/customElement'
 
 const EventDetail: React.FC<{ history:any; location: any;}> = (props) => { 
   const data = props.location.state;
@@ -7,9 +8,7 @@ const EventDetail: React.FC<{ history:any; location: any;}> = (props) => {
     <IonPage>
       <IonHeader>
         <IonToolbar className="padding-header">
-          <IonButtons slot="start" onClick={(e) => {props.history.history('events_list')}}>
-            <IonBackButton text="" className="disabled-button"/>
-          </IonButtons>
+          <BackButton goBack={e => {props.history.goBack()}}/>
           <IonTitle className="text-align-center">Event</IonTitle>
         </IonToolbar>
       </IonHeader>
