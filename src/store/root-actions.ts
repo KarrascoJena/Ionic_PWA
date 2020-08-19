@@ -33,6 +33,14 @@ const API = {
     })
   },
 
+  changePassword: async (currentPassword: string, newPassword: string, newPasswordRepeat: string) => {
+    return axios.post(`${config.serverAddress}/Accounts/ChangePassword`, { currentPassword: currentPassword, newPassword: newPassword, newPasswordRepeat: newPasswordRepeat}).then(res => {
+      if(res.status === 200) return {status: res.status, data: res.data.result}
+    }).catch((error) => {
+      return {status: error.response.status, data: error.response.data.responseException}
+    })
+  },
+
   getUsers: async (id) => {
     return axios.get(`${config.serverAddress}/Users/${id}`).then(res => {
       if(res.status === 200) return {status: res.status, data: res.data.result}

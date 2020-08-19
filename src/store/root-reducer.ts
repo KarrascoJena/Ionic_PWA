@@ -91,6 +91,13 @@ export class RootDispatcher {
     return API.forgetPassword(email)
   };
 
+  changePassword = async (currentPassword: string, newPassword: string, newPasswordRepeat: string) => {
+    return API.changePassword(currentPassword, newPassword, newPasswordRepeat).then(res => {
+      if(res?.status === 401) this.logout()
+      else return res
+    })
+  };
+
   getUsers = async (id: string) => {
     return API.getUsers(id).then( res => {
       // console.log(res)

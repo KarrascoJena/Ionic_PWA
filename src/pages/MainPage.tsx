@@ -12,7 +12,6 @@ import Contacts from './Contact/Contacts';
 import SearchOverview from '../pages/Search/Search';
 import Experiences from '../pages/Experiences/Experiences';
 import Matchs from '../pages/Matchs/matchs';
-import DiscoverVote from '../pages/User/DiscoverVote';
 import AccountSetting from '../pages/Setting/AccountSetting';
 import Notifications from '../pages/Setting/Notifications/Notifications'
 import SecuritySetting from '../pages/Setting/Security/Security'
