@@ -1,4 +1,7 @@
 @import './custom_variable';
+.open_picker {
+  touch-action: none;
+}
 
 .circle-image {
     border-radius: 50%;

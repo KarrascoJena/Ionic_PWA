@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp } from '@ionic/react';
+import { IonApp, setupConfig } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 
 import { useSelector } from "react-redux";
@@ -57,6 +57,7 @@ import MyContacts from './pages/Contact/Contacts';
 
 
 const App: React.FC = (props) => {
+  setupConfig({mode: 'ios'})
   const isLogin = useSelector<InitialState, boolean>((state: InitialState) => {
     return state.authorized
   });

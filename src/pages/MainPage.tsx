@@ -25,7 +25,6 @@ const MainPage: React.FC = (props) => {
   return(
     <Fragment>
       
-      {/* <PrivateRoute path="/main_page/discovervote" component={DiscoverVote} isLogin = {isLogin} exact={true} /> */}
       <PrivateRoute path="/main_page/matchs" component={Matchs} isLogin = {isLogin} exact={true} />
       <PrivateRoute path="/main_page/experiences" component={Experiences} isLogin = {isLogin} exact={true} />
       <PrivateRoute path="/main_page/search_overview" component={SearchOverview} isLogin = {isLogin} exact={true} />
