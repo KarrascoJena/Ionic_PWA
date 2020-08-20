@@ -14,6 +14,96 @@ import { initState } from './InitContactData'
 
 import './assets/scss/ContactDetail.scss';
 
+
+let test = {
+  fullName: "Edina111",
+  gender: "Male",
+  birthday: "1957-07-25T00:00:00",
+  contactRelationshipTypeId: "cffd479c-2ffa-4b3a-bb06-02a16843ce39",
+  city: "Graz",
+  image: "https://experiencecontent.blob.core.windows.net/user/901890a5-64c1-468d-a603-930c724e082a/profile.jpg",
+  travelRadius: 500,
+  events: {
+    weekend: {
+      isActive: "1"
+    },
+    birthday: {
+      isActive: "1"
+    },
+    chrismas: {
+      isActive: "1"
+    },
+    vacation: {
+      isActive: "1"
+    },
+    valentine: {
+      isActive: "1"
+    },
+    parentsday: {
+      isActive: "0"
+    },
+    anniversary: {
+      date: "2019-01-02",
+      isActive: "1"
+    }
+  },
+  interests: {
+    fly_fall: {
+      rating: "1"
+    },
+    wind_water: {
+      rating: "1"
+    },
+    dinner_culture: {
+      rating: "1"
+    },
+    wellness_beauty: {
+      rating: "0"
+    },
+    culture_creative: {
+      rating: "1"
+    },
+    driving_motosport: {
+      rating: "1"
+    },
+    sport_action_nature: {
+      rating: "1"
+    },
+    vacation_overnightstay: {
+      rating: "1"
+    }
+  },
+  characteristics: {
+    sociality: {
+      rating: "8"
+    },
+    personality: {
+      rating: "5"
+    },
+    fitness_level: {
+      rating: "9"
+    }
+  },
+  connections: {
+    email: {
+      address: "edinatoth@outlook.de"
+    },
+    phone: {
+      number: "+ 436649201745"
+    },
+    facebook: {
+      username: ""
+    },
+    whatsapp: {
+      number: "+ 436649201745"
+    },
+    instagram: {
+      username: ""
+    }
+  },
+  id: "6fe9e3fa-c4c9-4399-9ae4-200bf4e0f7c0"
+}
+
 const ContactDetail: React.FC<{history}> = (props) => {
   const location = useLocation()
   const [contact] = useState<any>(location.state);
@@ -34,9 +124,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
   
   const gotoMyContacts = (e, props) => {
     e.preventDefault();
-    console.log(state)
     rootDispatcher.updateContact(contact.id, state).then(res => {
-      console.log(res)
       props.history.push('/main_page/contacts');
     })
   }
@@ -44,7 +132,6 @@ const ContactDetail: React.FC<{history}> = (props) => {
   useEffect(() => {
     rootDispatcher.getUserRelationshipStatus().then (res => {
       setRelationshipStatus(res?.data)
-      console.log(res)
     })
 
     rootDispatcher.getContactDetail(contact.id).then( res => {
@@ -67,11 +154,13 @@ const ContactDetail: React.FC<{history}> = (props) => {
     })
   }, [])
 
-  const onChangeName = (e) => {
-    setState({...state, name: e.target.value})
+  const onChangeFullName = (e) => {
+    setState({...state, fullName: e.target.value})
   }
   const onChangeBirthday = (e) => {
-    setState({...state, birthday: e})
+    // console.log(e.detail.value)
+    e.preventDefault();
+    setState({...state, birthday: e.detail.value})
   }
 
   const onChangeGender = (e) => {
@@ -136,7 +225,7 @@ const ContactDetail: React.FC<{history}> = (props) => {
             </IonCol>
             <IonCol size="9">
               <IonItem>
-                <IonInput value={state.fullName} autofocus={true} clearInput={true} className="" onIonChange={(e) => onChangeName(e)}></IonInput>
+                <IonInput value={state.fullName} autofocus={true} clearInput={true} className="" onIonChange={(e) => onChangeFullName(e)}></IonInput>
               </IonItem>
             </IonCol>
           </IonRow>

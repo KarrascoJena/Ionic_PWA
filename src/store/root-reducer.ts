@@ -100,7 +100,6 @@ export class RootDispatcher {
 
   getUsers = async (id: string) => {
     return API.getUsers(id).then( res => {
-      // console.log(res)
       if(res?.status === 401) this.logout()
       else return res
     })
@@ -134,8 +133,8 @@ export class RootDispatcher {
     })
   };
 
-  updateContact = async (data: any, id: string) => {
-    return API.updateContact(data, id).then(res => {
+  updateContact = async (id: string, data: any) => {
+    return API.updateContact(id, data).then(res => {
       if(res?.status === 401) this.logout()
       else return res
     })

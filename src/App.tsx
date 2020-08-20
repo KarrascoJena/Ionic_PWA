@@ -85,6 +85,7 @@ const App: React.FC = (props) => {
         <PrivateRoute path="/contactdetail" component={ContactDetail} isLogin = {isLogin} exact={true} />
         <PrivateRoute path="/no_contacts" component={NoContacts} isLogin = {isLogin} exact={true} />
 
+        {/* <PrivateRoute path="/editprofile" component={EditProfile} isLogin = {isLogin} exact={true} /> */}
         <PrivateRoute path="/editprofile" component={EditProfile} isLogin = {isLogin} exact={true} />
         <PrivateRoute path="/selectavatar" component={SelectAvatar} isLogin = {isLogin} exact={true} />
 

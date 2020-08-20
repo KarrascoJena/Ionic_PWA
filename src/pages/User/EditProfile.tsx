@@ -32,29 +32,33 @@ const EditProfile: React.FC<{history}> = (props) => {
   const dispatch = useDispatch();
   const rootDispatcher = new RootDispatcher(dispatch);
 
-
-
-  console.log(userInfo)
   const [state, setState] = useState({
     fetched: false,
-    name: 'Edina',
+    fullName: '',
     username: userInfo.userName,
     gender: 'female',
     birthday: '',
     city: '',
     status: 'Relationship',
     children: 2,
-    fullName: ''
   })
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     rootDispatcher.getUsers(userInfo.id).then(res => {
-      setState({...state, ...res?.data})
+      setState({
+        ...state,
+        fullName: res?.data.fullName,
+        gender: res?.data.gender,
+        birthday: res?.data.birthday,
+        city: res?.data.city,
+        status: res?.data.userRelationshipStatusId,
+        children: res?.data.children
+      })
     })
   }, []);
 
   const onChangeName = (e) => {
-    setState({...state, name: e.target.value})
+    setState({...state, fullName: e.target.value})
   }
   
   const onChangeUserName = (e) => {
@@ -151,7 +155,7 @@ const EditProfile: React.FC<{history}> = (props) => {
           </IonCol>
           <IonCol size="9">
             <IonItem>
-              <IonDatetime value={state.birthday} onIonChange={(e) => {onChangeBirthday(e)}} placeholder="Select Date" className="ion-datetime-custom"></IonDatetime>
+              {/* <IonDatetime value={state.birthday} onIonChange={(e) => {onChangeBirthday(e)}} placeholder="Select Date" className="ion-datetime-custom"></IonDatetime> */}
           </IonItem>
           </IonCol>
         </IonRow>

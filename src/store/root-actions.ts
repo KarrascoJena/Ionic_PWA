@@ -96,7 +96,7 @@ const API = {
     })
   },
 
-  updateContact: async (data, id) => {
+  updateContact: async (id, data) => {
     console.log("update contact", axios.defaults.headers.common['Authorization'])
     return axios.put(`${config.serverAddress}/Contacts/${id}`, data).then((res) => {
       if(res.status === 200) return {status: res.status, data: res.data.result}
