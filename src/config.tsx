@@ -1,17 +1,9 @@
 export default {
   system: {
-    title: "Buurdy",
-  },
-  okta: {
-    clientId: process.env.REACT_APP_CLIENT_ID,
-    issuer: process.env.REACT_APP_ISSUER,
-    redirectUri: process.env.REACT_APP_OKTA_REDIRECT_URL,
-    scopes: ['openid', 'profile', 'email'],
-    pkce: false,
-    disableHttpsCheck: false,
+    title: "MemoryBirds",
   },
   brand: {
-    name: 'brand name'
+    name: 'MemoryBirds',
   },
   serverAddress: "https://api-experience-test-eu-north-001.azurewebsites.net/api/v1"
 };
